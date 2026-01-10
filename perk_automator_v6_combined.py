@@ -138,7 +138,7 @@ COORDS_WITH_AD = {
     'new_perk_region': ((1018, 63), (1228, 92)),
     'perk1_text_region': ((890, 200), (1343, 284)),
     'perk2_text_region': ((888, 305), (1345, 390)),
-    'wave_region': ((1130, 599), (1269, 624)),
+    # 'wave_region': ((1130, 599), (1269, 624)),
 }
 
 # ============================================
@@ -155,7 +155,7 @@ COORDS_NO_AD = {
     'new_perk_region': ((832, 62), (1044, 93)),
     'perk1_text_region': ((703, 199), (1159, 287)),
     'perk2_text_region': ((709, 307), (1160, 391)),
-    'wave_region': ((946, 601), (1080, 628)),
+    # 'wave_region': ((946, 601), (1080, 628)),
 }
 
 # Positions to check for ad detection (relative to window)
@@ -700,30 +700,6 @@ def check_for_new_perk(window_name, coords):
             return False
     return "new perk" in text.lower()
 
-def is_wave_1_text(text_clean):
-    """
-    Check if the given text indicates wave 1 (and ONLY wave 1, not 10, 11, 100, etc.)
-    Returns True if wave 1 is detected.
-    """
-    import re
-    # Remove whitespace, common OCR errors, and normalize
-    text_clean = text_clean.replace('l', '1').replace('i', '1')
-    text_clean = text_clean.replace('|', '1').replace('!', '1')
-    text_clean = text_clean.replace('wave:', 'wave').replace('wavel', 'wave 1')
-    text_clean = ' '.join(text_clean.split())
-    # Acceptable patterns for wave 1 (tightened)
-    patterns = [
-        r'^wave ?1$', r'^1$', r'^1/\d+$', r'^wave ?1/\d+$', r'^wave: ?1$', r'^wave 1$', r'^1 / \d+$'
-    ]
-    for pat in patterns:
-        if re.fullmatch(pat, text_clean):
-            return True
-    # Fallback: look for "wave" and "1" close together, but not "wave 1g" etc.
-    if 'wave' in text_clean and '1' in text_clean:
-        if re.fullmatch(r'wave ?1', text_clean):
-            return True
-    return False
-
 def handle_wave_1_detected(window_name):
     """Handle when wave 1 is detected - bring window to focus."""
     print(f"\n{'!'*60}")
@@ -1044,12 +1020,14 @@ def main_loop():
                 
                 coords = get_coords(window_name)
                 
-                # Check for wave 1
-                print(f"[{window_name}] Checking wave number...")
-                wave_text = get_text_from_region(window_name, coords['wave_region'])
-                wave_text_lower = wave_text.strip().lower()
-                print(f"  [{window_name}] Wave OCR: '{wave_text_lower}'")
-                if is_wave_1_text(wave_text_lower):
+                # Check for wave 1 using New Perk bar
+                print(f"[{window_name}] Checking for Wave 1 using New Perk bar...")
+                perk_bar_text = get_text_from_region(window_name, coords['new_perk_region'])
+                perk_bar_text_clean = perk_bar_text.strip().lower().replace('|', '').replace(' ', '')
+                print(f"  [{window_name}] Perk bar OCR (for wave): '{perk_bar_text}'")
+                import re
+                match = re.match(r'^1/\d+', perk_bar_text_clean)
+                if match:
                     print(f"  [{window_name}] >>> WAVE 1 DETECTED! <<<")
                     handle_wave_1_detected(window_name)
                 
