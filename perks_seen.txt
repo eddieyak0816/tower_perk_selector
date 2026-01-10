@@ -1,0 +1,13 @@
+[2026-01-10 14:29:24] [Maximus Bluestack] Priority 9999 |     not selected | 
+[2026-01-10 14:29:24] [Maximus Bluestack] Priority 9999 |     not selected | 
+[2026-01-10 14:29:32] [Maximus Bluestack] Priority 9999 |     not selected | 
+[2026-01-10 14:29:32] [Maximus Bluestack] Priority 9999 |     not selected | 
+[2026-01-10 14:29:38] [Maximus Bluestack] Priority 9999 |     not selected | dig
+
+on
+os
+[2026-01-10 14:29:38] [Maximus Bluestack] Priority 9999 |     not selected | 
+[2026-01-10 14:29:46] [Maximus Bluestack] Priority   25 | >>> SELECTED | ® x1.75 health regen
+[2026-01-10 14:29:46] [Maximus Bluestack] Priority   29 |     not selected | ra) lifesteal x2.50, but knockback
+
+(ate force -70%

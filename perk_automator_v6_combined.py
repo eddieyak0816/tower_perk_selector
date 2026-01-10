@@ -663,16 +663,21 @@ def click_at(window_name, coords, description=""):
 def get_text_from_region(window_name, region):
     """Capture a region and extract text using OCR."""
     check_failsafe()
-    
     screenshot = capture_window_screenshot(window_name, region)
-    
     if screenshot is None:
         print(f"  [{window_name}] Warning: Could not capture region for OCR")
         return ""
-    
-    screenshot = screenshot.convert('L')
-    text = pytesseract.image_to_string(screenshot)
-    
+    # Save debug screenshot for troubleshooting
+    debug_filename = f"debug_ocr_{window_name.replace(' ', '_')}_{int(time.time())}.png"
+    screenshot.save(debug_filename)
+    # Preprocess: grayscale, threshold, sharpen (same as New Perk bar)
+    img = screenshot.convert('L')
+    img = img.point(lambda x: 0 if x < 180 else 255, '1')
+    text = pytesseract.image_to_string(img, config='--psm 7')
+    # Extra cleaning: remove non-ascii, collapse whitespace
+    import re
+    text = re.sub(r'[^\x00-\x7F]+', '', text)
+    text = ' '.join(text.split())
     return text.strip().lower()
 
 def check_for_new_perk(window_name, coords):
@@ -707,25 +712,22 @@ def is_wave_1_text(text_clean):
     Returns True if wave 1 is detected.
     """
     import re
-    
-    # Remove any extra whitespace
+    # Remove whitespace, common OCR errors, and normalize
+    text_clean = text_clean.replace('l', '1').replace('i', '1')
+    text_clean = text_clean.replace('|', '1').replace('!', '1')
+    text_clean = text_clean.replace('wave:', 'wave').replace('wavel', 'wave 1')
     text_clean = ' '.join(text_clean.split())
-    
-    # Pattern: "1" that is NOT followed by another digit and NOT preceded by another digit
-    # This handles: "wave 1", "1", "1/100", "wave: 1", etc.
-    # But NOT: "wave 10", "wave 11", "wave 100", "11", "21", etc.
-    
-    # Look for "1" as a standalone number (word boundary or followed by non-digit)
-    # \b1\b would be ideal but "/" isn't a word boundary, so we use a custom pattern
-    
-    # Match "1" when:
-    # - At start of string OR preceded by non-digit
-    # - Followed by end of string OR non-digit (like "/", " ", etc.)
-    pattern = r'(?<![0-9])1(?![0-9])'
-    
-    if re.search(pattern, text_clean):
-        return True
-    
+    # Acceptable patterns for wave 1 (tightened)
+    patterns = [
+        r'^wave ?1$', r'^1$', r'^1/\d+$', r'^wave ?1/\d+$', r'^wave: ?1$', r'^wave 1$', r'^1 / \d+$'
+    ]
+    for pat in patterns:
+        if re.fullmatch(pat, text_clean):
+            return True
+    # Fallback: look for "wave" and "1" close together, but not "wave 1g" etc.
+    if 'wave' in text_clean and '1' in text_clean:
+        if re.fullmatch(r'wave ?1', text_clean):
+            return True
     return False
 
 def handle_wave_1_detected(window_name):
@@ -734,22 +736,17 @@ def handle_wave_1_detected(window_name):
     print(f"  WAVE 1 DETECTED ON: {window_name}")
     print(f"  Bringing window to focus...")
     print(f"{'!'*60}\n")
-
     # Log the event
     write_to_log(f"WAVE 1 DETECTED on {window_name} - bringing to focus")
-
-    # Save the current foreground window so we can restore it later
+    # Use the exact same window switching and restoration logic as New Perk bar
     saved_hwnd, saved_title = get_current_foreground_window()
     if saved_title:
         print(f"  Saving current window: '{saved_title}'")
-
-    # Bring the game window to focus
     bring_window_to_focus(window_name)
-
-    # Wait 30 seconds
+    # (If you need to click or interact, use click_at here)
+    # Wait 30 seconds (simulate whatever action is needed)
     print(f"  Waiting 30 seconds before restoring previous window...")
     time.sleep(30)
-
     # Restore the previous foreground window
     if saved_hwnd:
         print(f"  Restoring previous window: '{saved_title}'")
@@ -1055,10 +1052,14 @@ def main_loop():
                 
                 # Check for wave 1
                 print(f"[{window_name}] Checking wave number...")
+                # Save debug screenshot for wave region
+                wave_region_img = capture_window_screenshot(window_name, coords['wave_region'])
+                if wave_region_img:
+                    debug_wave_filename = f"debug_wave_{window_name.replace(' ', '_')}_{int(time.time())}.png"
+                    wave_region_img.save(debug_wave_filename)
                 wave_text = get_text_from_region(window_name, coords['wave_region'])
                 wave_text_lower = wave_text.strip().lower()
                 print(f"  [{window_name}] Wave OCR: '{wave_text_lower}'")
-                
                 if is_wave_1_text(wave_text_lower):
                     print(f"  [{window_name}] >>> WAVE 1 DETECTED! <<<")
                     handle_wave_1_detected(window_name)
