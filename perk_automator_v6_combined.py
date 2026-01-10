@@ -667,9 +667,7 @@ def get_text_from_region(window_name, region):
     if screenshot is None:
         print(f"  [{window_name}] Warning: Could not capture region for OCR")
         return ""
-    # Save debug screenshot for troubleshooting
-    debug_filename = f"debug_ocr_{window_name.replace(' ', '_')}_{int(time.time())}.png"
-    screenshot.save(debug_filename)
+    # No debug screenshot saving
     # Preprocess: grayscale, threshold, sharpen (same as New Perk bar)
     img = screenshot.convert('L')
     img = img.point(lambda x: 0 if x < 180 else 255, '1')
@@ -684,11 +682,7 @@ def check_for_new_perk(window_name, coords):
     """Check if 'New Perk' text is visible in the perk bar region."""
     region = coords['new_perk_region']
     
-    # Save debug screenshot to see what region is being captured
-    screenshot = capture_window_screenshot(window_name, region)
-    if screenshot:
-        debug_filename = f"debug_newperk_{window_name.replace(' ', '_')}.png"
-        screenshot.save(debug_filename)
+    # No debug screenshot saving
     
     text = get_text_from_region(window_name, region)
     print(f"  [{window_name}] OCR read: '{text}'")
@@ -1052,11 +1046,6 @@ def main_loop():
                 
                 # Check for wave 1
                 print(f"[{window_name}] Checking wave number...")
-                # Save debug screenshot for wave region
-                wave_region_img = capture_window_screenshot(window_name, coords['wave_region'])
-                if wave_region_img:
-                    debug_wave_filename = f"debug_wave_{window_name.replace(' ', '_')}_{int(time.time())}.png"
-                    wave_region_img.save(debug_wave_filename)
                 wave_text = get_text_from_region(window_name, coords['wave_region'])
                 wave_text_lower = wave_text.strip().lower()
                 print(f"  [{window_name}] Wave OCR: '{wave_text_lower}'")
