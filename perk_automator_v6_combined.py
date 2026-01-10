@@ -687,7 +687,18 @@ def check_for_new_perk(window_name, coords):
     
     text = get_text_from_region(window_name, region)
     print(f"  [{window_name}] OCR read: '{text}'")
-    
+    # If we are skipping New Perk bar until numbers, only return True if numbers are present
+    global SKIP_NEW_PERK_BAR_UNTIL_NUMBERS
+    if 'SKIP_NEW_PERK_BAR_UNTIL_NUMBERS' in globals() and SKIP_NEW_PERK_BAR_UNTIL_NUMBERS:
+        import re
+        # Look for any digit in the text
+        if re.search(r'\d', text):
+            print(f"  [{window_name}] Numbers detected in New Perk bar. Resetting skip flag.")
+            SKIP_NEW_PERK_BAR_UNTIL_NUMBERS = False
+            return True
+        else:
+            print(f"  [{window_name}] Skipping New Perk bar click: no numbers detected.")
+            return False
     return "new perk" in text.lower()
 
 def is_wave_1_text(text_clean):
@@ -723,17 +734,26 @@ def handle_wave_1_detected(window_name):
     print(f"  WAVE 1 DETECTED ON: {window_name}")
     print(f"  Bringing window to focus...")
     print(f"{'!'*60}\n")
-    
+
     # Log the event
     write_to_log(f"WAVE 1 DETECTED on {window_name} - bringing to focus")
-    
-    # Bring the window to focus
+
+    # Save the current foreground window so we can restore it later
+    saved_hwnd, saved_title = get_current_foreground_window()
+    if saved_title:
+        print(f"  Saving current window: '{saved_title}'")
+
+    # Bring the game window to focus
     bring_window_to_focus(window_name)
-    
-    # Optional: Play a sound or other notification
-    # You could add a beep here if desired:
-    # import winsound
-    # winsound.Beep(1000, 500)  # 1000 Hz for 500ms
+
+    # Wait 30 seconds
+    print(f"  Waiting 30 seconds before restoring previous window...")
+    time.sleep(30)
+
+    # Restore the previous foreground window
+    if saved_hwnd:
+        print(f"  Restoring previous window: '{saved_title}'")
+        restore_foreground_window(saved_hwnd, saved_title)
 
 def get_perk_priority(perk_text, window_name=None):
     """Get the priority of a perk based on keyword matching. Uses alternate list for 'Daddy' windows."""
@@ -783,23 +803,52 @@ def select_best_perk(window_name, coords):
     print(f"  [{window_name}] Checking perk 2 background...")
     perk2_is_purple, perk2_bg_color = is_purple_background(window_name, coords['perk2_text_region'])
 
-    # Apply purple penalty logic
-    # A purple perk should only be selected if:
-    # 1. It's Priority 1 (exempt), OR
-    # 2. Both perks are purple (no choice), OR
-    # 3. The other perk is also purple or unrecognized
+    # List of keywords for acceptable purple perks
+    ACCEPTABLE_PURPLE_KEYWORDS = [
+        ["cash per wave"],
+        ["boss health"],
+        ["tower damage", "bosses"]
+    ]
+
+    def is_acceptable_purple(perk_text):
+        text = perk_text.lower()
+        for keywords in ACCEPTABLE_PURPLE_KEYWORDS:
+            if all(k in text for k in keywords):
+                return True
+        return False
 
     effective_priority1 = priority1
     effective_priority2 = priority2
-
-    # Apply purple penalty (add 10000 to priority, making it very undesirable)
     PURPLE_PENALTY = 10000
 
-    if perk1_is_purple and priority1 != PURPLE_EXEMPT_PRIORITY:
+    # If both perks are purple
+    if perk1_is_purple and perk2_is_purple:
+        perk1_ok = is_acceptable_purple(perk1_text)
+        perk2_ok = is_acceptable_purple(perk2_text)
+        if not perk1_ok and not perk2_ok:
+            print(f"  [{window_name}] Both perks are purple and neither is acceptable. Skipping selection and closing window.")
+            log_perk_selection(window_name, perk1_text, priority1, perk2_text, priority2, "NONE - BOTH PURPLE",
+                              perk1_is_purple=perk1_is_purple, perk2_is_purple=perk2_is_purple,
+                              effective_priority1=effective_priority1, effective_priority2=effective_priority2,
+                              perk1_bg_color=perk1_bg_color, perk2_bg_color=perk2_bg_color,
+                              perk_list_name=perk_list_name)
+            # Close the perk window
+            click_at(window_name, coords['close_x'], "Close X (skip purple perks)")
+            time.sleep(0.5)
+            # Resume the game
+            click_at(window_name, coords['play_pause'], "Resume Game (skip purple perks)")
+            time.sleep(0.5)
+            # Set a global or external flag to indicate we should not click the New Perk bar again until numbers are detected
+            global SKIP_NEW_PERK_BAR_UNTIL_NUMBERS
+            SKIP_NEW_PERK_BAR_UNTIL_NUMBERS = True
+            return False
+
+    # Apply purple penalty (add 10000 to priority, making it very undesirable)
+    if perk1_is_purple and priority1 != PURPLE_EXEMPT_PRIORITY and not is_acceptable_purple(perk1_text):
         print(f"  [{window_name}] Perk 1 has PURPLE background - applying penalty")
         effective_priority1 = priority1 + PURPLE_PENALTY
 
-    if perk2_is_purple and priority2 != PURPLE_EXEMPT_PRIORITY:
+    if perk2_is_purple and priority2 != PURPLE_EXEMPT_PRIORITY and not is_acceptable_purple(perk2_text):
         print(f"  [{window_name}] Perk 2 has PURPLE background - applying penalty")
         effective_priority2 = priority2 + PURPLE_PENALTY
 

@@ -1,2 +1,0 @@
-[2026-01-10 12:13:35] [Daddy Bluestack] Priority   25 |     not selected | wy x1.75 health regen
-[2026-01-10 12:13:35] [Daddy Bluestack] Priority   15 | >>> SELECTED | {x} land mine damage x3.50

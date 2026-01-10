@@ -1,25 +1,5 @@
-[2026-01-10 12:11:12] ======================================================================
-[2026-01-10 12:11:12] PERK AUTOMATOR STARTED
-[2026-01-10 12:11:12] ======================================================================
-[2026-01-10 12:11:12] Window found: Daddy Bluestack at (0, 0)
-[2026-01-10 12:11:12] Window found: Maximus Bluestack at (0, 0)
-
-======================================================================
-[2026-01-10 12:13:35] PERK SELECTION - Daddy Bluestack
-======================================================================
-  Perk List Used: PERK_PRIORITY_DADDY
-  Perk 1: wy x1.75 health regen
-  Perk 1 Priority: 25
-  Perk 1 Background: RGB(32, 32, 82) | Hex: #202052
-  Perk 1 Is Purple: False
-  Perk 1 Effective Priority: 25
-
-  Perk 2: {x} land mine damage x3.50
-  Perk 2 Priority: 15
-  Perk 2 Background: RGB(33, 33, 84) | Hex: #212154
-  Perk 2 Is Purple: False
-  Perk 2 Effective Priority: 15
-
-  >>> SELECTED: Perk 2 (Effective Priority 15)
-======================================================================
-
+[2026-01-10 12:54:34] ======================================================================
+[2026-01-10 12:54:34] PERK AUTOMATOR STARTED
+[2026-01-10 12:54:34] ======================================================================
+[2026-01-10 12:54:34] Window found: Daddy Bluestack at (0, 0)
+[2026-01-10 12:54:34] Window found: Maximus Bluestack at (0, 0)
