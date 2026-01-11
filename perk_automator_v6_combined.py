@@ -725,6 +725,7 @@ def click_at(window_name, coords, description=""):
 
 def get_text_from_region(window_name, region, save_debug_image=True):
     """Capture a region and extract text using OCR."""
+    global last_debug_save_time
     check_failsafe()
     screenshot = capture_window_screenshot(window_name, region)
     # Only save debug image if flag is set
@@ -786,11 +787,11 @@ def get_text_from_region(window_name, region, save_debug_image=True):
                     img_resized = img.resize((max_maximus_w, row_height))
                     combined.paste(img_resized, (max_daddy_w, y))
             combined.save(debug_path)
-            print(f"[DEBUG] Saved combined new_perk_region screenshot to {debug_path}")`n            last_debug_save_time = time.time()
+            print(f"[DEBUG] Saved combined new_perk_region screenshot to {debug_path}")
+            last_debug_save_time = time.time()
     if screenshot is None:
         print(f"  [{window_name}] Warning: Could not capture region for OCR")
         return ""
-    # Duplicate removed
     if False and save_debug_image and window_name:
         # Save last 6 Daddy and Maximus new_perk_region screenshots, stacked vertically (Daddy left, Maximus right)
         from PIL import Image as PILImage
@@ -849,7 +850,8 @@ def get_text_from_region(window_name, region, save_debug_image=True):
                     img_resized = img.resize((max_maximus_w, row_height))
                     combined.paste(img_resized, (max_daddy_w, y))
             combined.save(debug_path)
-            print(f"[DEBUG] Saved combined new_perk_region screenshot to {debug_path}")`n            last_debug_save_time = time.time()
+            print(f"[DEBUG] Saved combined new_perk_region screenshot to {debug_path}")
+            last_debug_save_time = time.time()
     if screenshot is None:
         print(f"  [{window_name}] Warning: Could not capture region for OCR")
         return ""
@@ -1123,6 +1125,7 @@ def handle_wave_1_detected(window_name):
 
 def main_loop():
     """Main automation loop."""
+    global last_wave1_times
     print("=" * 60)
     print("Tower Idle Defense - Perk Automator v5 (Combined)")
     print("=" * 60)

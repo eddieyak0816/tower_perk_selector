@@ -1,2 +1,0 @@
-[2026-01-11 00:22:16] [Maximus Bluestack] Priority   20 |     not selected | Land Mine Damage x3.50
-[2026-01-11 00:22:16] [Maximus Bluestack] Priority   12 | >>> SELECTED | Defense percent +4.00%
