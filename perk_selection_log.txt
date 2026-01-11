@@ -283,3 +283,23 @@
   >>> SELECTED: Perk 1 (Effective Priority 18)
 ======================================================================
 
+
+======================================================================
+[2026-01-10 19:57:24] PERK SELECTION - Maximus Bluestack
+======================================================================
+  Perk List Used: PERK_PRIORITY
+  Perk 1: qs swamp radius x1.5
+  Perk 1 Priority: 11
+  Perk 1 Background: RGB(8, 32, 14) | Hex: #08200E
+  Perk 1 Is Purple: False
+  Perk 1 Effective Priority: 11
+
+  Perk 2: boss aed (5086 boss
+  Perk 2 Priority: 9999
+  Perk 2 Background: RGB(31, 3, 83) | Hex: #1F0353
+  Perk 2 Is Purple: True
+  Perk 2 Effective Priority: 19999
+
+  >>> SELECTED: Perk 1 (Effective Priority 11)
+======================================================================
+

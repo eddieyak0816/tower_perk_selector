@@ -26,3 +26,5 @@
 [2026-01-10 19:51:33] [Maximus Bluestack] Priority    7 | >>> SELECTED | black hole duration +12.0s
 [2026-01-10 19:51:41] [Maximus Bluestack] Priority   18 | >>> SELECTED | pa x1.15 damage
 [2026-01-10 19:51:41] [Maximus Bluestack] Priority 9999 |     not selected | y, mfesteal 12-50) bir krockback
+[2026-01-10 19:57:24] [Maximus Bluestack] Priority   11 | >>> SELECTED | qs swamp radius x1.5
+[2026-01-10 19:57:24] [Maximus Bluestack] Priority 9999 |     not selected | boss aed (5086 boss
