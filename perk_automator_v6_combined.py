@@ -210,7 +210,7 @@ PERK_PRIORITY = [
     (10, ["poison swamp"], []),                              # poison swamp
     (11, ["swamp radius"], []),                              # swamp radius x1.5
     (12, ["defense percent"], []),                           # defense percent +4
-    (13, ["free upgrade chance"], []),                       # free upgrade chance for all +5
+    (13, ["free upgrade chance", "upgrade chance for all"], []),  # free upgrade chance for all +5
     (14, ["cash bonus"], []),                                # x1.15 cash bonus
     (15, ["all coin"], []),                                  # x1.15 all coin
     (16, ["orbs"], []),                                      # orbs +1
@@ -243,7 +243,7 @@ PERK_PRIORITY_DADDY = [
     (5,  ["increase max game speed"], []),                   # increase max game speed by +1
     (6,  ["max health"], ["coins", "tower max"]),            # x1.20 max health (exclude perk 31)
     (7,  ["defense percent"], []),                           # defense percent +4
-    (8,  ["free upgrade chance"], []),                       # free upgrade chance for all +5
+    (8,  ["free upgrade chance", "upgrade chance for all"], []),  # free upgrade chance for all +5
     (9,  ["cash bonus"], []),                                # x1.15 cash bonus
     (10, ["all coin"], []),                                  # x1.15 all coin
     (11, ["orbs"], []),                                      # orbs +1
