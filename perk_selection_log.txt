@@ -3,3 +3,25 @@
 [2026-01-11 00:15:52] ======================================================================
 [2026-01-11 00:15:52] Window found: Daddy Bluestack at (0, 0)
 [2026-01-11 00:15:53] Window found: Maximus Bluestack at (0, 0)
+[2026-01-11 00:17:33] WAVE 1 DETECTED on Daddy Bluestack - bringing to focus
+[2026-01-11 00:17:39] WAVE 1 DETECTED on Daddy Bluestack - bringing to focus
+
+======================================================================
+[2026-01-11 00:22:16] PERK SELECTION - Maximus Bluestack
+======================================================================
+  Perk List Used: PERK_PRIORITY
+  Perk 1: Land Mine Damage x3.50
+  Perk 1 Priority: 20
+  Perk 1 Background: RGB(33, 32, 83) | Hex: #212053
+  Perk 1 Is Purple: False
+  Perk 1 Effective Priority: 20
+
+  Perk 2: Defense percent +4.00%
+  Perk 2 Priority: 12
+  Perk 2 Background: RGB(33, 32, 83) | Hex: #212053
+  Perk 2 Is Purple: False
+  Perk 2 Effective Priority: 12
+
+  >>> SELECTED: Perk 2 (Effective Priority 12)
+======================================================================
+

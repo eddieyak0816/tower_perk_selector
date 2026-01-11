@@ -307,6 +307,9 @@ CLICK_DELAY = 0.5
 WINDOW_OPEN_WAIT = 5.0
 WINDOW_CLOSE_WAIT = 5.0
 
+# Global timer for debug image saving (every 30 seconds)
+last_debug_save_time = 0
+
 # ============================================
 # FAILSAFE CONFIGURATION
 # ============================================
@@ -745,8 +748,8 @@ def get_text_from_region(window_name, region, save_debug_image=True):
                 get_text_from_region._maximus_imgs = get_text_from_region._maximus_imgs[-6:]
             updated = True
 
-        # Always update the combined image if either list changed
-        if updated:
+        # Always update the combined image if either list changed and 30 seconds have passed
+        if updated and time.time() - last_debug_save_time > 30:
             daddy_imgs = get_text_from_region._daddy_imgs[-6:]
             maximus_imgs = get_text_from_region._maximus_imgs[-6:]
             # Always show 6 rows, fill with blank if missing
@@ -784,8 +787,8 @@ def get_text_from_region(window_name, region, save_debug_image=True):
     if screenshot is None:
         print(f"  [{window_name}] Warning: Could not capture region for OCR")
         return ""
-    # Only save debug image if flag is set
-    if save_debug_image and window_name:
+    # Duplicate removed
+    if False and save_debug_image and window_name:
         # Save last 6 Daddy and Maximus new_perk_region screenshots, stacked vertically (Daddy left, Maximus right)
         from PIL import Image as PILImage
         debug_path = os.path.join(SCRIPT_DIR, 'debug_newperk_combined.png')
