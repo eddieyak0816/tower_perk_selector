@@ -1,3 +1,29 @@
+def check_for_new_perk(window_name, coords):
+    """Check if 'New Perk' text is visible in the perk bar region."""
+    region = coords['new_perk_region']
+    text = get_text_from_region(window_name, region)
+    print(f"  [{window_name}] OCR read: '{text}'")
+    return "new perk" in text.lower()
+def get_perk_priority(perk_text, window_name=None):
+    """Return the priority value for a given perk text."""
+    perk_text_lower = perk_text.strip().lower()
+    # Choose the correct priority list
+    if window_name and 'daddy' in window_name.lower():
+        priority_list = PERK_PRIORITY_DADDY
+    else:
+        priority_list = PERK_PRIORITY
+
+    # Special case: match 'free upgrade chance for all +5.00' if all words 'free', 'for', 'all' exist
+    if all(word in perk_text_lower for word in ['free', 'for', 'all']):
+        for priority, include_keywords, exclude_keywords in priority_list:
+            if 'free upgrade chance' in include_keywords or 'upgrade chance for all' in include_keywords:
+                return priority
+    for priority, include_keywords, exclude_keywords in priority_list:
+        all_include_match = all(keyword in perk_text_lower for keyword in include_keywords)
+        no_exclude_match = not any(keyword in perk_text_lower for keyword in exclude_keywords)
+        if all_include_match and no_exclude_match:
+            return priority
+    return 9999
 import pyautogui
 import pytesseract
 from PIL import Image
@@ -483,21 +509,48 @@ def get_coords(window_name):
 def bring_window_to_focus(window_name):
     """Bring the target window to the foreground."""
     if not WIN32_SUPPORT:
+        print(f"  [{window_name}] WARNING: Window targeting not supported")
         return False
     
     try:
-        hwnd = win32gui.FindWindow(None, window_name)
-        if hwnd == 0:
+        # Find window by partial title match
+        target_hwnd = None
+        def enum_callback(hwnd, extra):
+            nonlocal target_hwnd
+            title = win32gui.GetWindowText(hwnd)
+            if window_name.lower() in title.lower():
+                target_hwnd = hwnd
+                return False  # Stop enumeration
+            return True
+        
+        win32gui.EnumWindows(enum_callback, None)
+        
+        if target_hwnd is None:
+            print(f"  [{window_name}] WARNING: Window containing '{window_name}' not found")
             return False
         
-        if win32gui.IsIconic(hwnd):
-            win32gui.ShowWindow(hwnd, win32con.SW_RESTORE)
+        print(f"  [{window_name}] Found window with hwnd {target_hwnd}, title: '{win32gui.GetWindowText(target_hwnd)}'")
         
-        win32gui.SetForegroundWindow(hwnd)
+        if win32gui.IsIconic(target_hwnd):
+            win32gui.ShowWindow(target_hwnd, win32con.SW_RESTORE)
+            print(f"  [{window_name}] Restored minimized window")
+        
+        win32gui.SetForegroundWindow(target_hwnd)
         time.sleep(0.1)
-        return True
+        
+        # Verify the window is now foreground
+        fg_hwnd = win32gui.GetForegroundWindow()
+        fg_title = win32gui.GetWindowText(fg_hwnd)
+        print(f"  [{window_name}] Foreground window is now: '{fg_title}'")
+        
+        if fg_hwnd == target_hwnd:
+            print(f"  [{window_name}] Successfully switched to window")
+            return True
+        else:
+            print(f"  [{window_name}] WARNING: Failed to switch to window, still on '{fg_title}'")
+            return False
     except Exception as e:
-        print(f"  Could not focus window: {e}")
+        print(f"  [{window_name}] Could not focus window: {e}")
         return False
 
 def color_distance(color1, color2):
@@ -810,9 +863,7 @@ def get_text_from_region(window_name, region, save_debug_image=True):
         text = ""
     text = re.sub(r'[^\x00-\x7F]+', '', text)
     text = ' '.join(text.split())
-        if all_include_match and no_exclude_match:
-            return priority
-    return 9999
+    return text
 
 def select_best_perk(window_name, coords):
     """Read both perk options and click the better one.
@@ -1081,26 +1132,19 @@ def main_loop():
     
     pyautogui.FAILSAFE = True
     
-    loop_counter = 0
     while True:
         try:
             check_failsafe()
-            loop_counter += 1
-            save_debug_image = (loop_counter % 10 == 0)
-
             # Check each window for new perks and wave 1
             for window_name in WINDOWS:
                 check_failsafe()
-
                 window = get_target_window(window_name)
                 if not window:
                     continue
-
                 coords = get_coords(window_name)
-
                 # Check for wave 1 using New Perk bar
                 print(f"[{window_name}] Checking for Wave 1 using New Perk bar...")
-                perk_bar_text = get_text_from_region(window_name, coords['new_perk_region'], save_debug_image=save_debug_image)
+                perk_bar_text = get_text_from_region(window_name, coords['new_perk_region'])
                 perk_bar_text_clean = perk_bar_text.strip().lower().replace('|', '').replace(' ', '')
                 print(f"  [{window_name}] Perk bar OCR (for wave): '{perk_bar_text}'")
                 import re
@@ -1108,26 +1152,21 @@ def main_loop():
                 if match:
                     print(f"  [{window_name}] >>> WAVE 1 DETECTED! <<<")
                     handle_wave_1_detected(window_name)
-
                 # Check for new perk
                 print(f"[{window_name}] Checking for New Perk...")
-                perk_text = get_text_from_region(window_name, coords['new_perk_region'], save_debug_image=False)
+                perk_text = get_text_from_region(window_name, coords['new_perk_region'])
                 perk_text_lower = perk_text.strip().lower()
                 print(f"  [{window_name}] Perk bar OCR: '{perk_text_lower}'")
-
                 if "new perk" in perk_text_lower or "perk" in perk_text_lower:
                     print(f"  [{window_name}] New Perk detected!")
                     handle_perk_selection(window_name)
                 else:
                     print(f"  [{window_name}] No new perk available.")
-
             print(f"Waiting {CHECK_INTERVAL} seconds...")
             print("-" * 60)
-
             for _ in range(CHECK_INTERVAL * 5):
                 check_failsafe()
                 time.sleep(0.2)
-
         except KeyboardInterrupt:
             print("\n\nStopped by user (Ctrl+C)")
             break

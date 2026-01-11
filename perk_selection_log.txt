@@ -1,31 +1,45 @@
-[2026-01-10 23:06:31] ======================================================================
-[2026-01-10 23:06:31] PERK AUTOMATOR STARTED
-[2026-01-10 23:06:31] ======================================================================
-[2026-01-10 23:06:31] Window found: Daddy Bluestack at (0, 0)
-[2026-01-10 23:06:31] Window found: Maximus Bluestack at (0, 0)
-[2026-01-10 23:09:37] WAVE 1 DETECTED on Daddy Bluestack - bringing to focus
-[2026-01-10 23:12:46] WAVE 1 DETECTED on Daddy Bluestack - bringing to focus
+[2026-01-10 23:58:50] ======================================================================
+[2026-01-10 23:58:50] PERK AUTOMATOR STARTED
+[2026-01-10 23:58:50] ======================================================================
+[2026-01-10 23:58:50] Window found: Daddy Bluestack at (0, 0)
+[2026-01-10 23:58:50] Window found: Maximus Bluestack at (0, 0)
 
 ======================================================================
-[2026-01-10 23:15:24] PERK SELECTION - Maximus Bluestack
+[2026-01-10 23:59:03] PERK SELECTION - Maximus Bluestack
 ======================================================================
   Perk List Used: PERK_PRIORITY
-  Perk 1: x1.75 health regen
-  Perk 1 Priority: 25
-  Perk 1 Background: RGB(33, 32, 83) | Hex: #212053
+  Perk 1: 
+  Perk 1 Priority: 9999
+  Perk 1 Background: RGB(14, 13, 26) | Hex: #0E0D1A
   Perk 1 Is Purple: False
-  Perk 1 Effective Priority: 25
+  Perk 1 Effective Priority: 9999
 
-  Perk 2: x1.15 all coins bonuses
-  Perk 2 Priority: 15
-  Perk 2 Background: RGB(33, 32, 83) | Hex: #212053
+  Perk 2: ae , A as |
+  Perk 2 Priority: 9999
+  Perk 2 Background: RGB(11, 21, 31) | Hex: #0B151F
   Perk 2 Is Purple: False
-  Perk 2 Effective Priority: 15
+  Perk 2 Effective Priority: 9999
 
-  >>> SELECTED: Perk 2 (Effective Priority 15)
+  >>> SELECTED: Perk NONE - UNRECOGNIZED (Effective Priority 9999)
 ======================================================================
 
-[2026-01-10 23:16:48] WAVE 1 DETECTED on Daddy Bluestack - bringing to focus
-[2026-01-10 23:19:29] WAVE 1 DETECTED on Daddy Bluestack - bringing to focus
-[2026-01-10 23:23:27] WAVE 1 DETECTED on Daddy Bluestack - bringing to focus
-[2026-01-10 23:27:42] WAVE 1 DETECTED on Daddy Bluestack - bringing to focus
+
+======================================================================
+[2026-01-10 23:59:16] PERK SELECTION - Maximus Bluestack
+======================================================================
+  Perk List Used: PERK_PRIORITY
+  Perk 1: Land Mine Damage x3.50
+  Perk 1 Priority: 20
+  Perk 1 Background: RGB(33, 32, 83) | Hex: #212053
+  Perk 1 Is Purple: False
+  Perk 1 Effective Priority: 20
+
+  Perk 2: x1.15 Cash Bonus
+  Perk 2 Priority: 14
+  Perk 2 Background: RGB(33, 32, 83) | Hex: #212053
+  Perk 2 Is Purple: False
+  Perk 2 Effective Priority: 14
+
+  >>> SELECTED: Perk 2 (Effective Priority 14)
+======================================================================
+
