@@ -310,6 +310,9 @@ WINDOW_CLOSE_WAIT = 5.0
 # Global timer for debug image saving (every 30 seconds)
 last_debug_save_time = 0
 
+# Global timer for wave 1 handling (cooldown per window)
+last_wave1_times = {}
+
 # ============================================
 # FAILSAFE CONFIGURATION
 # ============================================
@@ -783,7 +786,7 @@ def get_text_from_region(window_name, region, save_debug_image=True):
                     img_resized = img.resize((max_maximus_w, row_height))
                     combined.paste(img_resized, (max_daddy_w, y))
             combined.save(debug_path)
-            print(f"[DEBUG] Saved combined new_perk_region screenshot to {debug_path}")
+            print(f"[DEBUG] Saved combined new_perk_region screenshot to {debug_path}")`n            last_debug_save_time = time.time()
     if screenshot is None:
         print(f"  [{window_name}] Warning: Could not capture region for OCR")
         return ""
@@ -846,7 +849,7 @@ def get_text_from_region(window_name, region, save_debug_image=True):
                     img_resized = img.resize((max_maximus_w, row_height))
                     combined.paste(img_resized, (max_daddy_w, y))
             combined.save(debug_path)
-            print(f"[DEBUG] Saved combined new_perk_region screenshot to {debug_path}")
+            print(f"[DEBUG] Saved combined new_perk_region screenshot to {debug_path}")`n            last_debug_save_time = time.time()
     if screenshot is None:
         print(f"  [{window_name}] Warning: Could not capture region for OCR")
         return ""
@@ -1179,9 +1182,10 @@ def main_loop():
                 print(f"  [{window_name}] Perk bar OCR (for wave): '{perk_bar_text}'")
                 import re
                 match = re.match(r'^1/\d+', perk_bar_text_clean)
-                if match:
+                if match and (window_name not in last_wave1_times or time.time() - last_wave1_times[window_name] > 30):
                     print(f"  [{window_name}] >>> WAVE 1 DETECTED! <<<")
                     handle_wave_1_detected(window_name)
+                    last_wave1_times[window_name] = time.time()
                 # Check for new perk
                 print(f"[{window_name}] Checking for New Perk...")
                 perk_text = get_text_from_region(window_name, coords['new_perk_region'])

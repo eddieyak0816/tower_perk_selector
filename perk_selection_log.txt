@@ -25,3 +25,9 @@
   >>> SELECTED: Perk 2 (Effective Priority 12)
 ======================================================================
 
+[2026-01-11 00:23:04] WAVE 1 DETECTED on Daddy Bluestack - bringing to focus
+[2026-01-11 00:23:09] WAVE 1 DETECTED on Daddy Bluestack - bringing to focus
+[2026-01-11 00:25:46] WAVE 1 DETECTED on Daddy Bluestack - bringing to focus
+[2026-01-11 00:25:51] WAVE 1 DETECTED on Daddy Bluestack - bringing to focus
+[2026-01-11 00:29:43] WAVE 1 DETECTED on Daddy Bluestack - bringing to focus
+[2026-01-11 00:29:49] WAVE 1 DETECTED on Daddy Bluestack - bringing to focus
