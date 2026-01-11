@@ -1088,6 +1088,33 @@ def check_window(window_name):
     
     return False
 
+def handle_wave_1_detected(window_name):
+    """Handle when wave 1 is detected - bring window to focus, then switch back after 10 seconds."""
+    # Save the current foreground window
+    saved_hwnd, saved_title = get_current_foreground_window()
+    if saved_title:
+        print(f"  Saving current window: '{saved_title}'")
+    
+    print(f"\n{'!'*60}")
+    print(f"  WAVE 1 DETECTED ON: {window_name}")
+    print(f"  Bringing window to focus...")
+    print(f"{'!'*60}\n")
+    
+    # Log the event
+    write_to_log(f"WAVE 1 DETECTED on {window_name} - bringing to focus")
+    
+    # Bring the window to focus
+    bring_window_to_focus(window_name)
+    
+    # Start a thread to restore the original window after 10 seconds
+    if saved_hwnd:
+        def restore_after_delay():
+            time.sleep(10)
+            print(f"  Restoring previous window after 10 seconds...")
+            restore_foreground_window(saved_hwnd, saved_title)
+        
+        threading.Thread(target=restore_after_delay, daemon=True).start()
+
 def main_loop():
     """Main automation loop."""
     print("=" * 60)

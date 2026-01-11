@@ -1,45 +1,5 @@
-[2026-01-10 23:58:50] ======================================================================
-[2026-01-10 23:58:50] PERK AUTOMATOR STARTED
-[2026-01-10 23:58:50] ======================================================================
-[2026-01-10 23:58:50] Window found: Daddy Bluestack at (0, 0)
-[2026-01-10 23:58:50] Window found: Maximus Bluestack at (0, 0)
-
-======================================================================
-[2026-01-10 23:59:03] PERK SELECTION - Maximus Bluestack
-======================================================================
-  Perk List Used: PERK_PRIORITY
-  Perk 1: 
-  Perk 1 Priority: 9999
-  Perk 1 Background: RGB(14, 13, 26) | Hex: #0E0D1A
-  Perk 1 Is Purple: False
-  Perk 1 Effective Priority: 9999
-
-  Perk 2: ae , A as |
-  Perk 2 Priority: 9999
-  Perk 2 Background: RGB(11, 21, 31) | Hex: #0B151F
-  Perk 2 Is Purple: False
-  Perk 2 Effective Priority: 9999
-
-  >>> SELECTED: Perk NONE - UNRECOGNIZED (Effective Priority 9999)
-======================================================================
-
-
-======================================================================
-[2026-01-10 23:59:16] PERK SELECTION - Maximus Bluestack
-======================================================================
-  Perk List Used: PERK_PRIORITY
-  Perk 1: Land Mine Damage x3.50
-  Perk 1 Priority: 20
-  Perk 1 Background: RGB(33, 32, 83) | Hex: #212053
-  Perk 1 Is Purple: False
-  Perk 1 Effective Priority: 20
-
-  Perk 2: x1.15 Cash Bonus
-  Perk 2 Priority: 14
-  Perk 2 Background: RGB(33, 32, 83) | Hex: #212053
-  Perk 2 Is Purple: False
-  Perk 2 Effective Priority: 14
-
-  >>> SELECTED: Perk 2 (Effective Priority 14)
-======================================================================
-
+[2026-01-11 00:15:52] ======================================================================
+[2026-01-11 00:15:52] PERK AUTOMATOR STARTED
+[2026-01-11 00:15:52] ======================================================================
+[2026-01-11 00:15:52] Window found: Daddy Bluestack at (0, 0)
+[2026-01-11 00:15:53] Window found: Maximus Bluestack at (0, 0)
