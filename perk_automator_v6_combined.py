@@ -664,24 +664,136 @@ def click_at(window_name, coords, description=""):
     pyautogui.click(x, y)
     time.sleep(CLICK_DELAY)
 
-def get_text_from_region(window_name, region):
+def get_text_from_region(window_name, region, save_debug_image=True):
     """Capture a region and extract text using OCR."""
     check_failsafe()
     screenshot = capture_window_screenshot(window_name, region)
-    # Debug: Save screenshot of Daddy's new_perk_region only once
-    if window_name and 'daddy' in window_name.lower():
-        if not hasattr(get_text_from_region, '_daddy_debug_saved'):
-            debug_path = os.path.join(SCRIPT_DIR, 'debug_daddy_newperk.png')
-            try:
-                screenshot.save(debug_path)
-                print(f"[DEBUG] Saved Daddy new_perk_region screenshot to {debug_path}")
-            except Exception as e:
-                print(f"[DEBUG] Failed to save Daddy debug screenshot: {e}")
-            get_text_from_region._daddy_debug_saved = True
+    # Only save debug image if flag is set
+    if save_debug_image and window_name:
+        # Save last 6 Daddy and Maximus new_perk_region screenshots, stacked vertically (Daddy left, Maximus right)
+        from PIL import Image as PILImage
+        debug_path = os.path.join(SCRIPT_DIR, 'debug_newperk_combined.png')
+        # Use lists to store last 6 for each, persistently
+        if not hasattr(get_text_from_region, '_daddy_imgs'):
+            get_text_from_region._daddy_imgs = []
+        if not hasattr(get_text_from_region, '_maximus_imgs'):
+            get_text_from_region._maximus_imgs = []
+
+        # Add new screenshot to appropriate list
+        updated = False
+        if 'daddy' in window_name.lower():
+            get_text_from_region._daddy_imgs.append(screenshot.copy())
+            if len(get_text_from_region._daddy_imgs) > 6:
+                get_text_from_region._daddy_imgs = get_text_from_region._daddy_imgs[-6:]
+            updated = True
+        if 'maximus' in window_name.lower():
+            get_text_from_region._maximus_imgs.append(screenshot.copy())
+            if len(get_text_from_region._maximus_imgs) > 6:
+                get_text_from_region._maximus_imgs = get_text_from_region._maximus_imgs[-6:]
+            updated = True
+
+        # Always update the combined image if either list changed
+        if updated:
+            daddy_imgs = get_text_from_region._daddy_imgs[-6:]
+            maximus_imgs = get_text_from_region._maximus_imgs[-6:]
+            # Always show 6 rows, fill with blank if missing
+            from PIL import Image as PILImage
+            max_daddy_w = max((img.width for img in daddy_imgs), default=1)
+            max_maximus_w = max((img.width for img in maximus_imgs), default=1)
+            row_height = max(
+                max((img.height for img in daddy_imgs), default=1),
+                max((img.height for img in maximus_imgs), default=1)
+            )
+            total_height = row_height * 6
+            total_width = max_daddy_w + max_maximus_w
+            combined = PILImage.new('RGB', (total_width, total_height), color=(128, 128, 128))
+            # Fill up to 6 images with blank if needed
+            blank_daddy = PILImage.new('RGB', (max_daddy_w, row_height), color=(64, 64, 64))
+            blank_maximus = PILImage.new('RGB', (max_maximus_w, row_height), color=(64, 64, 64))
+            for i in range(6):
+                y = row_height * i
+                # Daddy column
+                if i < 6 - len(daddy_imgs):
+                    combined.paste(blank_daddy, (0, y))
+                else:
+                    img = daddy_imgs[i - (6 - len(daddy_imgs))]
+                    img_resized = img.resize((max_daddy_w, row_height))
+                    combined.paste(img_resized, (0, y))
+                # Maximus column
+                if i < 6 - len(maximus_imgs):
+                    combined.paste(blank_maximus, (max_daddy_w, y))
+                else:
+                    img = maximus_imgs[i - (6 - len(maximus_imgs))]
+                    img_resized = img.resize((max_maximus_w, row_height))
+                    combined.paste(img_resized, (max_daddy_w, y))
+            combined.save(debug_path)
+            print(f"[DEBUG] Saved combined new_perk_region screenshot to {debug_path}")
     if screenshot is None:
         print(f"  [{window_name}] Warning: Could not capture region for OCR")
         return ""
-    # No debug screenshot saving
+    # Only save debug image if flag is set
+    if save_debug_image and window_name:
+        # Save last 6 Daddy and Maximus new_perk_region screenshots, stacked vertically (Daddy left, Maximus right)
+        from PIL import Image as PILImage
+        debug_path = os.path.join(SCRIPT_DIR, 'debug_newperk_combined.png')
+        # Use lists to store last 6 for each, persistently
+        if not hasattr(get_text_from_region, '_daddy_imgs'):
+            get_text_from_region._daddy_imgs = []
+        if not hasattr(get_text_from_region, '_maximus_imgs'):
+            get_text_from_region._maximus_imgs = []
+
+        # Add new screenshot to appropriate list
+        updated = False
+        if 'daddy' in window_name.lower():
+            get_text_from_region._daddy_imgs.append(screenshot.copy())
+            if len(get_text_from_region._daddy_imgs) > 6:
+                get_text_from_region._daddy_imgs = get_text_from_region._daddy_imgs[-6:]
+            updated = True
+        if 'maximus' in window_name.lower():
+            get_text_from_region._maximus_imgs.append(screenshot.copy())
+            if len(get_text_from_region._maximus_imgs) > 6:
+                get_text_from_region._maximus_imgs = get_text_from_region._maximus_imgs[-6:]
+            updated = True
+
+        # Always update the combined image if either list changed
+        if updated:
+            daddy_imgs = get_text_from_region._daddy_imgs[-6:]
+            maximus_imgs = get_text_from_region._maximus_imgs[-6:]
+            # Always show 6 rows, fill with blank if missing
+            from PIL import Image as PILImage
+            max_daddy_w = max((img.width for img in daddy_imgs), default=1)
+            max_maximus_w = max((img.width for img in maximus_imgs), default=1)
+            row_height = max(
+                max((img.height for img in daddy_imgs), default=1),
+                max((img.height for img in maximus_imgs), default=1)
+            )
+            total_height = row_height * 6
+            total_width = max_daddy_w + max_maximus_w
+            combined = PILImage.new('RGB', (total_width, total_height), color=(128, 128, 128))
+            # Fill up to 6 images with blank if needed
+            blank_daddy = PILImage.new('RGB', (max_daddy_w, row_height), color=(64, 64, 64))
+            blank_maximus = PILImage.new('RGB', (max_maximus_w, row_height), color=(64, 64, 64))
+            for i in range(6):
+                y = row_height * i
+                # Daddy column
+                if i < 6 - len(daddy_imgs):
+                    combined.paste(blank_daddy, (0, y))
+                else:
+                    img = daddy_imgs[i - (6 - len(daddy_imgs))]
+                    img_resized = img.resize((max_daddy_w, row_height))
+                    combined.paste(img_resized, (0, y))
+                # Maximus column
+                if i < 6 - len(maximus_imgs):
+                    combined.paste(blank_maximus, (max_daddy_w, y))
+                else:
+                    img = maximus_imgs[i - (6 - len(maximus_imgs))]
+                    img_resized = img.resize((max_maximus_w, row_height))
+                    combined.paste(img_resized, (max_daddy_w, y))
+            combined.save(debug_path)
+            print(f"[DEBUG] Saved combined new_perk_region screenshot to {debug_path}")
+    if screenshot is None:
+        print(f"  [{window_name}] Warning: Could not capture region for OCR")
+        return ""
     # Preprocess: grayscale, threshold, sharpen (same as New Perk bar)
     # For Daddy and Maximus, use grayscale only, no thresholding
     if window_name and ('maximus' in window_name.lower() or 'daddy' in window_name.lower()):
@@ -698,70 +810,6 @@ def get_text_from_region(window_name, region):
         text = ""
     text = re.sub(r'[^\x00-\x7F]+', '', text)
     text = ' '.join(text.split())
-    return text.strip().lower()
-
-def check_for_new_perk(window_name, coords):
-    """Check if 'New Perk' text is visible in the perk bar region."""
-    region = coords['new_perk_region']
-    
-    # No debug screenshot saving
-    
-    text = get_text_from_region(window_name, region)
-    print(f"  [{window_name}] OCR read: '{text}'")
-    # If we are skipping New Perk bar until numbers, only return True if numbers are present
-    global SKIP_NEW_PERK_BAR_UNTIL_NUMBERS
-    if 'SKIP_NEW_PERK_BAR_UNTIL_NUMBERS' in globals() and SKIP_NEW_PERK_BAR_UNTIL_NUMBERS:
-        import re
-        # Look for any digit in the text
-        if re.search(r'\d', text):
-            print(f"  [{window_name}] Numbers detected in New Perk bar. Resetting skip flag.")
-            SKIP_NEW_PERK_BAR_UNTIL_NUMBERS = False
-            return True
-        else:
-            print(f"  [{window_name}] Skipping New Perk bar click: no numbers detected.")
-            return False
-    return "new perk" in text.lower()
-
-def handle_wave_1_detected(window_name):
-    """Handle when wave 1 is detected - bring window to focus."""
-    print(f"\n{'!'*60}")
-    print(f"  WAVE 1 DETECTED ON: {window_name}")
-    print(f"  Bringing window to focus...")
-    print(f"{'!'*60}\n")
-    # Log the event
-    write_to_log(f"WAVE 1 DETECTED on {window_name} - bringing to focus")
-    # Use the exact same window switching and restoration logic as New Perk bar
-    saved_hwnd, saved_title = get_current_foreground_window()
-    if saved_title:
-        print(f"  Saving current window: '{saved_title}'")
-    bring_window_to_focus(window_name)
-    # (If you need to click or interact, use click_at here)
-    # Wait 30 seconds (simulate whatever action is needed)
-    print(f"  Waiting 30 seconds before restoring previous window...")
-    time.sleep(30)
-    # Restore the previous foreground window
-    if saved_hwnd:
-        print(f"  Restoring previous window: '{saved_title}'")
-        restore_foreground_window(saved_hwnd, saved_title)
-
-def get_perk_priority(perk_text, window_name=None):
-    """Get the priority of a perk based on keyword matching. Uses alternate list for 'Daddy' windows."""
-    perk_text_lower = perk_text.lower()
-
-    # Use alternate list if window_name contains 'daddy' (case-insensitive)
-    if window_name and 'daddy' in window_name.lower():
-        priority_list = PERK_PRIORITY_DADDY
-    else:
-        priority_list = PERK_PRIORITY
-
-    # Special case: match 'free upgrade chance for all +5.00' if all words 'free', 'for', 'all' exist
-    if all(word in perk_text_lower for word in ['free', 'for', 'all']):
-        for priority, include_keywords, exclude_keywords in priority_list:
-            if 'free upgrade chance' in include_keywords or 'upgrade chance for all' in include_keywords:
-                return priority
-    for priority, include_keywords, exclude_keywords in priority_list:
-        all_include_match = all(keyword in perk_text_lower for keyword in include_keywords)
-        no_exclude_match = not any(keyword in perk_text_lower for keyword in exclude_keywords)
         if all_include_match and no_exclude_match:
             return priority
     return 9999
@@ -1033,23 +1081,26 @@ def main_loop():
     
     pyautogui.FAILSAFE = True
     
+    loop_counter = 0
     while True:
         try:
             check_failsafe()
-            
+            loop_counter += 1
+            save_debug_image = (loop_counter % 10 == 0)
+
             # Check each window for new perks and wave 1
             for window_name in WINDOWS:
                 check_failsafe()
-                
+
                 window = get_target_window(window_name)
                 if not window:
                     continue
-                
+
                 coords = get_coords(window_name)
-                
+
                 # Check for wave 1 using New Perk bar
                 print(f"[{window_name}] Checking for Wave 1 using New Perk bar...")
-                perk_bar_text = get_text_from_region(window_name, coords['new_perk_region'])
+                perk_bar_text = get_text_from_region(window_name, coords['new_perk_region'], save_debug_image=save_debug_image)
                 perk_bar_text_clean = perk_bar_text.strip().lower().replace('|', '').replace(' ', '')
                 print(f"  [{window_name}] Perk bar OCR (for wave): '{perk_bar_text}'")
                 import re
@@ -1057,26 +1108,26 @@ def main_loop():
                 if match:
                     print(f"  [{window_name}] >>> WAVE 1 DETECTED! <<<")
                     handle_wave_1_detected(window_name)
-                
+
                 # Check for new perk
                 print(f"[{window_name}] Checking for New Perk...")
-                perk_text = get_text_from_region(window_name, coords['new_perk_region'])
+                perk_text = get_text_from_region(window_name, coords['new_perk_region'], save_debug_image=False)
                 perk_text_lower = perk_text.strip().lower()
                 print(f"  [{window_name}] Perk bar OCR: '{perk_text_lower}'")
-                
+
                 if "new perk" in perk_text_lower or "perk" in perk_text_lower:
                     print(f"  [{window_name}] New Perk detected!")
                     handle_perk_selection(window_name)
                 else:
                     print(f"  [{window_name}] No new perk available.")
-            
+
             print(f"Waiting {CHECK_INTERVAL} seconds...")
             print("-" * 60)
-            
+
             for _ in range(CHECK_INTERVAL * 5):
                 check_failsafe()
                 time.sleep(0.2)
-            
+
         except KeyboardInterrupt:
             print("\n\nStopped by user (Ctrl+C)")
             break

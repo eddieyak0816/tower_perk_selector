@@ -1,30 +1,5 @@
-[2026-01-10 22:32:20] ======================================================================
-[2026-01-10 22:32:20] PERK AUTOMATOR STARTED
-[2026-01-10 22:32:20] ======================================================================
-[2026-01-10 22:32:20] Window found: Daddy Bluestack at (0, 0)
-[2026-01-10 22:32:20] Window found: Maximus Bluestack at (0, 0)
-[2026-01-10 22:35:23] WAVE 1 DETECTED on Daddy Bluestack - bringing to focus
-[2026-01-10 22:38:42] WAVE 1 DETECTED on Daddy Bluestack - bringing to focus
-[2026-01-10 22:42:55] WAVE 1 DETECTED on Daddy Bluestack - bringing to focus
-
-======================================================================
-[2026-01-10 22:43:35] PERK SELECTION - Maximus Bluestack
-======================================================================
-  Perk List Used: PERK_PRIORITY
-  Perk 1: land mine damage x3.50
-  Perk 1 Priority: 20
-  Perk 1 Background: RGB(33, 32, 83) | Hex: #212053
-  Perk 1 Is Purple: False
-  Perk 1 Effective Priority: 20
-
-  Perk 2: free eee for all
-  Perk 2 Priority: 9999
-  Perk 2 Background: RGB(33, 32, 83) | Hex: #212053
-  Perk 2 Is Purple: False
-  Perk 2 Effective Priority: 9999
-
-  >>> SELECTED: Perk 1 (Effective Priority 20)
-======================================================================
-
-[2026-01-10 22:47:12] WAVE 1 DETECTED on Daddy Bluestack - bringing to focus
-[2026-01-10 22:50:33] WAVE 1 DETECTED on Daddy Bluestack - bringing to focus
+[2026-01-10 23:06:31] ======================================================================
+[2026-01-10 23:06:31] PERK AUTOMATOR STARTED
+[2026-01-10 23:06:31] ======================================================================
+[2026-01-10 23:06:31] Window found: Daddy Bluestack at (0, 0)
+[2026-01-10 23:06:31] Window found: Maximus Bluestack at (0, 0)
