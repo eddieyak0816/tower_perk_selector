@@ -669,14 +669,20 @@ def get_text_from_region(window_name, region):
         return ""
     # No debug screenshot saving
     # Preprocess: grayscale, threshold, sharpen (same as New Perk bar)
-    img = screenshot.convert('L')
-    img = img.point(lambda x: 0 if x < 180 else 255, '1')
-    text = pytesseract.image_to_string(img, config='--psm 7')
-    # Extra cleaning: remove non-ascii, collapse whitespace
-    import re
-    text = re.sub(r'[^\x00-\x7F]+', '', text)
-    text = ' '.join(text.split())
-    return text.strip().lower()
+        # For Maximus, revert to previous working version: grayscale only, no thresholding
+        if window_name and 'maximus' in window_name.lower():
+            img = screenshot.convert('L')
+            text = pytesseract.image_to_string(img, config='--psm 7')
+        else:
+            # Keep Daddy and others as before (with thresholding)
+            img = screenshot.convert('L')
+            img = img.point(lambda x: 0 if x < 180 else 255, '1')
+            text = pytesseract.image_to_string(img, config='--psm 7')
+        # Extra cleaning: remove non-ascii, collapse whitespace
+        import re
+        text = re.sub(r'[^\x00-\x7F]+', '', text)
+        text = ' '.join(text.split())
+        return text.strip().lower()
 
 def check_for_new_perk(window_name, coords):
     """Check if 'New Perk' text is visible in the perk bar region."""
