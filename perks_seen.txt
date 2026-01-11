@@ -1,0 +1,2 @@
+[2026-01-10 22:43:35] [Maximus Bluestack] Priority   20 | >>> SELECTED | land mine damage x3.50
+[2026-01-10 22:43:35] [Maximus Bluestack] Priority 9999 |     not selected | free eee for all

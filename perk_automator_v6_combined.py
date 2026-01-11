@@ -754,6 +754,11 @@ def get_perk_priority(perk_text, window_name=None):
     else:
         priority_list = PERK_PRIORITY
 
+    # Special case: match 'free upgrade chance for all +5.00' if all words 'free', 'for', 'all' exist
+    if all(word in perk_text_lower for word in ['free', 'for', 'all']):
+        for priority, include_keywords, exclude_keywords in priority_list:
+            if 'free upgrade chance' in include_keywords or 'upgrade chance for all' in include_keywords:
+                return priority
     for priority, include_keywords, exclude_keywords in priority_list:
         all_include_match = all(keyword in perk_text_lower for keyword in include_keywords)
         no_exclude_match = not any(keyword in perk_text_lower for keyword in exclude_keywords)
