@@ -1,30 +1,10 @@
-[2026-01-10 19:49:56] [Maximus Bluestack] Priority   12 |     not selected | ca defense percent +4.00%
-[2026-01-10 19:49:56] [Maximus Bluestack] Priority    9 | >>> SELECTED | i. x1.20 max health
-[2026-01-10 19:50:04] [Maximus Bluestack] Priority 9999 |     not selected | free hesereg tei for all
-[2026-01-10 19:50:04] [Maximus Bluestack] Priority    8 | >>> SELECTED | increase max game speed by +1.00
-[2026-01-10 19:50:12] [Maximus Bluestack] Priority   19 | >>> SELECTED | (eh, interest x1.50
-[2026-01-10 19:50:12] [Maximus Bluestack] Priority   20 |     not selected | {x} land mine damage x3.50
-[2026-01-10 19:50:20] [Maximus Bluestack] Priority   10 |     not selected | unlock poison swamp
-[2026-01-10 19:50:20] [Maximus Bluestack] Priority    9 | >>> SELECTED | i. x1.20 max health
-[2026-01-10 19:50:28] [Maximus Bluestack] Priority 9999 |     not selected | free hesereg tei for all
-[2026-01-10 19:50:28] [Maximus Bluestack] Priority   14 | >>> SELECTED | $ x1.15 cash bonus
-[2026-01-10 19:50:36] [Maximus Bluestack] Priority   17 |     not selected | 0 bounce shot +2
-[2026-01-10 19:50:36] [Maximus Bluestack] Priority    5 | >>> SELECTED | ) +1 wave on death wave
-[2026-01-10 19:50:44] [Maximus Bluestack] Priority    4 |     not selected | ex golden tower bonus x1.5
-[2026-01-10 19:50:44] [Maximus Bluestack] Priority    2 | >>> SELECTED | perk wave requirement -20.00%
-[2026-01-10 19:50:52] [Maximus Bluestack] Priority   12 | >>> SELECTED | ca defense percent +4.00%
-[2026-01-10 19:50:52] [Maximus Bluestack] Priority   25 |     not selected | ye x1.75 health regen
-[2026-01-10 19:51:01] [Maximus Bluestack] Priority   21 |     not selected | @ x1.15 defense absolute
-[2026-01-10 19:51:01] [Maximus Bluestack] Priority    9 | >>> SELECTED | i. x1.20 max health
-[2026-01-10 19:51:09] [Maximus Bluestack] Priority   10 | >>> SELECTED | unlock poison swamp
-[2026-01-10 19:51:09] [Maximus Bluestack] Priority 9999 |     not selected | boss aed (5086 boss
-[2026-01-10 19:51:17] [Maximus Bluestack] Priority 9999 |     not selected | boss pee boss
-[2026-01-10 19:51:17] [Maximus Bluestack] Priority   16 | >>> SELECTED | c) orbs +1
-[2026-01-10 19:51:25] [Maximus Bluestack] Priority   12 | >>> SELECTED | ca defense percent +4.00%
-[2026-01-10 19:51:25] [Maximus Bluestack] Priority 9999 |     not selected | free eee for all
-[2026-01-10 19:51:33] [Maximus Bluestack] Priority   17 |     not selected | 0 bounce shot +2
-[2026-01-10 19:51:33] [Maximus Bluestack] Priority    7 | >>> SELECTED | black hole duration +12.0s
-[2026-01-10 19:51:41] [Maximus Bluestack] Priority   18 | >>> SELECTED | pa x1.15 damage
-[2026-01-10 19:51:41] [Maximus Bluestack] Priority 9999 |     not selected | y, mfesteal 12-50) bir krockback
-[2026-01-10 19:57:24] [Maximus Bluestack] Priority   11 | >>> SELECTED | qs swamp radius x1.5
-[2026-01-10 19:57:24] [Maximus Bluestack] Priority 9999 |     not selected | boss aed (5086 boss
+[2026-01-10 20:55:02] [Maximus Bluestack] Priority   18 |     not selected | chain lightning damage x2
+[2026-01-10 20:55:02] [Maximus Bluestack] Priority    4 | >>> SELECTED | golden tower bonus x1.5
+[2026-01-10 20:59:38] [Daddy Bluestack] Priority   19 |     not selected | black hole duration +12.0s
+[2026-01-10 20:59:38] [Daddy Bluestack] Priority    7 | >>> SELECTED | defense percent +4.00%
+[2026-01-10 21:06:52] [Maximus Bluestack] Priority   18 | >>> SELECTED | chain lightning damage x2
+[2026-01-10 21:06:52] [Maximus Bluestack] Priority   18 |     not selected | rgnemies damage x25
+[2026-01-10 21:22:54] [Maximus Bluestack] Priority   25 |     not selected | x1.75 health regen
+[2026-01-10 21:22:54] [Maximus Bluestack] Priority   20 | >>> SELECTED | land mine damage x3.50
+[2026-01-10 21:24:54] [Daddy Bluestack] Priority   11 | >>> SELECTED | orbs +1
+[2026-01-10 21:24:54] [Daddy Bluestack] Priority   15 |     not selected | land mine damage x3.50

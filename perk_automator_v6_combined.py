@@ -668,17 +668,27 @@ def get_text_from_region(window_name, region):
     """Capture a region and extract text using OCR."""
     check_failsafe()
     screenshot = capture_window_screenshot(window_name, region)
+    # Debug: Save screenshot of Daddy's new_perk_region only once
+    if window_name and 'daddy' in window_name.lower():
+        if not hasattr(get_text_from_region, '_daddy_debug_saved'):
+            debug_path = os.path.join(SCRIPT_DIR, 'debug_daddy_newperk.png')
+            try:
+                screenshot.save(debug_path)
+                print(f"[DEBUG] Saved Daddy new_perk_region screenshot to {debug_path}")
+            except Exception as e:
+                print(f"[DEBUG] Failed to save Daddy debug screenshot: {e}")
+            get_text_from_region._daddy_debug_saved = True
     if screenshot is None:
         print(f"  [{window_name}] Warning: Could not capture region for OCR")
         return ""
     # No debug screenshot saving
     # Preprocess: grayscale, threshold, sharpen (same as New Perk bar)
-    # For Maximus, revert to previous working version: grayscale only, no thresholding
-    if window_name and 'maximus' in window_name.lower():
+    # For Daddy and Maximus, use grayscale only, no thresholding
+    if window_name and ('maximus' in window_name.lower() or 'daddy' in window_name.lower()):
         img = screenshot.convert('L')
         text = pytesseract.image_to_string(img, config='--psm 7')
     else:
-        # Keep Daddy and others as before (with thresholding)
+        # For any other window, keep thresholding
         img = screenshot.convert('L')
         img = img.point(lambda x: 0 if x < 180 else 255, '1')
         text = pytesseract.image_to_string(img, config='--psm 7')

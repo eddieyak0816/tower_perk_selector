@@ -1,262 +1,42 @@
-[2026-01-10 19:49:43] ======================================================================
-[2026-01-10 19:49:43] PERK AUTOMATOR STARTED
-[2026-01-10 19:49:43] ======================================================================
-[2026-01-10 19:49:43] Window found: Daddy Bluestack at (0, 0)
-[2026-01-10 19:49:43] Window found: Maximus Bluestack at (0, 0)
+[2026-01-10 20:54:50] ======================================================================
+[2026-01-10 20:54:50] PERK AUTOMATOR STARTED
+[2026-01-10 20:54:50] ======================================================================
+[2026-01-10 20:54:50] Window found: Daddy Bluestack at (0, 0)
+[2026-01-10 20:54:50] Window found: Maximus Bluestack at (0, 0)
 
 ======================================================================
-[2026-01-10 19:49:56] PERK SELECTION - Maximus Bluestack
+[2026-01-10 20:55:02] PERK SELECTION - Maximus Bluestack
 ======================================================================
   Perk List Used: PERK_PRIORITY
-  Perk 1: ca defense percent +4.00%
-  Perk 1 Priority: 12
-  Perk 1 Background: RGB(32, 32, 82) | Hex: #202052
+  Perk 1: chain lightning damage x2
+  Perk 1 Priority: 18
+  Perk 1 Background: RGB(8, 32, 14) | Hex: #08200E
   Perk 1 Is Purple: False
-  Perk 1 Effective Priority: 12
+  Perk 1 Effective Priority: 18
 
-  Perk 2: i. x1.20 max health
-  Perk 2 Priority: 9
-  Perk 2 Background: RGB(33, 33, 84) | Hex: #212154
+  Perk 2: golden tower bonus x1.5
+  Perk 2 Priority: 4
+  Perk 2 Background: RGB(8, 32, 14) | Hex: #08200E
   Perk 2 Is Purple: False
-  Perk 2 Effective Priority: 9
+  Perk 2 Effective Priority: 4
 
-  >>> SELECTED: Perk 2 (Effective Priority 9)
+  >>> SELECTED: Perk 2 (Effective Priority 4)
 ======================================================================
 
 
 ======================================================================
-[2026-01-10 19:50:04] PERK SELECTION - Maximus Bluestack
+[2026-01-10 20:59:38] PERK SELECTION - Daddy Bluestack
 ======================================================================
-  Perk List Used: PERK_PRIORITY
-  Perk 1: free hesereg tei for all
-  Perk 1 Priority: 9999
-  Perk 1 Background: RGB(32, 32, 82) | Hex: #202052
-  Perk 1 Is Purple: False
-  Perk 1 Effective Priority: 9999
-
-  Perk 2: increase max game speed by +1.00
-  Perk 2 Priority: 8
-  Perk 2 Background: RGB(33, 33, 84) | Hex: #212154
-  Perk 2 Is Purple: False
-  Perk 2 Effective Priority: 8
-
-  >>> SELECTED: Perk 2 (Effective Priority 8)
-======================================================================
-
-
-======================================================================
-[2026-01-10 19:50:12] PERK SELECTION - Maximus Bluestack
-======================================================================
-  Perk List Used: PERK_PRIORITY
-  Perk 1: (eh, interest x1.50
+  Perk List Used: PERK_PRIORITY_DADDY
+  Perk 1: black hole duration +12.0s
   Perk 1 Priority: 19
-  Perk 1 Background: RGB(32, 32, 82) | Hex: #202052
+  Perk 1 Background: RGB(8, 32, 14) | Hex: #08200E
   Perk 1 Is Purple: False
   Perk 1 Effective Priority: 19
 
-  Perk 2: {x} land mine damage x3.50
-  Perk 2 Priority: 20
-  Perk 2 Background: RGB(33, 33, 84) | Hex: #212154
-  Perk 2 Is Purple: False
-  Perk 2 Effective Priority: 20
-
-  >>> SELECTED: Perk 1 (Effective Priority 19)
-======================================================================
-
-
-======================================================================
-[2026-01-10 19:50:20] PERK SELECTION - Maximus Bluestack
-======================================================================
-  Perk List Used: PERK_PRIORITY
-  Perk 1: unlock poison swamp
-  Perk 1 Priority: 10
-  Perk 1 Background: RGB(32, 32, 82) | Hex: #202052
-  Perk 1 Is Purple: False
-  Perk 1 Effective Priority: 10
-
-  Perk 2: i. x1.20 max health
-  Perk 2 Priority: 9
-  Perk 2 Background: RGB(33, 33, 84) | Hex: #212154
-  Perk 2 Is Purple: False
-  Perk 2 Effective Priority: 9
-
-  >>> SELECTED: Perk 2 (Effective Priority 9)
-======================================================================
-
-
-======================================================================
-[2026-01-10 19:50:28] PERK SELECTION - Maximus Bluestack
-======================================================================
-  Perk List Used: PERK_PRIORITY
-  Perk 1: free hesereg tei for all
-  Perk 1 Priority: 9999
-  Perk 1 Background: RGB(32, 32, 82) | Hex: #202052
-  Perk 1 Is Purple: False
-  Perk 1 Effective Priority: 9999
-
-  Perk 2: $ x1.15 cash bonus
-  Perk 2 Priority: 14
-  Perk 2 Background: RGB(33, 33, 84) | Hex: #212154
-  Perk 2 Is Purple: False
-  Perk 2 Effective Priority: 14
-
-  >>> SELECTED: Perk 2 (Effective Priority 14)
-======================================================================
-
-
-======================================================================
-[2026-01-10 19:50:36] PERK SELECTION - Maximus Bluestack
-======================================================================
-  Perk List Used: PERK_PRIORITY
-  Perk 1: 0 bounce shot +2
-  Perk 1 Priority: 17
-  Perk 1 Background: RGB(32, 32, 82) | Hex: #202052
-  Perk 1 Is Purple: False
-  Perk 1 Effective Priority: 17
-
-  Perk 2: ) +1 wave on death wave
-  Perk 2 Priority: 5
-  Perk 2 Background: RGB(8, 33, 14) | Hex: #08210E
-  Perk 2 Is Purple: False
-  Perk 2 Effective Priority: 5
-
-  >>> SELECTED: Perk 2 (Effective Priority 5)
-======================================================================
-
-
-======================================================================
-[2026-01-10 19:50:44] PERK SELECTION - Maximus Bluestack
-======================================================================
-  Perk List Used: PERK_PRIORITY
-  Perk 1: ex golden tower bonus x1.5
-  Perk 1 Priority: 4
-  Perk 1 Background: RGB(8, 32, 14) | Hex: #08200E
-  Perk 1 Is Purple: False
-  Perk 1 Effective Priority: 4
-
-  Perk 2: perk wave requirement -20.00%
-  Perk 2 Priority: 2
-  Perk 2 Background: RGB(33, 33, 84) | Hex: #212154
-  Perk 2 Is Purple: False
-  Perk 2 Effective Priority: 2
-
-  >>> SELECTED: Perk 2 (Effective Priority 2)
-======================================================================
-
-
-======================================================================
-[2026-01-10 19:50:52] PERK SELECTION - Maximus Bluestack
-======================================================================
-  Perk List Used: PERK_PRIORITY
-  Perk 1: ca defense percent +4.00%
-  Perk 1 Priority: 12
-  Perk 1 Background: RGB(32, 32, 82) | Hex: #202052
-  Perk 1 Is Purple: False
-  Perk 1 Effective Priority: 12
-
-  Perk 2: ye x1.75 health regen
-  Perk 2 Priority: 25
-  Perk 2 Background: RGB(33, 33, 84) | Hex: #212154
-  Perk 2 Is Purple: False
-  Perk 2 Effective Priority: 25
-
-  >>> SELECTED: Perk 1 (Effective Priority 12)
-======================================================================
-
-
-======================================================================
-[2026-01-10 19:51:01] PERK SELECTION - Maximus Bluestack
-======================================================================
-  Perk List Used: PERK_PRIORITY
-  Perk 1: @ x1.15 defense absolute
-  Perk 1 Priority: 21
-  Perk 1 Background: RGB(32, 32, 82) | Hex: #202052
-  Perk 1 Is Purple: False
-  Perk 1 Effective Priority: 21
-
-  Perk 2: i. x1.20 max health
-  Perk 2 Priority: 9
-  Perk 2 Background: RGB(33, 33, 84) | Hex: #212154
-  Perk 2 Is Purple: False
-  Perk 2 Effective Priority: 9
-
-  >>> SELECTED: Perk 2 (Effective Priority 9)
-======================================================================
-
-
-======================================================================
-[2026-01-10 19:51:09] PERK SELECTION - Maximus Bluestack
-======================================================================
-  Perk List Used: PERK_PRIORITY
-  Perk 1: unlock poison swamp
-  Perk 1 Priority: 10
-  Perk 1 Background: RGB(32, 32, 82) | Hex: #202052
-  Perk 1 Is Purple: False
-  Perk 1 Effective Priority: 10
-
-  Perk 2: boss aed (5086 boss
-  Perk 2 Priority: 9999
-  Perk 2 Background: RGB(31, 3, 83) | Hex: #1F0353
-  Perk 2 Is Purple: True
-  Perk 2 Effective Priority: 19999
-
-  >>> SELECTED: Perk 1 (Effective Priority 10)
-======================================================================
-
-
-======================================================================
-[2026-01-10 19:51:17] PERK SELECTION - Maximus Bluestack
-======================================================================
-  Perk List Used: PERK_PRIORITY
-  Perk 1: boss pee boss
-  Perk 1 Priority: 9999
-  Perk 1 Background: RGB(30, 3, 82) | Hex: #1E0352
-  Perk 1 Is Purple: True
-  Perk 1 Effective Priority: 19999
-
-  Perk 2: c) orbs +1
-  Perk 2 Priority: 16
-  Perk 2 Background: RGB(33, 33, 84) | Hex: #212154
-  Perk 2 Is Purple: False
-  Perk 2 Effective Priority: 16
-
-  >>> SELECTED: Perk 2 (Effective Priority 16)
-======================================================================
-
-
-======================================================================
-[2026-01-10 19:51:25] PERK SELECTION - Maximus Bluestack
-======================================================================
-  Perk List Used: PERK_PRIORITY
-  Perk 1: ca defense percent +4.00%
-  Perk 1 Priority: 12
-  Perk 1 Background: RGB(32, 32, 82) | Hex: #202052
-  Perk 1 Is Purple: False
-  Perk 1 Effective Priority: 12
-
-  Perk 2: free eee for all
-  Perk 2 Priority: 9999
-  Perk 2 Background: RGB(33, 33, 84) | Hex: #212154
-  Perk 2 Is Purple: False
-  Perk 2 Effective Priority: 9999
-
-  >>> SELECTED: Perk 1 (Effective Priority 12)
-======================================================================
-
-
-======================================================================
-[2026-01-10 19:51:33] PERK SELECTION - Maximus Bluestack
-======================================================================
-  Perk List Used: PERK_PRIORITY
-  Perk 1: 0 bounce shot +2
-  Perk 1 Priority: 17
-  Perk 1 Background: RGB(32, 32, 82) | Hex: #202052
-  Perk 1 Is Purple: False
-  Perk 1 Effective Priority: 17
-
-  Perk 2: black hole duration +12.0s
+  Perk 2: defense percent +4.00%
   Perk 2 Priority: 7
-  Perk 2 Background: RGB(8, 33, 14) | Hex: #08210E
+  Perk 2 Background: RGB(33, 32, 83) | Hex: #212053
   Perk 2 Is Purple: False
   Perk 2 Effective Priority: 7
 
@@ -265,40 +45,60 @@
 
 
 ======================================================================
-[2026-01-10 19:51:41] PERK SELECTION - Maximus Bluestack
+[2026-01-10 21:06:52] PERK SELECTION - Maximus Bluestack
 ======================================================================
   Perk List Used: PERK_PRIORITY
-  Perk 1: pa x1.15 damage
+  Perk 1: chain lightning damage x2
   Perk 1 Priority: 18
-  Perk 1 Background: RGB(32, 32, 82) | Hex: #202052
+  Perk 1 Background: RGB(8, 32, 14) | Hex: #08200E
   Perk 1 Is Purple: False
   Perk 1 Effective Priority: 18
 
-  Perk 2: y, mfesteal 12-50) bir krockback
-  Perk 2 Priority: 9999
-  Perk 2 Background: RGB(31, 3, 83) | Hex: #1F0353
+  Perk 2: rgnemies damage x25
+  Perk 2 Priority: 18
+  Perk 2 Background: RGB(31, 3, 82) | Hex: #1F0352
   Perk 2 Is Purple: True
-  Perk 2 Effective Priority: 19999
+  Perk 2 Effective Priority: 10018
 
   >>> SELECTED: Perk 1 (Effective Priority 18)
 ======================================================================
 
 
 ======================================================================
-[2026-01-10 19:57:24] PERK SELECTION - Maximus Bluestack
+[2026-01-10 21:22:54] PERK SELECTION - Maximus Bluestack
 ======================================================================
   Perk List Used: PERK_PRIORITY
-  Perk 1: qs swamp radius x1.5
+  Perk 1: x1.75 health regen
+  Perk 1 Priority: 25
+  Perk 1 Background: RGB(33, 32, 83) | Hex: #212053
+  Perk 1 Is Purple: False
+  Perk 1 Effective Priority: 25
+
+  Perk 2: land mine damage x3.50
+  Perk 2 Priority: 20
+  Perk 2 Background: RGB(33, 32, 83) | Hex: #212053
+  Perk 2 Is Purple: False
+  Perk 2 Effective Priority: 20
+
+  >>> SELECTED: Perk 2 (Effective Priority 20)
+======================================================================
+
+
+======================================================================
+[2026-01-10 21:24:54] PERK SELECTION - Daddy Bluestack
+======================================================================
+  Perk List Used: PERK_PRIORITY_DADDY
+  Perk 1: orbs +1
   Perk 1 Priority: 11
-  Perk 1 Background: RGB(8, 32, 14) | Hex: #08200E
+  Perk 1 Background: RGB(33, 32, 83) | Hex: #212053
   Perk 1 Is Purple: False
   Perk 1 Effective Priority: 11
 
-  Perk 2: boss aed (5086 boss
-  Perk 2 Priority: 9999
-  Perk 2 Background: RGB(31, 3, 83) | Hex: #1F0353
-  Perk 2 Is Purple: True
-  Perk 2 Effective Priority: 19999
+  Perk 2: land mine damage x3.50
+  Perk 2 Priority: 15
+  Perk 2 Background: RGB(33, 32, 83) | Hex: #212053
+  Perk 2 Is Purple: False
+  Perk 2 Effective Priority: 15
 
   >>> SELECTED: Perk 1 (Effective Priority 11)
 ======================================================================
