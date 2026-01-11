@@ -3,3 +3,29 @@
 [2026-01-10 23:06:31] ======================================================================
 [2026-01-10 23:06:31] Window found: Daddy Bluestack at (0, 0)
 [2026-01-10 23:06:31] Window found: Maximus Bluestack at (0, 0)
+[2026-01-10 23:09:37] WAVE 1 DETECTED on Daddy Bluestack - bringing to focus
+[2026-01-10 23:12:46] WAVE 1 DETECTED on Daddy Bluestack - bringing to focus
+
+======================================================================
+[2026-01-10 23:15:24] PERK SELECTION - Maximus Bluestack
+======================================================================
+  Perk List Used: PERK_PRIORITY
+  Perk 1: x1.75 health regen
+  Perk 1 Priority: 25
+  Perk 1 Background: RGB(33, 32, 83) | Hex: #212053
+  Perk 1 Is Purple: False
+  Perk 1 Effective Priority: 25
+
+  Perk 2: x1.15 all coins bonuses
+  Perk 2 Priority: 15
+  Perk 2 Background: RGB(33, 32, 83) | Hex: #212053
+  Perk 2 Is Purple: False
+  Perk 2 Effective Priority: 15
+
+  >>> SELECTED: Perk 2 (Effective Priority 15)
+======================================================================
+
+[2026-01-10 23:16:48] WAVE 1 DETECTED on Daddy Bluestack - bringing to focus
+[2026-01-10 23:19:29] WAVE 1 DETECTED on Daddy Bluestack - bringing to focus
+[2026-01-10 23:23:27] WAVE 1 DETECTED on Daddy Bluestack - bringing to focus
+[2026-01-10 23:27:42] WAVE 1 DETECTED on Daddy Bluestack - bringing to focus

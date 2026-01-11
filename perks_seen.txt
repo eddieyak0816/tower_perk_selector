@@ -1,0 +1,2 @@
+[2026-01-10 23:15:24] [Maximus Bluestack] Priority   25 |     not selected | x1.75 health regen
+[2026-01-10 23:15:24] [Maximus Bluestack] Priority   15 | >>> SELECTED | x1.15 all coins bonuses
