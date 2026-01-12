@@ -1,2 +1,0 @@
-[2026-01-12 02:52:15] [Maximus Bluestack] Priority   25 | >>> SELECTED | x1.75 Health Regen
-[2026-01-12 02:52:15] [Maximus Bluestack] Priority 9999 |     not selected | 1.80 coins, pur ower max healtt

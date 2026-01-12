@@ -146,6 +146,63 @@ def log_perk_selection(window_name, perk1_text, perk1_priority, perk2_text, perk
     log_perk_to_simple_list(window_name, perk1_text, perk1_priority, perk1_selected)
     log_perk_to_simple_list(window_name, perk2_text, perk2_priority, perk2_selected)
 
+def log_perk_selection_three(window_name, perk1_text, perk1_priority, perk2_text, perk2_priority, perk3_text, perk3_priority, selected_perk,
+                             perk1_is_purple=False, perk2_is_purple=False, perk3_is_purple=False,
+                             effective_priority1=None, effective_priority2=None, effective_priority3=None,
+                             perk1_bg_color=None, perk2_bg_color=None, perk3_bg_color=None,
+                             perk_list_name=None):
+    """Log a three-option perk selection decision to the log file."""
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    if effective_priority1 is None:
+        effective_priority1 = perk1_priority
+    if effective_priority2 is None:
+        effective_priority2 = perk2_priority
+    if effective_priority3 is None:
+        effective_priority3 = perk3_priority
+
+    with open(LOG_FILE, "a", encoding="utf-8") as f:
+        f.write(f"\n{'='*70}\n")
+        f.write(f"[{timestamp}] PERK SELECTION - {window_name}\n")
+        f.write(f"{'='*70}\n")
+        if perk_list_name:
+            f.write(f"  Perk List Used: {perk_list_name}\n")
+        f.write(f"  Perk 1: {perk1_text}\n")
+        f.write(f"  Perk 1 Priority: {perk1_priority}\n")
+        if perk1_bg_color:
+            f.write(f"  Perk 1 Background: RGB{perk1_bg_color} | Hex: #{perk1_bg_color[0]:02X}{perk1_bg_color[1]:02X}{perk1_bg_color[2]:02X}\n")
+        f.write(f"  Perk 1 Is Purple: {perk1_is_purple}\n")
+        f.write(f"  Perk 1 Effective Priority: {effective_priority1}\n\n")
+
+        f.write(f"  Perk 2: {perk2_text}\n")
+        f.write(f"  Perk 2 Priority: {perk2_priority}\n")
+        if perk2_bg_color:
+            f.write(f"  Perk 2 Background: RGB{perk2_bg_color} | Hex: #{perk2_bg_color[0]:02X}{perk2_bg_color[1]:02X}{perk2_bg_color[2]:02X}\n")
+        f.write(f"  Perk 2 Is Purple: {perk2_is_purple}\n")
+        f.write(f"  Perk 2 Effective Priority: {effective_priority2}\n\n")
+
+        f.write(f"  Perk 3: {perk3_text}\n")
+        f.write(f"  Perk 3 Priority: {perk3_priority}\n")
+        if perk3_bg_color:
+            f.write(f"  Perk 3 Background: RGB{perk3_bg_color} | Hex: #{perk3_bg_color[0]:02X}{perk3_bg_color[1]:02X}{perk3_bg_color[2]:02X}\n")
+        f.write(f"  Perk 3 Is Purple: {perk3_is_purple}\n")
+        f.write(f"  Perk 3 Effective Priority: {effective_priority3}\n\n")
+
+        selected_priority = None
+        if selected_perk == 1:
+            selected_priority = effective_priority1
+        elif selected_perk == 2:
+            selected_priority = effective_priority2
+        elif selected_perk == 3:
+            selected_priority = effective_priority3
+        f.write(f"  >>> SELECTED: Perk {selected_perk} (Effective Priority {selected_priority})\n")
+        f.write(f"{'='*70}\n\n")
+
+    # Log to simple perks-only log
+    log_perk_to_simple_list(window_name, perk1_text, perk1_priority, selected_perk == 1)
+    log_perk_to_simple_list(window_name, perk2_text, perk2_priority, selected_perk == 2)
+    log_perk_to_simple_list(window_name, perk3_text, perk3_priority, selected_perk == 3)
+
 # ============================================
 # WINDOW CONFIGURATION - Both BlueStacks instances
 # ============================================
@@ -166,12 +223,14 @@ COORDS_WITH_AD = {
     'new_perk_bar': (1128, 74),
     'perk_option_1': (1133, 242),
     'perk_option_2': (1138, 345),
+    'perk_option_3': (1135, 448),
     'close_x': (1329, 132),
     'new_perk_region': ((1018, 63), (1228, 92)),
     # OLD Perk 1: ((890, 200), (1343, 284))
     # OLD Perk 2: ((888, 305), (1345, 390))
     'perk1_text_region': ((994, 210), (1311, 288)),
     'perk2_text_region': ((994, 312), (1311, 391)),
+    'perk3_text_region': ((994, 414), (1311, 493)),
     # 'wave_region': ((1130, 599), (1269, 624)),
 }
 
@@ -185,12 +244,14 @@ COORDS_NO_AD = {
     'new_perk_bar': (944, 79),
     'perk_option_1': (956, 245),
     'perk_option_2': (957, 349),
+    'perk_option_3': (956, 453),
     'close_x': (1145, 134),
     'new_perk_region': ((832, 62), (1044, 93)),
     # OLD Perk 1: ((703, 199), (1159, 287))
     # OLD Perk 2: ((709, 307), (1160, 391))
     'perk1_text_region': ((814, 206), (1145, 283)),
     'perk2_text_region': ((814, 312), (1145, 391)),
+    'perk3_text_region': ((814, 418), (1145, 497)),
     # 'wave_region': ((946, 601), (1080, 628)),
 }
 
@@ -318,6 +379,8 @@ last_debug_save_time = 0
 
 # Global timer for wave 1 handling (cooldown per window)
 last_wave1_times = {}
+# Flag to skip clicking the New Perk bar until numeric detection recovers
+SKIP_NEW_PERK_BAR_UNTIL_NUMBERS = False
 
 # ============================================
 # FAILSAFE CONFIGURATION
@@ -531,6 +594,10 @@ def get_coords(window_name):
                 if 'perk2_text_region' in coords:
                     (x1b, y1b), (x2b, y2b) = coords['perk2_text_region']
                     adjusted['perk2_text_region'] = ((x1b, y1b + delta), (x2b, y2b + delta))
+                # Shift perk3 by same delta if present
+                if 'perk3_text_region' in coords:
+                    (x1c, y1c), (x2c, y2c) = coords['perk3_text_region']
+                    adjusted['perk3_text_region'] = ((x1c, y1c + delta), (x2c, y2c + delta))
                 # Shift click targets if present
                 if 'perk_option_1' in coords:
                     ox, oy = coords['perk_option_1']
@@ -538,6 +605,9 @@ def get_coords(window_name):
                 if 'perk_option_2' in coords:
                     ox2, oy2 = coords['perk_option_2']
                     adjusted['perk_option_2'] = (ox2, oy2 + delta)
+                if 'perk_option_3' in coords:
+                    ox3, oy3 = coords['perk_option_3']
+                    adjusted['perk_option_3'] = (ox3, oy3 + delta)
             coords = adjusted
             print(f"  [{window_name}] Applied Maximus Y-shift (perk regions) by delta {delta}")
     except Exception as e:
@@ -913,15 +983,26 @@ def select_best_perk(window_name, coords):
     - The perk is Priority 1 (exempt from purple penalty)
     - Both perks have purple backgrounds (no choice)
     """
+    global SKIP_NEW_PERK_BAR_UNTIL_NUMBERS
+    # Read top two options always
     perk1_text = get_text_from_region(window_name, coords['perk1_text_region'])
     perk2_text = get_text_from_region(window_name, coords['perk2_text_region'])
 
+    # Optionally read third perk region if present (only for Maximus)
+    has_third = window_name and 'maximus' in window_name.lower() and 'perk3_text_region' in coords and 'perk_option_3' in coords
+    perk3_text = None
+    if has_third:
+        perk3_text = get_text_from_region(window_name, coords['perk3_text_region'])
+
     print(f"  [{window_name}] Perk 1: {perk1_text[:50]}..." if len(perk1_text) > 50 else f"  [{window_name}] Perk 1: {perk1_text}")
     print(f"  [{window_name}] Perk 2: {perk2_text[:50]}..." if len(perk2_text) > 50 else f"  [{window_name}] Perk 2: {perk2_text}")
+    if has_third:
+        print(f"  [{window_name}] Perk 3: {perk3_text[:50]}..." if len(perk3_text) > 50 else f"  [{window_name}] Perk 3: {perk3_text}")
 
     # Pass window_name to get_perk_priority for alternate list support
     priority1 = get_perk_priority(perk1_text, window_name)
     priority2 = get_perk_priority(perk2_text, window_name)
+    priority3 = get_perk_priority(perk3_text, window_name) if has_third else None
 
     # Determine which perk list was used
     if window_name and 'daddy' in window_name.lower():
@@ -929,13 +1010,18 @@ def select_best_perk(window_name, coords):
     else:
         perk_list_name = "PERK_PRIORITY"
 
-    print(f"  [{window_name}] Priority 1: {priority1}, Priority 2: {priority2}")
+    print(f"  [{window_name}] Priority 1: {priority1}, Priority 2: {priority2}" + (f", Priority 3: {priority3}" if has_third else ""))
 
     # Check for purple backgrounds (returns tuple: (is_purple, color))
     print(f"  [{window_name}] Checking perk 1 background...")
     perk1_is_purple, perk1_bg_color = is_purple_background(window_name, coords['perk1_text_region'])
     print(f"  [{window_name}] Checking perk 2 background...")
     perk2_is_purple, perk2_bg_color = is_purple_background(window_name, coords['perk2_text_region'])
+    perk3_is_purple = False
+    perk3_bg_color = None
+    if has_third:
+        print(f"  [{window_name}] Checking perk 3 background...")
+        perk3_is_purple, perk3_bg_color = is_purple_background(window_name, coords['perk3_text_region'])
 
     # List of keywords for acceptable purple perks
     ACCEPTABLE_PURPLE_KEYWORDS = [
@@ -945,6 +1031,8 @@ def select_best_perk(window_name, coords):
     ]
 
     def is_acceptable_purple(perk_text):
+        if not perk_text:
+            return False
         text = perk_text.lower()
         for keywords in ACCEPTABLE_PURPLE_KEYWORDS:
             if all(k in text for k in keywords):
@@ -953,31 +1041,48 @@ def select_best_perk(window_name, coords):
 
     effective_priority1 = priority1
     effective_priority2 = priority2
+    effective_priority3 = priority3 if has_third else None
     PURPLE_PENALTY = 10000
 
-    # If both perks are purple
-    if perk1_is_purple and perk2_is_purple:
-        perk1_ok = is_acceptable_purple(perk1_text)
-        perk2_ok = is_acceptable_purple(perk2_text)
-        if not perk1_ok and not perk2_ok:
-            print(f"  [{window_name}] Both perks are purple and neither is acceptable. Skipping selection and closing window.")
-            log_perk_selection(window_name, perk1_text, priority1, perk2_text, priority2, "NONE - BOTH PURPLE",
-                              perk1_is_purple=perk1_is_purple, perk2_is_purple=perk2_is_purple,
-                              effective_priority1=effective_priority1, effective_priority2=effective_priority2,
-                              perk1_bg_color=perk1_bg_color, perk2_bg_color=perk2_bg_color,
-                              perk_list_name=perk_list_name)
-            # Close the perk window
-            click_at(window_name, coords['close_x'], "Close X (skip purple perks)")
-            time.sleep(0.5)
-            # Resume the game
-            click_at(window_name, coords['play_pause'], "Resume Game (skip purple perks)")
-            time.sleep(0.5)
-            # Set a global or external flag to indicate we should not click the New Perk bar again until numbers are detected
-            global SKIP_NEW_PERK_BAR_UNTIL_NUMBERS
-            SKIP_NEW_PERK_BAR_UNTIL_NUMBERS = True
-            return False
+    # If all available perks are purple
+    if has_third:
+        if perk1_is_purple and perk2_is_purple and perk3_is_purple:
+            perk1_ok = is_acceptable_purple(perk1_text)
+            perk2_ok = is_acceptable_purple(perk2_text)
+            perk3_ok = is_acceptable_purple(perk3_text)
+            if not (perk1_ok or perk2_ok or perk3_ok):
+                print(f"  [{window_name}] All three perks are purple and none acceptable. Skipping selection and closing window.")
+                log_perk_selection_three(window_name, perk1_text, priority1, perk2_text, priority2, perk3_text, priority3, "NONE - ALL PURPLE",
+                                         perk1_is_purple=perk1_is_purple, perk2_is_purple=perk2_is_purple, perk3_is_purple=perk3_is_purple,
+                                         effective_priority1=effective_priority1, effective_priority2=effective_priority2, effective_priority3=effective_priority3,
+                                         perk1_bg_color=perk1_bg_color, perk2_bg_color=perk2_bg_color, perk3_bg_color=perk3_bg_color,
+                                         perk_list_name=perk_list_name)
+                click_at(window_name, coords['close_x'], "Close X (skip purple perks)")
+                time.sleep(0.5)
+                click_at(window_name, coords['play_pause'], "Resume Game (skip purple perks)")
+                time.sleep(0.5)
+                globals()['SKIP_NEW_PERK_BAR_UNTIL_NUMBERS'] = True
+                return False
+    else:
+        # Two-perk case: original behavior
+        if perk1_is_purple and perk2_is_purple:
+            perk1_ok = is_acceptable_purple(perk1_text)
+            perk2_ok = is_acceptable_purple(perk2_text)
+            if not perk1_ok and not perk2_ok:
+                print(f"  [{window_name}] Both perks are purple and neither is acceptable. Skipping selection and closing window.")
+                log_perk_selection(window_name, perk1_text, priority1, perk2_text, priority2, "NONE - BOTH PURPLE",
+                                  perk1_is_purple=perk1_is_purple, perk2_is_purple=perk2_is_purple,
+                                  effective_priority1=effective_priority1, effective_priority2=effective_priority2,
+                                  perk1_bg_color=perk1_bg_color, perk2_bg_color=perk2_bg_color,
+                                  perk_list_name=perk_list_name)
+                click_at(window_name, coords['close_x'], "Close X (skip purple perks)")
+                time.sleep(0.5)
+                click_at(window_name, coords['play_pause'], "Resume Game (skip purple perks)")
+                time.sleep(0.5)
+                globals()['SKIP_NEW_PERK_BAR_UNTIL_NUMBERS'] = True
+                return False
 
-    # Apply purple penalty (add 10000 to priority, making it very undesirable)
+    # Apply purple penalty (add large penalty to deprioritize)
     if perk1_is_purple and priority1 != PURPLE_EXEMPT_PRIORITY and not is_acceptable_purple(perk1_text):
         print(f"  [{window_name}] Perk 1 has PURPLE background - applying penalty")
         effective_priority1 = priority1 + PURPLE_PENALTY
@@ -986,41 +1091,71 @@ def select_best_perk(window_name, coords):
         print(f"  [{window_name}] Perk 2 has PURPLE background - applying penalty")
         effective_priority2 = priority2 + PURPLE_PENALTY
 
-    print(f"  [{window_name}] Effective Priority 1: {effective_priority1}, Effective Priority 2: {effective_priority2}")
+    if has_third and perk3_is_purple and priority3 != PURPLE_EXEMPT_PRIORITY and not is_acceptable_purple(perk3_text):
+        print(f"  [{window_name}] Perk 3 has PURPLE background - applying penalty")
+        effective_priority3 = priority3 + PURPLE_PENALTY
 
-    if priority1 == 9999 and priority2 == 9999:
-        print(f"  [{window_name}] WARNING: Neither perk recognized!")
-        # Log unrecognized perks with all the color info
-        log_perk_selection(window_name, perk1_text, priority1, perk2_text, priority2, "NONE - UNRECOGNIZED",
-                          perk1_is_purple=perk1_is_purple, perk2_is_purple=perk2_is_purple,
-                          effective_priority1=effective_priority1, effective_priority2=effective_priority2,
-                          perk1_bg_color=perk1_bg_color, perk2_bg_color=perk2_bg_color,
-                          perk_list_name=perk_list_name)
+    print(f"  [{window_name}] Effective Priority 1: {effective_priority1}, Effective Priority 2: {effective_priority2}" + (f", Effective Priority 3: {effective_priority3}" if has_third else ""))
+
+    # If none recognized
+    if priority1 == 9999 and priority2 == 9999 and (not has_third or priority3 == 9999):
+        print(f"  [{window_name}] WARNING: No perk recognized!")
+        if has_third:
+            log_perk_selection_three(window_name, perk1_text, priority1, perk2_text, priority2, perk3_text, priority3, "NONE - UNRECOGNIZED",
+                                     perk1_is_purple=perk1_is_purple, perk2_is_purple=perk2_is_purple, perk3_is_purple=perk3_is_purple,
+                                     effective_priority1=effective_priority1, effective_priority2=effective_priority2, effective_priority3=effective_priority3,
+                                     perk1_bg_color=perk1_bg_color, perk2_bg_color=perk2_bg_color, perk3_bg_color=perk3_bg_color,
+                                     perk_list_name=perk_list_name)
+        else:
+            log_perk_selection(window_name, perk1_text, priority1, perk2_text, priority2, "NONE - UNRECOGNIZED",
+                              perk1_is_purple=perk1_is_purple, perk2_is_purple=perk2_is_purple,
+                              effective_priority1=effective_priority1, effective_priority2=effective_priority2,
+                              perk1_bg_color=perk1_bg_color, perk2_bg_color=perk2_bg_color,
+                              perk_list_name=perk_list_name)
         return False
 
-    # Use effective priorities for selection
-    if effective_priority1 <= effective_priority2:
-        purple_note = " (purple but exempt)" if perk1_is_purple and priority1 == PURPLE_EXEMPT_PRIORITY else ""
-        purple_note = " (purple but other is worse)" if perk1_is_purple and perk2_is_purple else purple_note
-        print(f"  [{window_name}] Selecting Perk 1 (priority {priority1}){purple_note}")
-        # Log the selection with all the color info
-        log_perk_selection(window_name, perk1_text, priority1, perk2_text, priority2, 1,
-                          perk1_is_purple=perk1_is_purple, perk2_is_purple=perk2_is_purple,
-                          effective_priority1=effective_priority1, effective_priority2=effective_priority2,
-                          perk1_bg_color=perk1_bg_color, perk2_bg_color=perk2_bg_color,
-                          perk_list_name=perk_list_name)
-        click_at(window_name, coords['perk_option_1'], "Perk Option 1")
+    # Choose the minimal effective priority
+    if has_third:
+        # Build list and pick first occurrence of minimal value
+        effs = [effective_priority1, effective_priority2, effective_priority3]
+        min_val = min(effs)
+        selected_index = effs.index(min_val) + 1
+        print(f"  [{window_name}] Selecting Perk {selected_index} (priority { [priority1, priority2, priority3][selected_index-1] })")
+        # Log and click
+        log_perk_selection_three(window_name, perk1_text, priority1, perk2_text, priority2, perk3_text, priority3, selected_index,
+                                 perk1_is_purple=perk1_is_purple, perk2_is_purple=perk2_is_purple, perk3_is_purple=perk3_is_purple,
+                                 effective_priority1=effective_priority1, effective_priority2=effective_priority2, effective_priority3=effective_priority3,
+                                 perk1_bg_color=perk1_bg_color, perk2_bg_color=perk2_bg_color, perk3_bg_color=perk3_bg_color,
+                                 perk_list_name=perk_list_name)
+        # Click the selected option
+        if selected_index == 1:
+            click_at(window_name, coords['perk_option_1'], "Perk Option 1")
+        elif selected_index == 2:
+            click_at(window_name, coords['perk_option_2'], "Perk Option 2")
+        else:
+            click_at(window_name, coords['perk_option_3'], "Perk Option 3")
     else:
-        purple_note = " (purple but exempt)" if perk2_is_purple and priority2 == PURPLE_EXEMPT_PRIORITY else ""
-        purple_note = " (purple but other is worse)" if perk1_is_purple and perk2_is_purple else purple_note
-        print(f"  [{window_name}] Selecting Perk 2 (priority {priority2}){purple_note}")
-        # Log the selection with all the color info
-        log_perk_selection(window_name, perk1_text, priority1, perk2_text, priority2, 2,
-                          perk1_is_purple=perk1_is_purple, perk2_is_purple=perk2_is_purple,
-                          effective_priority1=effective_priority1, effective_priority2=effective_priority2,
-                          perk1_bg_color=perk1_bg_color, perk2_bg_color=perk2_bg_color,
-                          perk_list_name=perk_list_name)
-        click_at(window_name, coords['perk_option_2'], "Perk Option 2")
+        # Two-option selection (preserve previous behavior)
+        if effective_priority1 <= effective_priority2:
+            purple_note = " (purple but exempt)" if perk1_is_purple and priority1 == PURPLE_EXEMPT_PRIORITY else ""
+            purple_note = " (purple but other is worse)" if perk1_is_purple and perk2_is_purple else purple_note
+            print(f"  [{window_name}] Selecting Perk 1 (priority {priority1}){purple_note}")
+            log_perk_selection(window_name, perk1_text, priority1, perk2_text, priority2, 1,
+                              perk1_is_purple=perk1_is_purple, perk2_is_purple=perk2_is_purple,
+                              effective_priority1=effective_priority1, effective_priority2=effective_priority2,
+                              perk1_bg_color=perk1_bg_color, perk2_bg_color=perk2_bg_color,
+                              perk_list_name=perk_list_name)
+            click_at(window_name, coords['perk_option_1'], "Perk Option 1")
+        else:
+            purple_note = " (purple but exempt)" if perk2_is_purple and priority2 == PURPLE_EXEMPT_PRIORITY else ""
+            purple_note = " (purple but other is worse)" if perk1_is_purple and perk2_is_purple else purple_note
+            print(f"  [{window_name}] Selecting Perk 2 (priority {priority2}){purple_note}")
+            log_perk_selection(window_name, perk1_text, priority1, perk2_text, priority2, 2,
+                              perk1_is_purple=perk1_is_purple, perk2_is_purple=perk2_is_purple,
+                              effective_priority1=effective_priority1, effective_priority2=effective_priority2,
+                              perk1_bg_color=perk1_bg_color, perk2_bg_color=perk2_bg_color,
+                              perk_list_name=perk_list_name)
+            click_at(window_name, coords['perk_option_2'], "Perk Option 2")
 
     return True
 
@@ -1085,6 +1220,38 @@ def handle_perk_selection(window_name):
         
         print(f"  [{window_name}] Step 3: Selecting best perk...")
         coords = get_coords(window_name)
+        # If this is Maximus and a third perk region exists, capture an image of all 3 perks for verification
+        try:
+            if window_name and 'maximus' in window_name.lower() and 'perk1_text_region' in coords and 'perk2_text_region' in coords and 'perk3_text_region' in coords:
+                try:
+                    img1 = capture_window_screenshot(window_name, coords['perk1_text_region'])
+                    img2 = capture_window_screenshot(window_name, coords['perk2_text_region'])
+                    img3 = capture_window_screenshot(window_name, coords['perk3_text_region'])
+                    if img1 and img2 and img3:
+                        from PIL import Image as PILImage
+                        widths = [img1.width, img2.width, img3.width]
+                        heights = [img1.height, img2.height, img3.height]
+                        total_height = sum(heights)
+                        max_width = max(widths)
+                        combined = PILImage.new('RGB', (max_width, total_height), color=(0,0,0))
+                        y = 0
+                        for im in (img1, img2, img3):
+                            # If narrower than max width, pad to center
+                            if im.width < max_width:
+                                bg = PILImage.new('RGB', (max_width, im.height), color=(0,0,0))
+                                bg.paste(im, ((max_width - im.width)//2, 0))
+                                im = bg
+                            combined.paste(im, (0, y))
+                            y += im.height
+                        stamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+                        out_path = SCRIPT_DIR / f"maximus_perks_{stamp}.png"
+                        combined.save(out_path)
+                        print(f"  [{window_name}] Saved Maximus 3-perk snapshot to {out_path}")
+                except Exception as e:
+                    print(f"  [{window_name}] Could not capture/save Maximus perks image: {e}")
+        except Exception:
+            pass
+
         perk_selected = select_best_perk(window_name, coords)
         
         if perk_selected:
