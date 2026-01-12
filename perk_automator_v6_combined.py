@@ -32,6 +32,12 @@ import threading
 import os
 from datetime import datetime
 from pathlib import Path
+try:
+    import tkinter as tk
+    from tkinter import messagebox
+    TKINTER_AVAILABLE = True
+except Exception:
+    TKINTER_AVAILABLE = False
 
 # Get the directory where this script is located
 SCRIPT_DIR = Path(__file__).parent.resolve()
@@ -507,10 +513,37 @@ def get_coords(window_name):
     
     if is_ad_showing(window_name):
         print(f"  [{window_name}] Ad detected - using ad coordinates")
-        return COORDS_WITH_AD
+        coords = COORDS_WITH_AD
     else:
         print(f"  [{window_name}] No ad - using no-ad coordinates")
-        return COORDS_NO_AD
+        coords = COORDS_NO_AD
+
+    # Apply per-window tweaks (e.g., Maximus shifted UI)
+    try:
+        if window_name and 'maximus' in window_name.lower():
+            # Make a shallow copy and adjust Y positions so perk1 top-left Y == 265
+            adjusted = dict(coords)
+            if 'perk1_text_region' in coords:
+                (x1, y1), (x2, y2) = coords['perk1_text_region']
+                delta = 265 - y1
+                adjusted['perk1_text_region'] = ((x1, y1 + delta), (x2, y2 + delta))
+                # Shift perk2 by same delta if present
+                if 'perk2_text_region' in coords:
+                    (x1b, y1b), (x2b, y2b) = coords['perk2_text_region']
+                    adjusted['perk2_text_region'] = ((x1b, y1b + delta), (x2b, y2b + delta))
+                # Shift click targets if present
+                if 'perk_option_1' in coords:
+                    ox, oy = coords['perk_option_1']
+                    adjusted['perk_option_1'] = (ox, oy + delta)
+                if 'perk_option_2' in coords:
+                    ox2, oy2 = coords['perk_option_2']
+                    adjusted['perk_option_2'] = (ox2, oy2 + delta)
+            coords = adjusted
+            print(f"  [{window_name}] Applied Maximus Y-shift (perk regions) by delta {delta}")
+    except Exception as e:
+        print(f"  [{window_name}] Error adjusting Maximus coords: {e}")
+
+    return coords
 
 def bring_window_to_focus(window_name):
     """Bring the target window to the foreground."""
@@ -1167,6 +1200,73 @@ def main_loop():
     time.sleep(3)
     
     pyautogui.FAILSAFE = True
+
+    # Show a simple GUI to allow toggling which windows to monitor
+    if TKINTER_AVAILABLE:
+        try:
+            def show_window_selector():
+                root = tk.Tk()
+                root.title("Perk Automator - Window Selector")
+
+                tk.Label(root, text="Select windows to enable for perk selection:").pack(padx=10, pady=(10, 0))
+
+                vars = {}
+                # Show each configured window with a checkbox
+                for name in list(WINDOWS):
+                    found = False
+                    try:
+                        if WINDOW_SUPPORT:
+                            for w in gw.getAllWindows():
+                                if w.title and name.lower() in w.title.lower():
+                                    found = True
+                                    break
+                    except Exception:
+                        found = False
+                    var = tk.BooleanVar(value=found)
+                    cb_text = f"{name} {'(found)' if found else '(not found)'}"
+                    chk = tk.Checkbutton(root, text=cb_text, variable=var)
+                    chk.pack(anchor='w', padx=12)
+                    vars[name] = var
+
+                def select_all():
+                    for v in vars.values():
+                        v.set(True)
+
+                def clear_all():
+                    for v in vars.values():
+                        v.set(False)
+
+                btn_frame = tk.Frame(root)
+                btn_frame.pack(pady=8)
+                tk.Button(btn_frame, text="Select All", command=select_all).pack(side='left', padx=6)
+                tk.Button(btn_frame, text="Clear All", command=clear_all).pack(side='left', padx=6)
+
+                def on_start():
+                    selected = [n for n, v in vars.items() if v.get()]
+                    if not selected:
+                        if not messagebox.askyesno("No Windows Selected", "No windows are selected — continue with none?"):
+                            return
+                    # Update global WINDOWS list
+                    global WINDOWS
+                    WINDOWS = selected
+                    root.destroy()
+
+                tk.Button(root, text="Start", command=on_start).pack(pady=(0, 12))
+                # Center window
+                root.update_idletasks()
+                w = root.winfo_width()
+                h = root.winfo_height()
+                x = (root.winfo_screenwidth() // 2) - (w // 2)
+                y = (root.winfo_screenheight() // 2) - (h // 2)
+                root.geometry(f"+{x}+{y}")
+                root.mainloop()
+
+            # Show selector before starting
+            show_window_selector()
+        except Exception as e:
+            print(f"GUI selector failed: {e}")
+    else:
+        print("Tkinter not available — running with configured WINDOWS list.")
     
     while True:
         try:
