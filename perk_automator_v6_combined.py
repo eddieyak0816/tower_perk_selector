@@ -150,7 +150,7 @@ def log_perk_selection_three(window_name, perk1_text, perk1_priority, perk2_text
                              perk1_is_purple=False, perk2_is_purple=False, perk3_is_purple=False,
                              effective_priority1=None, effective_priority2=None, effective_priority3=None,
                              perk1_bg_color=None, perk2_bg_color=None, perk3_bg_color=None,
-                             perk_list_name=None):
+                             perk_list_name=None, selected_note=None):
     """Log a three-option perk selection decision to the log file."""
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
@@ -195,7 +195,11 @@ def log_perk_selection_three(window_name, perk1_text, perk1_priority, perk2_text
             selected_priority = effective_priority2
         elif selected_perk == 3:
             selected_priority = effective_priority3
-        f.write(f"  >>> SELECTED: Perk {selected_perk} (Effective Priority {selected_priority})\n")
+        # Append selected_note if provided
+        if selected_note:
+            f.write(f"  >>> SELECTED: Perk {selected_perk} (Effective Priority {selected_priority}){selected_note}\n")
+        else:
+            f.write(f"  >>> SELECTED: Perk {selected_perk} (Effective Priority {selected_priority})\n")
         f.write(f"{'='*70}\n\n")
 
     # Log to simple perks-only log
@@ -1056,7 +1060,7 @@ def select_best_perk(window_name, coords):
                                          perk1_is_purple=perk1_is_purple, perk2_is_purple=perk2_is_purple, perk3_is_purple=perk3_is_purple,
                                          effective_priority1=effective_priority1, effective_priority2=effective_priority2, effective_priority3=effective_priority3,
                                          perk1_bg_color=perk1_bg_color, perk2_bg_color=perk2_bg_color, perk3_bg_color=perk3_bg_color,
-                                         perk_list_name=perk_list_name)
+                                         perk_list_name=perk_list_name, selected_note=None)
                 click_at(window_name, coords['close_x'], "Close X (skip purple perks)")
                 time.sleep(0.5)
                 click_at(window_name, coords['play_pause'], "Resume Game (skip purple perks)")
@@ -1105,7 +1109,7 @@ def select_best_perk(window_name, coords):
                                      perk1_is_purple=perk1_is_purple, perk2_is_purple=perk2_is_purple, perk3_is_purple=perk3_is_purple,
                                      effective_priority1=effective_priority1, effective_priority2=effective_priority2, effective_priority3=effective_priority3,
                                      perk1_bg_color=perk1_bg_color, perk2_bg_color=perk2_bg_color, perk3_bg_color=perk3_bg_color,
-                                     perk_list_name=perk_list_name)
+                                     perk_list_name=perk_list_name, selected_note=None)
         else:
             log_perk_selection(window_name, perk1_text, priority1, perk2_text, priority2, "NONE - UNRECOGNIZED",
                               perk1_is_purple=perk1_is_purple, perk2_is_purple=perk2_is_purple,
@@ -1120,13 +1124,19 @@ def select_best_perk(window_name, coords):
         effs = [effective_priority1, effective_priority2, effective_priority3]
         min_val = min(effs)
         selected_index = effs.index(min_val) + 1
-        print(f"  [{window_name}] Selecting Perk {selected_index} (priority { [priority1, priority2, priority3][selected_index-1] })")
+        # Determine purple note (exempt if base priority equals PURPLE_EXEMPT_PRIORITY)
+        base_priorities = [priority1, priority2, priority3]
+        is_purples = [perk1_is_purple, perk2_is_purple, perk3_is_purple]
+        sel_base = base_priorities[selected_index-1]
+        sel_is_purple = is_purples[selected_index-1]
+        purple_note = " (purple but exempt)" if sel_is_purple and sel_base == PURPLE_EXEMPT_PRIORITY else ""
+        print(f"  [{window_name}] Selecting Perk {selected_index} (priority {base_priorities[selected_index-1]}){purple_note}")
         # Log and click
         log_perk_selection_three(window_name, perk1_text, priority1, perk2_text, priority2, perk3_text, priority3, selected_index,
                                  perk1_is_purple=perk1_is_purple, perk2_is_purple=perk2_is_purple, perk3_is_purple=perk3_is_purple,
                                  effective_priority1=effective_priority1, effective_priority2=effective_priority2, effective_priority3=effective_priority3,
                                  perk1_bg_color=perk1_bg_color, perk2_bg_color=perk2_bg_color, perk3_bg_color=perk3_bg_color,
-                                 perk_list_name=perk_list_name)
+                                 perk_list_name=perk_list_name, selected_note=purple_note)
         # Click the selected option
         if selected_index == 1:
             click_at(window_name, coords['perk_option_1'], "Perk Option 1")

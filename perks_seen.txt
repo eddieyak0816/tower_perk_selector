@@ -1,0 +1,333 @@
+[2026-01-15 01:36:52] [Daddy Bluestack] Priority   14 | >>> SELECTED | Interest x1.50
+[2026-01-15 01:36:52] [Daddy Bluestack] Priority   29 |     not selected | Lifesteal ene oe trockbac
+[2026-01-15 01:38:58] [Maximus Bluestack] Priority   19 |     not selected | Interest x1.50
+[2026-01-15 01:38:58] [Maximus Bluestack] Priority   25 |     not selected | x1.75 Health Regen
+[2026-01-15 01:38:58] [Maximus Bluestack] Priority   12 | >>> SELECTED | Defense percent +4.00%
+[2026-01-15 01:50:06] [Daddy Bluestack] Priority   13 | >>> SELECTED | x1.15 Damage
+[2026-01-15 01:50:06] [Daddy Bluestack] Priority   15 |     not selected | Land Mine Damage x3.50
+[2026-01-15 01:50:30] [Maximus Bluestack] Priority 9999 |     not selected | anes eee ae
+[2026-01-15 01:50:30] [Maximus Bluestack] Priority   25 |     not selected | x1.75 Health Regen
+[2026-01-15 01:50:30] [Maximus Bluestack] Priority   13 | >>> SELECTED | Free sacra for all
+[2026-01-15 02:02:08] [Maximus Bluestack] Priority    9 |     not selected | x1.20 max health
+[2026-01-15 02:02:08] [Maximus Bluestack] Priority   14 |     not selected | x1.15 Cash Bonus
+[2026-01-15 02:02:08] [Maximus Bluestack] Priority    2 | >>> SELECTED | Perk wave requirement -20.00%
+[2026-01-15 02:02:27] [Maximus Bluestack] Priority   13 | >>> SELECTED | Free HSER E Pete for all
+[2026-01-15 02:02:27] [Maximus Bluestack] Priority   15 |     not selected | x1.15 all coins bonuses
+[2026-01-15 02:02:27] [Maximus Bluestack] Priority   16 |     not selected | Orbs +1
+[2026-01-15 02:02:45] [Maximus Bluestack] Priority   16 |     not selected | Orbs +1
+[2026-01-15 02:02:45] [Maximus Bluestack] Priority   17 |     not selected | Bounce Shot +2
+[2026-01-15 02:02:45] [Maximus Bluestack] Priority   13 | >>> SELECTED | Free sacra for all
+[2026-01-15 02:03:04] [Maximus Bluestack] Priority   15 | >>> SELECTED | x1.15 all coins bonuses
+[2026-01-15 02:03:04] [Maximus Bluestack] Priority   19 |     not selected | Interest x1.50
+[2026-01-15 02:03:04] [Maximus Bluestack] Priority   23 |     not selected | Unlock Smart Missiles
+[2026-01-15 02:03:23] [Maximus Bluestack] Priority   13 |     not selected | Free HSER E Pete for all
+[2026-01-15 02:03:23] [Maximus Bluestack] Priority   12 | >>> SELECTED | Defense percent +4.00%
+[2026-01-15 02:03:23] [Maximus Bluestack] Priority   15 |     not selected | x1.15 all coins bonuses
+[2026-01-15 02:03:42] [Maximus Bluestack] Priority   20 |     not selected | Land Mine Damage x3.50
+[2026-01-15 02:03:42] [Maximus Bluestack] Priority   15 | >>> SELECTED | x1.15 all coins bonuses
+[2026-01-15 02:03:42] [Maximus Bluestack] Priority   18 |     not selected | x1.15 Damage
+[2026-01-15 02:04:01] [Maximus Bluestack] Priority   17 |     not selected | Bounce Shot +2
+[2026-01-15 02:04:01] [Maximus Bluestack] Priority   21 |     not selected | x1.15 Defense Absolute
+[2026-01-15 02:04:01] [Maximus Bluestack] Priority   13 | >>> SELECTED | Free sacra for all
+[2026-01-15 02:04:19] [Maximus Bluestack] Priority    9 | >>> SELECTED | x1.20 max health
+[2026-01-15 02:04:19] [Maximus Bluestack] Priority   20 |     not selected | Land Mine Damage x3.50
+[2026-01-15 02:04:19] [Maximus Bluestack] Priority   15 |     not selected | x1.15 all coins bonuses
+[2026-01-15 02:04:44] [Daddy Bluestack] Priority   15 | >>> SELECTED | Land Mine Damage x3.50
+[2026-01-15 02:04:44] [Daddy Bluestack] Priority   25 |     not selected | x1.75 Health Regen
+[2026-01-15 02:13:24] [Maximus Bluestack] Priority   12 | >>> SELECTED | Defense percent +4.00%
+[2026-01-15 02:13:24] [Maximus Bluestack] Priority   23 |     not selected | Unlock Smart Missiles
+[2026-01-15 02:13:24] [Maximus Bluestack] Priority   15 |     not selected | x1.15 all coins bonuses
+[2026-01-15 02:16:39] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 02:16:39] [Daddy Bluestack] Priority   25 | >>> SELECTED | x1.75 Health Regen
+[2026-01-15 02:23:16] [Maximus Bluestack] Priority   23 |     not selected | Unlock Smart Missiles
+[2026-01-15 02:23:16] [Maximus Bluestack] Priority   21 | >>> SELECTED | x1.15 Defense Absolute
+[2026-01-15 02:23:16] [Maximus Bluestack] Priority   25 |     not selected | x1.75 Health Regen
+[2026-01-15 02:30:07] [Daddy Bluestack] Priority   25 | >>> SELECTED | x1.75 Health Regen
+[2026-01-15 02:30:07] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 02:33:06] [Maximus Bluestack] Priority   29 |     not selected | Lifesteal ee crockback
+[2026-01-15 02:33:06] [Maximus Bluestack] Priority   23 |     not selected | Unlock Smart Missiles
+[2026-01-15 02:33:06] [Maximus Bluestack] Priority   18 | >>> SELECTED | x1.15 Damage
+[2026-01-15 02:42:53] [Maximus Bluestack] Priority   18 |     not selected | x1.15 Damage
+[2026-01-15 02:42:53] [Maximus Bluestack] Priority   19 |     not selected | Interest x1.50
+[2026-01-15 02:42:53] [Maximus Bluestack] Priority   17 | >>> SELECTED | Bounce Shot +2
+[2026-01-15 02:43:34] [Daddy Bluestack] Priority   13 | >>> SELECTED | x1.15 Damage
+[2026-01-15 02:43:34] [Daddy Bluestack] Priority   16 |     not selected | x1.15 Defense Absolute
+[2026-01-15 02:52:39] [Maximus Bluestack] Priority   20 |     not selected | Land Mine Damage x3.50
+[2026-01-15 02:52:39] [Maximus Bluestack] Priority 9999 |     not selected | Seer cndnnce S0%
+[2026-01-15 02:52:39] [Maximus Bluestack] Priority   17 | >>> SELECTED | Bounce Shot +2
+[2026-01-15 02:57:14] [Daddy Bluestack] Priority   13 | >>> SELECTED | x1.15 Damage
+[2026-01-15 02:57:14] [Daddy Bluestack] Priority   16 |     not selected | x1.15 Defense Absolute
+[2026-01-15 03:02:23] [Maximus Bluestack] Priority   25 |     not selected | x1.75 Health Regen
+[2026-01-15 03:02:23] [Maximus Bluestack] Priority    9 | >>> SELECTED | x1.20 max health
+[2026-01-15 03:02:23] [Maximus Bluestack] Priority   13 |     not selected | Free sacra for all
+[2026-01-15 03:10:32] [Daddy Bluestack] Priority   16 | >>> SELECTED | x1.15 Defense Absolute
+[2026-01-15 03:10:32] [Daddy Bluestack] Priority   25 |     not selected | x1.75 Health Regen
+[2026-01-15 03:12:07] [Maximus Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 03:12:07] [Maximus Bluestack] Priority   18 | >>> SELECTED | x1.15 Damage
+[2026-01-15 03:12:07] [Maximus Bluestack] Priority   25 |     not selected | x1.75 Health Regen
+[2026-01-15 03:21:52] [Maximus Bluestack] Priority   14 | >>> SELECTED | x1.15 Cash Bonus
+[2026-01-15 03:21:52] [Maximus Bluestack] Priority   23 |     not selected | Unlock Smart Missiles
+[2026-01-15 03:21:52] [Maximus Bluestack] Priority   21 |     not selected | x1.15 Defense Absolute
+[2026-01-15 03:23:45] [Daddy Bluestack] Priority   16 | >>> SELECTED | x1.15 Defense Absolute
+[2026-01-15 03:23:45] [Daddy Bluestack] Priority   25 |     not selected | x1.75 Health Regen
+[2026-01-15 03:33:25] [Maximus Bluestack] Priority   13 | >>> SELECTED | Free HSER E Pete for all
+[2026-01-15 03:33:25] [Maximus Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 03:33:25] [Maximus Bluestack] Priority   14 |     not selected | x1.15 Cash Bonus
+[2026-01-15 03:37:11] [Daddy Bluestack] Priority   25 |     not selected | x1.75 Health Regen
+[2026-01-15 03:37:11] [Daddy Bluestack] Priority   14 | >>> SELECTED | Interest x1.50
+[2026-01-15 03:45:14] [Maximus Bluestack] Priority   20 |     not selected | Land Mine Damage x3.50
+[2026-01-15 03:45:14] [Maximus Bluestack] Priority   19 |     not selected | Interest x1.50
+[2026-01-15 03:45:14] [Maximus Bluestack] Priority    9 | >>> SELECTED | x1.20 max health
+[2026-01-15 03:50:37] [Daddy Bluestack] Priority   16 | >>> SELECTED | x1.15 Defense Absolute
+[2026-01-15 03:50:37] [Daddy Bluestack] Priority   25 |     not selected | x1.75 Health Regen
+[2026-01-15 03:57:00] [Maximus Bluestack] Priority   19 |     not selected | Interest x1.50
+[2026-01-15 03:57:00] [Maximus Bluestack] Priority 9999 |     not selected | Seer cndnnce S0%
+[2026-01-15 03:57:00] [Maximus Bluestack] Priority   17 | >>> SELECTED | Bounce Shot +2
+[2026-01-15 04:08:47] [Maximus Bluestack] Priority   18 | >>> SELECTED | x1.15 Damage
+[2026-01-15 04:08:47] [Maximus Bluestack] Priority   21 |     not selected | x1.15 Defense Absolute
+[2026-01-15 04:08:47] [Maximus Bluestack] Priority   23 |     not selected | Unlock Smart Missiles
+[2026-01-15 04:20:30] [Maximus Bluestack] Priority   15 | >>> SELECTED | x1.15 all coins bonuses
+[2026-01-15 04:20:30] [Maximus Bluestack] Priority   19 |     not selected | Interest x1.50
+[2026-01-15 04:20:30] [Maximus Bluestack] Priority   25 |     not selected | x1.75 Health Regen
+[2026-01-15 04:25:19] [Daddy Bluestack] Priority    2 | >>> SELECTED | Perk wave requirement -20.00
+[2026-01-15 04:25:19] [Daddy Bluestack] Priority   15 |     not selected | Land Mine Damage x3.50
+[2026-01-15 04:32:02] [Maximus Bluestack] Priority 9999 |     not selected | x1.50 arse eare bosses
+[2026-01-15 04:32:02] [Maximus Bluestack] Priority    9 | >>> SELECTED | x1.20 max health
+[2026-01-15 04:32:02] [Maximus Bluestack] Priority   14 |     not selected | x1.15 Cash Bonus
+[2026-01-15 04:39:15] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:39:15] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:39:30] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:39:30] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:39:44] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:39:44] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:39:59] [Daddy Bluestack] Priority 9999 |     not selected | Ex
+[2026-01-15 04:39:59] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:40:12] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:40:12] [Daddy Bluestack] Priority 9999 |     not selected | we \i4 i
+[2026-01-15 04:40:24] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:40:24] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:40:39] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:40:39] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:40:54] [Daddy Bluestack] Priority 9999 |     not selected | 7 i
+[2026-01-15 04:40:54] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:41:06] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:41:06] [Daddy Bluestack] Priority 9999 |     not selected | oO ileaontawecah
+[2026-01-15 04:41:19] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:41:19] [Daddy Bluestack] Priority 9999 |     not selected | : i Dy, :
+[2026-01-15 04:41:31] [Daddy Bluestack] Priority 9999 |     not selected | .
+[2026-01-15 04:41:31] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:41:43] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:41:43] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:41:58] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:41:58] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:42:13] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:42:13] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:42:28] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:42:28] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:42:43] [Daddy Bluestack] Priority 9999 |     not selected | ts AD
+[2026-01-15 04:42:43] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:42:55] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:42:55] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:43:10] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:43:10] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:43:25] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:43:25] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:43:39] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:43:39] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:43:54] [Daddy Bluestack] Priority 9999 |     not selected | oe ; a *, :
+[2026-01-15 04:43:54] [Daddy Bluestack] Priority 9999 |     not selected | a @ ys ; .
+[2026-01-15 04:44:07] [Daddy Bluestack] Priority 9999 |     not selected | O45
+[2026-01-15 04:44:07] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:44:19] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:44:19] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:44:34] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:44:34] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:44:49] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:44:49] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:45:03] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:45:03] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:45:18] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:45:18] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:45:31] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:45:31] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:45:45] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:45:45] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:46:00] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:46:00] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:46:15] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:46:15] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:46:30] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:46:30] [Daddy Bluestack] Priority 9999 |     not selected | _ a o.
+[2026-01-15 04:46:42] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:46:42] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:46:58] [Maximus Bluestack] Priority   14 | >>> SELECTED | x1.15 Cash Bonus
+[2026-01-15 04:46:58] [Maximus Bluestack] Priority   20 |     not selected | Land Mine Damage x3.50
+[2026-01-15 04:46:58] [Maximus Bluestack] Priority   25 |     not selected | x1.75 Health Regen
+[2026-01-15 04:55:20] [Maximus Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 04:55:20] [Maximus Bluestack] Priority   19 | >>> SELECTED | Interest x1.50
+[2026-01-15 04:55:20] [Maximus Bluestack] Priority 9999 |     not selected | 7.00 Nile dovteweeach
+[2026-01-15 04:59:34] [Daddy Bluestack] Priority    9 | >>> SELECTED | x1.15 Cash Bonus
+[2026-01-15 04:59:34] [Daddy Bluestack] Priority   11 |     not selected | Orbs +1
+[2026-01-15 05:07:03] [Maximus Bluestack] Priority   25 |     not selected | x1.75 Health Regen
+[2026-01-15 05:07:03] [Maximus Bluestack] Priority   18 | >>> SELECTED | x1.15 Damage
+[2026-01-15 05:07:03] [Maximus Bluestack] Priority   19 |     not selected | Interest x1.50
+[2026-01-15 05:17:50] [Daddy Bluestack] Priority   10 | >>> SELECTED | x1.15 all coins bonuses
+[2026-01-15 05:17:50] [Daddy Bluestack] Priority   15 |     not selected | Land Mine Damage x3.50
+[2026-01-15 05:18:49] [Maximus Bluestack] Priority 9999 |     not selected | 1.80 coins, oar max healtt
+[2026-01-15 05:18:49] [Maximus Bluestack] Priority   21 |     not selected | x1.15 Defense Absolute
+[2026-01-15 05:18:49] [Maximus Bluestack] Priority   14 | >>> SELECTED | x1.15 Cash Bonus
+[2026-01-15 05:32:27] [Maximus Bluestack] Priority   21 |     not selected | x1.15 Defense Absolute
+[2026-01-15 05:32:27] [Maximus Bluestack] Priority   16 | >>> SELECTED | Orbs +1
+[2026-01-15 05:32:27] [Maximus Bluestack] Priority   19 |     not selected | Interest x1.50
+[2026-01-15 05:36:13] [Daddy Bluestack] Priority 9999 |     not selected | x1.80 coins, but tower max heal
+[2026-01-15 05:36:13] [Daddy Bluestack] Priority   14 | >>> SELECTED | Interest x1.50
+[2026-01-15 05:46:04] [Maximus Bluestack] Priority   14 | >>> SELECTED | x1.15 Cash Bonus
+[2026-01-15 05:46:04] [Maximus Bluestack] Priority   15 |     not selected | x1.15 all coins bonuses
+[2026-01-15 05:46:04] [Maximus Bluestack] Priority   20 |     not selected | Land Mine Damage x3.50
+[2026-01-15 05:54:17] [Daddy Bluestack] Priority    7 | >>> SELECTED | Defense percent +4.00%
+[2026-01-15 05:54:17] [Daddy Bluestack] Priority   29 |     not selected | Lifesteal ene oe trockbac
+[2026-01-15 05:59:48] [Maximus Bluestack] Priority   23 |     not selected | Unlock Smart Missiles
+[2026-01-15 05:59:48] [Maximus Bluestack] Priority   14 | >>> SELECTED | x1.15 Cash Bonus
+[2026-01-15 05:59:48] [Maximus Bluestack] Priority   25 |     not selected | x1.75 Health Regen
+[2026-01-15 06:12:33] [Daddy Bluestack] Priority    2 | >>> SELECTED | Perk wave requirement -20.00
+[2026-01-15 06:12:33] [Daddy Bluestack] Priority   13 |     not selected | x1.15 Damage
+[2026-01-15 06:12:51] [Daddy Bluestack] Priority    8 | >>> SELECTED | Free HESEREG TEI for all
+[2026-01-15 06:12:51] [Daddy Bluestack] Priority 9999 |     not selected | ncrease max game speed by +1,
+[2026-01-15 06:13:09] [Daddy Bluestack] Priority   16 | >>> SELECTED | x1.15 Defense Absolute
+[2026-01-15 06:13:09] [Daddy Bluestack] Priority 9999 |     not selected | ncrease max game speed by +1,
+[2026-01-15 06:13:33] [Maximus Bluestack] Priority 9999 |     not selected | 1.80 coins, oar max healtt
+[2026-01-15 06:13:33] [Maximus Bluestack] Priority   19 | >>> SELECTED | Interest x1.50
+[2026-01-15 06:13:33] [Maximus Bluestack] Priority   20 |     not selected | Land Mine Damage x3.50
+[2026-01-15 06:22:26] [Daddy Bluestack] Priority   19 |     not selected | Black Hole duration +12.0s
+[2026-01-15 06:22:26] [Daddy Bluestack] Priority   12 | >>> SELECTED | Bounce Shot +2
+[2026-01-15 06:26:52] [Maximus Bluestack] Priority   25 |     not selected | x1.75 Health Regen
+[2026-01-15 06:26:52] [Maximus Bluestack] Priority 9999 |     not selected | 1.80 coins, pur ower max healtt
+[2026-01-15 06:26:52] [Maximus Bluestack] Priority   15 | >>> SELECTED | x1.15 all coins bonuses
+[2026-01-15 06:35:52] [Daddy Bluestack] Priority 9999 |     not selected | ncrease max game speed by +1,
+[2026-01-15 06:35:52] [Daddy Bluestack] Priority   14 | >>> SELECTED | Interest x1.50
+[2026-01-15 06:40:38] [Maximus Bluestack] Priority   15 | >>> SELECTED | x1.15 all coins bonuses
+[2026-01-15 06:40:38] [Maximus Bluestack] Priority   20 |     not selected | Land Mine Damage x3.50
+[2026-01-15 06:40:38] [Maximus Bluestack] Priority   25 |     not selected | x1.75 Health Regen
+[2026-01-15 06:49:39] [Daddy Bluestack] Priority    8 | >>> SELECTED | Free HESEREG TEI for all
+[2026-01-15 06:49:39] [Daddy Bluestack] Priority   15 |     not selected | Land Mine Damage x3.50
+[2026-01-15 06:54:13] [Maximus Bluestack] Priority   16 | >>> SELECTED | Orbs +1
+[2026-01-15 06:54:13] [Maximus Bluestack] Priority   21 |     not selected | x1.15 Defense Absolute
+[2026-01-15 06:54:13] [Maximus Bluestack] Priority   20 |     not selected | Land Mine Damage x3.50
+[2026-01-15 07:03:17] [Daddy Bluestack] Priority    7 | >>> SELECTED | Defense percent +4.00%
+[2026-01-15 07:03:17] [Daddy Bluestack] Priority   23 |     not selected | Unlock Smart Missiles
+[2026-01-15 07:07:58] [Maximus Bluestack] Priority   20 | >>> SELECTED | Land Mine Damage x3.50
+[2026-01-15 07:07:58] [Maximus Bluestack] Priority   21 |     not selected | x1.15 Defense Absolute
+[2026-01-15 07:07:58] [Maximus Bluestack] Priority   25 |     not selected | x1.75 Health Regen
+[2026-01-15 07:16:52] [Daddy Bluestack] Priority 9999 |     not selected | ncrease max game speed by +1,
+[2026-01-15 07:16:52] [Daddy Bluestack] Priority   25 | >>> SELECTED | x1.75 Health Regen
+[2026-01-15 07:21:43] [Maximus Bluestack] Priority   23 |     not selected | Unlock Smart Missiles
+[2026-01-15 07:21:43] [Maximus Bluestack] Priority   20 | >>> SELECTED | Land Mine Damage x3.50
+[2026-01-15 07:21:43] [Maximus Bluestack] Priority 9999 |     not selected | Boss aed (5086 boss
+[2026-01-15 07:30:54] [Daddy Bluestack] Priority   16 |     not selected | x1.15 Defense Absolute
+[2026-01-15 07:30:54] [Daddy Bluestack] Priority   11 | >>> SELECTED | Orbs +1
+[2026-01-15 07:35:37] [Maximus Bluestack] Priority   23 |     not selected | Unlock Smart Missiles
+[2026-01-15 07:35:37] [Maximus Bluestack] Priority   19 | >>> SELECTED | Interest x1.50
+[2026-01-15 07:35:37] [Maximus Bluestack] Priority   21 |     not selected | x1.15 Defense Absolute
+[2026-01-15 07:44:43] [Daddy Bluestack] Priority    7 | >>> SELECTED | Defense percent +4.00%
+[2026-01-15 07:44:43] [Daddy Bluestack] Priority   19 |     not selected | Black Hole duration +12.0s
+[2026-01-15 07:49:07] [Maximus Bluestack] Priority   25 |     not selected | x1.75 Health Regen
+[2026-01-15 07:49:07] [Maximus Bluestack] Priority   23 |     not selected | Unlock Smart Missiles
+[2026-01-15 07:49:07] [Maximus Bluestack] Priority   21 | >>> SELECTED | x1.15 Defense Absolute
+[2026-01-15 08:03:37] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 08:03:37] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 08:03:50] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 08:03:50] [Daddy Bluestack] Priority 9999 |     not selected | ; i Pay)
+[2026-01-15 08:04:03] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 08:04:03] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 08:04:16] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 08:04:16] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 08:04:28] [Daddy Bluestack] Priority 9999 |     not selected | Pp @ .
+[2026-01-15 08:04:28] [Daddy Bluestack] Priority 9999 |     not selected | cay VA, Level Skip =
+[2026-01-15 08:04:42] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 08:04:42] [Daddy Bluestack] Priority 9999 |     not selected | "|
+[2026-01-15 08:04:54] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 08:04:54] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-15 08:05:07] [Daddy Bluestack] Priority    8 | >>> SELECTED | Free HESEREG TEI for all
+[2026-01-15 08:05:07] [Daddy Bluestack] Priority   13 |     not selected | Spotlight damage bonus x1.5
+[2026-01-15 08:17:14] [Maximus Bluestack] Priority   23 |     not selected | 4 more smart missiles
+[2026-01-15 08:17:14] [Maximus Bluestack] Priority   21 |     not selected | x1.15 Defense Absolute
+[2026-01-15 08:17:14] [Maximus Bluestack] Priority   20 | >>> SELECTED | Land Mine Damage x3.50
+[2026-01-15 08:17:40] [Daddy Bluestack] Priority   12 |     not selected | Bounce Shot +2
+[2026-01-15 08:17:40] [Daddy Bluestack] Priority    9 | >>> SELECTED | x1.15 Cash Bonus
+[2026-01-15 08:30:48] [Maximus Bluestack] Priority   23 |     not selected | 4 more smart missiles
+[2026-01-15 08:30:48] [Maximus Bluestack] Priority   25 |     not selected | x1.75 Health Regen
+[2026-01-15 08:30:48] [Maximus Bluestack] Priority   19 | >>> SELECTED | Interest x1.50
+[2026-01-15 08:31:13] [Daddy Bluestack] Priority   19 |     not selected | Black Hole duration +12.0s
+[2026-01-15 08:31:13] [Daddy Bluestack] Priority    8 | >>> SELECTED | Free eee for all
+[2026-01-15 08:44:35] [Maximus Bluestack] Priority   21 | >>> SELECTED | x1.15 Defense Absolute
+[2026-01-15 08:44:35] [Maximus Bluestack] Priority   23 |     not selected | 4 more smart missiles
+[2026-01-15 08:44:35] [Maximus Bluestack] Priority 9999 |     not selected | 1.80 coins, pur tower max healtt
+[2026-01-15 08:45:00] [Daddy Bluestack] Priority   13 |     not selected | x1.15 Damage
+[2026-01-15 08:45:00] [Daddy Bluestack] Priority   12 | >>> SELECTED | Bounce Shot +2
+[2026-01-15 08:58:12] [Maximus Bluestack] Priority 9999 |     not selected | anes eee ae
+[2026-01-15 08:58:12] [Maximus Bluestack] Priority   21 |     not selected | x1.15 Defense Absolute
+[2026-01-15 08:58:12] [Maximus Bluestack] Priority   20 | >>> SELECTED | Land Mine Damage x3.50
+[2026-01-15 09:02:00] [Daddy Bluestack] Priority    7 | >>> SELECTED | Defense percent +4.00%
+[2026-01-15 09:02:00] [Daddy Bluestack] Priority   15 |     not selected | Land Mine Damage x3.50
+[2026-01-15 09:11:49] [Maximus Bluestack] Priority   23 |     not selected | 4 more smart missiles
+[2026-01-15 09:11:49] [Maximus Bluestack] Priority 9999 |     not selected | 1.80 coins, pur ower max healtt
+[2026-01-15 09:11:49] [Maximus Bluestack] Priority   20 | >>> SELECTED | Land Mine Damage x3.50
+[2026-01-15 09:18:57] [Daddy Bluestack] Priority 9999 |     not selected | Boss Tee boss
+[2026-01-15 09:18:57] [Daddy Bluestack] Priority   25 | >>> SELECTED | x1.75 Health Regen
+[2026-01-15 09:26:28] [Maximus Bluestack] Priority   25 |     not selected | x1.75 Health Regen
+[2026-01-15 09:26:28] [Maximus Bluestack] Priority   19 | >>> SELECTED | Interest x1.50
+[2026-01-15 09:26:28] [Maximus Bluestack] Priority   21 |     not selected | x1.15 Defense Absolute
+[2026-01-15 09:36:32] [Daddy Bluestack] Priority    6 | >>> SELECTED | x1.20 max health
+[2026-01-15 09:36:32] [Daddy Bluestack] Priority 9999 |     not selected | ncrease max game speed by +1,
+[2026-01-15 09:40:05] [Maximus Bluestack] Priority   21 | >>> SELECTED | x1.15 Defense Absolute
+[2026-01-15 09:40:05] [Maximus Bluestack] Priority   23 |     not selected | 4 more smart missiles
+[2026-01-15 09:40:05] [Maximus Bluestack] Priority 9999 |     not selected | x1.50 ret bosses
+[2026-01-15 09:53:53] [Maximus Bluestack] Priority   25 | >>> SELECTED | x1.75 Health Regen
+[2026-01-15 09:53:53] [Maximus Bluestack] Priority 9999 |     not selected | Seer cndnnce S0%
+[2026-01-15 09:53:53] [Maximus Bluestack] Priority 9999 |     not selected | 1.80 coins, pur tower max healtt
+[2026-01-15 09:54:38] [Daddy Bluestack] Priority   12 | >>> SELECTED | Bounce Shot +2
+[2026-01-15 09:54:38] [Daddy Bluestack] Priority   25 |     not selected | x1.75 Health Regen
+[2026-01-15 09:58:31] [Maximus Bluestack] Priority    1 | >>> SELECTED | Enemies damage tower damage
+[2026-01-15 09:58:31] [Maximus Bluestack] Priority 9999 |     not selected | Some low priority perk
+[2026-01-15 09:58:31] [Maximus Bluestack] Priority 9999 |     not selected | Another perk
+[2026-01-15 09:58:31] [Maximus Bluestack] Priority    1 |     not selected | Enemies damage tower damage
+[2026-01-15 09:58:31] [Maximus Bluestack] Priority 9999 |     not selected | Some low priority perk
+[2026-01-15 09:58:31] [Maximus Bluestack] Priority 9999 |     not selected | Another perk
+[2026-01-15 10:00:29] [Daddy Bluestack] Priority    1 | >>> SELECTED | Enemies damage tower damage
+[2026-01-15 10:00:29] [Daddy Bluestack] Priority    9 |     not selected | Cash bonus
+[2026-01-15 10:01:57] [Maximus Bluestack] Priority    1 | >>> SELECTED | Enemies damage tower damage
+[2026-01-15 10:01:57] [Maximus Bluestack] Priority 9999 |     not selected | Some low priority perk
+[2026-01-15 10:01:57] [Maximus Bluestack] Priority   14 |     not selected | Cash bonus
+[2026-01-15 10:01:57] [Maximus Bluestack] Priority    1 |     not selected | Enemies damage tower damage
+[2026-01-15 10:01:57] [Maximus Bluestack] Priority 9999 |     not selected | Some low priority perk
+[2026-01-15 10:01:57] [Maximus Bluestack] Priority   14 |     not selected | Cash bonus
+[2026-01-15 10:04:30] [Maximus Bluestack] Priority    1 | >>> SELECTED | Enemies damage tower damage
+[2026-01-15 10:04:30] [Maximus Bluestack] Priority 9999 |     not selected | Some low priority perk
+[2026-01-15 10:04:30] [Maximus Bluestack] Priority   14 |     not selected | Cash bonus
+[2026-01-15 10:08:22] [Maximus Bluestack] Priority   26 | >>> SELECTED | Cash per wave x12.00
+[2026-01-15 10:08:22] [Maximus Bluestack] Priority 9999 |     not selected | Some low priority perk
+[2026-01-15 10:08:22] [Maximus Bluestack] Priority 9999 |     not selected | Another low perk
+[2026-01-15 10:08:22] [Maximus Bluestack] Priority   27 | >>> SELECTED | Boss health -70%
+[2026-01-15 10:08:22] [Maximus Bluestack] Priority 9999 |     not selected | Some low priority perk
+[2026-01-15 10:08:22] [Maximus Bluestack] Priority 9999 |     not selected | Another low perk
+[2026-01-15 10:08:22] [Maximus Bluestack] Priority   34 | >>> SELECTED | Tower damage x1.50 bosses
+[2026-01-15 10:08:22] [Maximus Bluestack] Priority 9999 |     not selected | Some low priority perk
+[2026-01-15 10:08:22] [Maximus Bluestack] Priority 9999 |     not selected | Another low perk
+[2026-01-15 10:08:22] [Maximus Bluestack] Priority    9 |     not selected | Max health x1.20
+[2026-01-15 10:08:22] [Maximus Bluestack] Priority 9999 | >>> SELECTED | Some low priority perk
+[2026-01-15 10:08:22] [Maximus Bluestack] Priority 9999 |     not selected | Another low perk
+[2026-01-15 10:10:11] [Maximus Bluestack] Priority   26 | >>> SELECTED | Cash per wave x12.00
+[2026-01-15 10:10:11] [Maximus Bluestack] Priority 9999 |     not selected | low
+[2026-01-15 10:10:11] [Maximus Bluestack] Priority 9999 |     not selected | low2
+[2026-01-15 10:10:11] [Maximus Bluestack] Priority   27 | >>> SELECTED | Boss health -70%
+[2026-01-15 10:10:11] [Maximus Bluestack] Priority 9999 |     not selected | low
+[2026-01-15 10:10:11] [Maximus Bluestack] Priority 9999 |     not selected | low2
+[2026-01-15 10:10:11] [Maximus Bluestack] Priority   34 | >>> SELECTED | Tower damage x1.50 bosses
+[2026-01-15 10:10:11] [Maximus Bluestack] Priority 9999 |     not selected | low
+[2026-01-15 10:10:11] [Maximus Bluestack] Priority 9999 |     not selected | low2
+[2026-01-15 10:10:11] [Maximus Bluestack] Priority    9 |     not selected | Max health x1.20
+[2026-01-15 10:10:11] [Maximus Bluestack] Priority 9999 | >>> SELECTED | low
+[2026-01-15 10:10:11] [Maximus Bluestack] Priority 9999 |     not selected | low2
+[2026-01-15 10:10:11] [Maximus Bluestack] Priority    9 |     not selected | Max health x1.20
+[2026-01-15 10:10:11] [Maximus Bluestack] Priority   18 |     not selected | Damage x1.15
+[2026-01-15 10:10:11] [Maximus Bluestack] Priority   29 |     not selected | Life steal x2.5
