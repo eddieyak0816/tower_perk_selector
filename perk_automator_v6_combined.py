@@ -302,7 +302,7 @@ PERK_PRIORITY = [
     (5,  ["death"], []),                                     # death wave
     (6,  ["spotlight"], []),                                 # spotlight
     (7,  ["black hole"], []),                                # black hole
-    (8,  ["increase max game speed"], []),                   # increase max game speed by +1
+    (8,  ["game speed"], []),                                # game speed (increase max game speed by +1)
     (9,  ["max health"], ["coins", "tower max"]),            # x1.20 max health (exclude perk 31)
     (10, ["poison swamp"], []),                              # poison swamp
     (11, ["swamp radius"], []),                              # swamp radius x1.5
@@ -337,7 +337,7 @@ PERK_PRIORITY_DADDY = [
     (2,  ["perk wave requirement"], []),                     # perk wave requirement -20
     (3,  ["golden tower"], []),                              # golden tower
     (4,  ["death"], []),                                     # death wave
-    (5,  ["increase max game speed"], []),                   # increase max game speed by +1
+    (5,  ["game speed"], []),                                # game speed (increase max game speed by +1)
     (6,  ["max health"], ["coins", "tower max"]),            # x1.20 max health (exclude perk 31)
     (7,  ["defense percent"], []),                           # defense percent +4
     (8,  ["free upgrade chance", "upgrade chance for all"], []),  # free upgrade chance for all +5
