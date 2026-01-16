@@ -345,28 +345,28 @@ PERK_PRIORITY_DADDY = [
     (10, ["all coin"], []),                                  # x1.15 all coin
     (11, ["orbs"], []),                                      # orbs +1
     (12, ["bounce shot"], []),                               # bounce shot +2
-    (13, ["damage"], ["land mine", "tower damage", "enemies damage", "distance"]),  # x1.15 damage (generic)
-    (14, ["interest"], []),                                  # interest x1.50
-    (15, ["land mine damage"], []),                          # land mine damage x3.50
-    (16, ["defense absolute"], []),                          # x1.15 defense absolute
-    (17, ["chrono field"], []),                              # #3: chrono field - Time slow field (Moved Up)
-    (18, ["spotlight"], []),                                 # #6: spotlight (Moved Up)
-    (19, ["black hole"], []),                                # #7: black hole (Moved Up)
-    (20, ["poison swamp"], []),                              # #10: poison swamp (Moved Up)
-    (21, ["swamp radius"], []),                              # 11: swamp radius (Moved Up)
-    (22, ["chain lightning"], []),                           # chain lightning (Now after swamp)
-    (23, ["smart missiles"], []),                            # smart missiles
-    (24, ["inner land mines"], []),                          # inner land mines
+    (13, ["chrono field"], []),                              # chrono field
+    (14, ["spotlight"], []),                                 # spotlight
+    (15, ["black hole"], []),                                # black hole
+    (16, ["poison swamp"], []),                              # poison swamp
+    (17, ["swamp radius"], []),                              # swamp radius
+    (18, ["chain lightning"], []),                           # chain lightning
+    (19, ["smart missiles"], []),                            # smart missiles
+    (20, ["inner land mines"], []),                          # inner land mines
+    (21, ["land mine damage"], []),                          # land mine damage x3.50
+    (22, ["damage"], ["land mine", "tower damage", "enemies damage", "distance"]),  # x1.15 damage (generic)
+    (23, ["interest"], []),                                  # interest x1.50
+    (24, ["defense absolute"], []),                          # x1.15 defense absolute
     (25, ["health regen"], []),                               # health regen (generic)
-    (26, ["cash per wave"], []),                             # x12.00 cash per wave
-    (27, ["boss health"], []),                               # boss health -70%, but boss speed +50%
-    (28, ["ranged enemies", "attack distance"], []),         # ranged enemies attack distance reduced
-    (29, ["life", "steal"], []),                             # lifesteal x2.50
-    (30, ["enemies speed"], []),                             # enemies speed -40%
-    (31, ["enemies have", "health"], ["max health", "health regen"]),  # enemies have -50% health
-    (32, ["tower health regen"], []),                         # tower health regen x8
-    (33, ["coins", "tower max health"], []),                 # x1.80 coins, but tower max health
-    (34, ["tower damage", "bosses"], []),                    # x1.50 tower damage, but bosses
+    (26, ["boss health"], []),                               # boss health -70%, but boss speed +50%
+    (27, ["cash per wave"], []),                             # x12.00 cash per wave
+    (28, ["tower damage", "bosses"], []),                    # x1.50 tower damage, but bosses
+    (29, ["ranged enemies", "attack distance"], []),         # ranged enemies attack distance reduced
+    (30, ["life", "steal"], []),                             # lifesteal x2.50
+    (31, ["enemies speed"], []),                              # enemies speed -40%
+    (32, ["enemies have", "health"], ["max health", "health regen"]),  # enemies have -50% health
+    (33, ["tower health regen"], []),                         # tower health regen x8
+    (34, ["coins", "tower max health"], []),                 # x1.80 coins, but tower max health
 ]
 
 # ============================================
@@ -685,6 +685,107 @@ def bring_window_to_focus(window_name):
     except Exception as e:
         print(f"  [{window_name}] Could not focus window: {e}")
         return False
+
+
+FAILED_FOCUS_COOLDOWN = 30  # seconds to wait before retrying focus on a window that failed
+failed_focus_until = {}
+
+
+def ensure_window_foreground(window_name, max_attempts=3, retry_delay=0.2, verify_ui=True):
+    """Ensure the target window is the foreground window.
+
+    - Tries up to max_attempts to bring the window to foreground and verifies by checking the active window title.
+    - If verify_ui=True then also does a lightweight UI verification using play/pause color (via check_play_pause_state).
+    - Implements a cooldown: if recent attempts failed, skip trying again until cooldown expires.
+
+    Returns True if the target window is confirmed foreground and UI verified, False otherwise.
+    """
+    # Respect cooldown if previous focus attempts failed
+    now = time.time()
+    if window_name in failed_focus_until and now < failed_focus_until[window_name]:
+        if DIAGNOSTIC_FOCUS_LOGS:
+            print(f"  [{window_name}] Skipping focus attempts until {failed_focus_until[window_name]} (cooldown)")
+        return False
+
+    for attempt in range(1, max_attempts + 1):
+        cur_hwnd, cur_title = get_current_foreground_window()
+        if cur_title and window_name.lower() in cur_title.lower():
+            if DIAGNOSTIC_FOCUS_LOGS:
+                print(f"  [{window_name}] Foreground confirmed on attempt {attempt}: '{cur_title}'")
+            # Optional lightweight UI verification
+            if verify_ui:
+                try:
+                    coords = get_coords(window_name)
+                    state = check_play_pause_state(window_name, coords)
+                    if state == 'unknown':
+                        if DIAGNOSTIC_FOCUS_LOGS:
+                            print(f"  [{window_name}] UI verification returned 'unknown' - treating as not verified")
+                        # Try to focus again instead of accepting unknown
+                        pass
+                    else:
+                        return True
+                except Exception as e:
+                    if DIAGNOSTIC_FOCUS_LOGS:
+                        print(f"  [{window_name}] UI verification error: {e}")
+                    # Fall through to attempt focusing
+            else:
+                return True
+
+        if DIAGNOSTIC_FOCUS_LOGS:
+            print(f"  [{window_name}] Foreground not yet target (attempt {attempt}); trying to focus...")
+
+        # Try to bring to focus (primary method)
+        brought = bring_window_to_focus(window_name)
+
+        # If primary method succeeded but we still don't see it in the foreground, try a fallback sequence
+        if not brought or True:
+            # Fallback: temporarily make window topmost to try to force it to front
+            try:
+                if WIN32_SUPPORT:
+                    hwnd = win32gui.FindWindow(None, window_name)
+                    if hwnd:
+                        if DIAGNOSTIC_FOCUS_LOGS:
+                            print(f"  [{window_name}] Attempting topmost fallback for hwnd {hwnd}")
+                        win32gui.SetWindowPos(hwnd, win32con.HWND_TOPMOST, 0, 0, 0, 0, win32con.SWP_NOMOVE | win32con.SWP_NOSIZE)
+                        time.sleep(0.05)
+                        win32gui.SetWindowPos(hwnd, win32con.HWND_NOTOPMOST, 0, 0, 0, 0, win32con.SWP_NOMOVE | win32con.SWP_NOSIZE)
+                        time.sleep(retry_delay)
+            except Exception as e:
+                if DIAGNOSTIC_FOCUS_LOGS:
+                    print(f"  [{window_name}] Topmost fallback failed: {e}")
+
+        # Small wait before re-checking
+        time.sleep(retry_delay)
+        cur_hwnd2, cur_title2 = get_current_foreground_window()
+        if cur_title2 and window_name.lower() in cur_title2.lower():
+            if DIAGNOSTIC_FOCUS_LOGS:
+                print(f"  [{window_name}] Foreground confirmed after focus/fallback on attempt {attempt}")
+            # UI verification
+            if verify_ui:
+                try:
+                    coords = get_coords(window_name)
+                    state = check_play_pause_state(window_name, coords)
+                    if state == 'unknown':
+                        if DIAGNOSTIC_FOCUS_LOGS:
+                            print(f"  [{window_name}] UI verification returned 'unknown' after focus - treating as not verified")
+                        # continue retrying
+                        continue
+                    else:
+                        return True
+                except Exception as e:
+                    if DIAGNOSTIC_FOCUS_LOGS:
+                        print(f"  [{window_name}] UI verification error after focus: {e}")
+                    continue
+            else:
+                return True
+
+    # If we get here, verification failed
+    print(f"  [{window_name}] WARNING: Could not verify window is foreground after {max_attempts} attempts")
+    write_to_log(f"WARNING: Could not focus window '{window_name}' for perk selection")
+    # Set cooldown to avoid repeated immediate attempts
+    failed_focus_until[window_name] = time.time() + FAILED_FOCUS_COOLDOWN
+    return False
+
 
 def color_distance(color1, color2):
     """Calculate the distance between two RGB colors."""
@@ -1291,7 +1392,14 @@ def handle_perk_selection(window_name):
     
     # Loop to select all available perks
     while True:
-        print(f"  [{window_name}] Step 2: Opening perk window...")
+        print(f"  [{window_name}] Step 2: Ensuring window is foreground and opening perk window...")
+        # Ensure the target game window is actually foreground before doing any clicks
+        if not ensure_window_foreground(window_name):
+            print(f"  [{window_name}] Aborting perk selection - target window not foreground. Restoring previous window.")
+            write_to_log(f"Aborted perk selection on {window_name}: could not verify foreground")
+            if saved_hwnd:
+                restore_foreground_window(saved_hwnd, saved_title)
+            return
         click_at(window_name, coords['new_perk_bar'], "New Perk Bar")
         time.sleep(WINDOW_OPEN_WAIT)
         # Re-ensure the game is still paused in case someone toggled it while we switched windows

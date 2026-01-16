@@ -1,15 +1,6 @@
-[2026-01-16 01:37:06] [Daddy Bluestack] Priority   25 |     not selected | x1.75 Health Regen
-[2026-01-16 01:37:06] [Daddy Bluestack] Priority   16 | >>> SELECTED | x1.15 Defense Absolute
-[2026-01-16 01:37:06] [Daddy Bluestack] Priority 9999 |     not selected | x1.80 coins, purower max heal
-[2026-01-16 01:38:35] [Maximus Bluestack] Priority    2 | >>> SELECTED | Perk wave requirement -20.00%
-[2026-01-16 01:38:35] [Maximus Bluestack] Priority   15 |     not selected | x1.15 all coins bonuses
-[2026-01-16 01:38:35] [Maximus Bluestack] Priority   13 |     not selected | Free sacra for all
-[2026-01-16 01:52:24] [Maximus Bluestack] Priority 9999 |     not selected | 
-[2026-01-16 01:52:24] [Maximus Bluestack] Priority 9999 |     not selected | +1 Enemy /a
-[2026-01-16 01:52:24] [Maximus Bluestack] Priority 9999 |     not selected | aes at i
-[2026-01-16 01:52:38] [Maximus Bluestack] Priority    7 |     not selected | Black Hole duration +12.0s
-[2026-01-16 01:52:38] [Maximus Bluestack] Priority    4 | >>> SELECTED | Golden tower bonus x1.5
-[2026-01-16 01:52:38] [Maximus Bluestack] Priority    5 |     not selected | +1 wave on death wave
-[2026-01-16 01:53:13] [Daddy Bluestack] Priority   16 | >>> SELECTED | x1.15 Defense Absolute
-[2026-01-16 01:53:13] [Daddy Bluestack] Priority   25 |     not selected | x1.75 Health Regen
-[2026-01-16 01:53:13] [Daddy Bluestack] Priority 9999 |     not selected | eee filsdontgivecash
+[2026-01-16 12:33:45] [Daddy Bluestack] Priority   21 | >>> SELECTED | Land Mine Damage x3.50
+[2026-01-16 12:33:45] [Daddy Bluestack] Priority   22 |     not selected | x1.15 Damage
+[2026-01-16 12:33:45] [Daddy Bluestack] Priority   24 |     not selected | x1.15 Defense Absolute
+[2026-01-16 12:34:11] [Maximus Bluestack] Priority 9999 |     not selected | anes eee ae
+[2026-01-16 12:34:11] [Maximus Bluestack] Priority   20 | >>> SELECTED | Land Mine Damage x3.50
+[2026-01-16 12:34:11] [Maximus Bluestack] Priority   21 |     not selected | x1.15 Defense Absolute
