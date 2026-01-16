@@ -1,0 +1,51 @@
+[2026-01-16 00:02:05] [Daddy Bluestack] Priority 9999 |     not selected | pages OF
+[2026-01-16 00:02:05] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-16 00:02:05] [Daddy Bluestack] Priority 9999 |     not selected | fae
+[2026-01-16 00:02:18] [Daddy Bluestack] Priority   16 |     not selected | x1.15 Defense Absolute
+[2026-01-16 00:02:18] [Daddy Bluestack] Priority   13 | >>> SELECTED | x1.15 Damage
+[2026-01-16 00:02:18] [Daddy Bluestack] Priority   14 |     not selected | Interest x1.50
+[2026-01-16 00:03:11] [Maximus Bluestack] Priority   25 |     not selected | x1.75 Health Regen
+[2026-01-16 00:03:11] [Maximus Bluestack] Priority   19 | >>> SELECTED | Interest x1.50
+[2026-01-16 00:03:11] [Maximus Bluestack] Priority 9999 |     not selected | 1.80 coins, pur tower max healtt
+[2026-01-16 00:15:28] [Daddy Bluestack] Priority   14 | >>> SELECTED | Interest x1.50
+[2026-01-16 00:15:28] [Daddy Bluestack] Priority   16 |     not selected | x1.15 Defense Absolute
+[2026-01-16 00:15:28] [Daddy Bluestack] Priority   25 |     not selected | x1.75 Health Regen
+[2026-01-16 00:17:23] [Maximus Bluestack] Priority   25 |     not selected | x1.75 Health Regen
+[2026-01-16 00:17:23] [Maximus Bluestack] Priority   19 | >>> SELECTED | Interest x1.50
+[2026-01-16 00:17:23] [Maximus Bluestack] Priority 9999 |     not selected | 7.00 Nile dovteweeach
+[2026-01-16 00:29:28] [Daddy Bluestack] Priority   25 |     not selected | x1.75 Health Regen
+[2026-01-16 00:29:28] [Daddy Bluestack] Priority   16 | >>> SELECTED | x1.15 Defense Absolute
+[2026-01-16 00:29:28] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-16 00:31:09] [Maximus Bluestack] Priority   25 |     not selected | x1.75 Health Regen
+[2026-01-16 00:31:09] [Maximus Bluestack] Priority   19 | >>> SELECTED | Interest x1.50
+[2026-01-16 00:31:09] [Maximus Bluestack] Priority 9999 |     not selected | 
+[2026-01-16 00:43:03] [Daddy Bluestack] Priority   14 | >>> SELECTED | Interest x1.50
+[2026-01-16 00:43:03] [Daddy Bluestack] Priority   29 |     not selected | Lifesteal ene oe trockbac
+[2026-01-16 00:43:03] [Daddy Bluestack] Priority   16 |     not selected | x1.15 Defense Absolute
+[2026-01-16 00:45:02] [Maximus Bluestack] Priority   25 | >>> SELECTED | x1.75 Health Regen
+[2026-01-16 00:45:02] [Maximus Bluestack] Priority 9999 |     not selected | 
+[2026-01-16 00:45:02] [Maximus Bluestack] Priority   29 |     not selected | Lifesteal 20. De Krrockback
+[2026-01-16 00:56:25] [Daddy Bluestack] Priority   25 |     not selected | x1.75 Health Regen
+[2026-01-16 00:56:25] [Daddy Bluestack] Priority   14 | >>> SELECTED | Interest x1.50
+[2026-01-16 00:56:25] [Daddy Bluestack] Priority   16 |     not selected | x1.15 Defense Absolute
+[2026-01-16 00:58:34] [Maximus Bluestack] Priority   25 | >>> SELECTED | x1.75 Health Regen
+[2026-01-16 00:58:34] [Maximus Bluestack] Priority 9999 |     not selected | 1.80 coins, pur ower max healtt
+[2026-01-16 00:58:34] [Maximus Bluestack] Priority 9999 |     not selected | 
+[2026-01-16 01:10:05] [Daddy Bluestack] Priority   14 | >>> SELECTED | Interest x1.50
+[2026-01-16 01:10:05] [Daddy Bluestack] Priority   16 |     not selected | x1.15 Defense Absolute
+[2026-01-16 01:10:05] [Daddy Bluestack] Priority   25 |     not selected | x1.75 Health Regen
+[2026-01-16 01:23:36] [Daddy Bluestack] Priority 9999 |     not selected | Meee 6.30T b
+[2026-01-16 01:23:36] [Daddy Bluestack] Priority 9999 |     not selected | } 7 < ). 33
+[2026-01-16 01:23:36] [Daddy Bluestack] Priority 9999 |     not selected | a ~ eh +1 3 Ab
+[2026-01-16 01:23:49] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-16 01:23:49] [Daddy Bluestack] Priority 9999 |     not selected | b ; ees i J
+[2026-01-16 01:23:49] [Daddy Bluestack] Priority 9999 |     not selected | Enemy, Attack set i
+[2026-01-16 01:24:02] [Daddy Bluestack] Priority 9999 |     not selected | a
+[2026-01-16 01:24:02] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-16 01:24:02] [Daddy Bluestack] Priority 9999 |     not selected | Me ct Level: Skip
+[2026-01-16 01:24:16] [Daddy Bluestack] Priority   16 | >>> SELECTED | x1.15 Defense Absolute
+[2026-01-16 01:24:16] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-16 01:24:16] [Daddy Bluestack] Priority 9999 |     not selected | 
+[2026-01-16 01:24:35] [Daddy Bluestack] Priority   16 | >>> SELECTED | x1.15 Defense Absolute
+[2026-01-16 01:24:35] [Daddy Bluestack] Priority   25 |     not selected | x1.75 Health Regen
+[2026-01-16 01:24:35] [Daddy Bluestack] Priority 9999 |     not selected | x1.80 coins, purower max heal

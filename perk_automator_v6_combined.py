@@ -378,6 +378,16 @@ CLICK_DELAY = 0.5
 WINDOW_OPEN_WAIT = 5.0
 WINDOW_CLOSE_WAIT = 5.0
 
+# Diagnostic focus logging / small settle delay to help troubleshoot hotkey focus issues
+DIAGNOSTIC_FOCUS_LOGS = True
+FOCUS_SETTLE_DELAY = 0.15  # seconds to wait after attempting to set foreground (0 to disable)
+# Focus retry settings: number of attempts and delay between them
+MAX_FOCUS_ATTEMPTS = 10
+FOCUS_RETRY_DELAY = 0.15  # seconds between focus attempts
+
+# Control saving of debug images to disk (set False to avoid creating files)
+SAVE_DEBUG_IMAGES = False
+
 # Global timer for debug image saving (every 30 seconds)
 last_debug_save_time = 0
 
@@ -626,6 +636,11 @@ def bring_window_to_focus(window_name):
         return False
     
     try:
+        # Diagnostic: log current foreground window
+        if DIAGNOSTIC_FOCUS_LOGS:
+            cur_hwnd, cur_title = get_current_foreground_window()
+            print(f"  [{window_name}] Current foreground before focus attempt: hwnd={cur_hwnd}, title='{cur_title}'")
+
         # Find window by partial title match
         target_hwnd = None
         def enum_callback(hwnd, extra):
@@ -649,12 +664,17 @@ def bring_window_to_focus(window_name):
             print(f"  [{window_name}] Restored minimized window")
         
         win32gui.SetForegroundWindow(target_hwnd)
-        time.sleep(0.1)
+        # Allow OS to settle focus slightly; use diagnostic-configured delay
+        if DIAGNOSTIC_FOCUS_LOGS and FOCUS_SETTLE_DELAY > 0:
+            time.sleep(FOCUS_SETTLE_DELAY)
+        else:
+            time.sleep(0.05)
         
         # Verify the window is now foreground
         fg_hwnd = win32gui.GetForegroundWindow()
         fg_title = win32gui.GetWindowText(fg_hwnd)
-        print(f"  [{window_name}] Foreground window is now: '{fg_title}'")
+        if DIAGNOSTIC_FOCUS_LOGS:
+            print(f"  [{window_name}] Foreground window AFTER focus attempt: hwnd={fg_hwnd}, title='{fg_title}'")
         
         if fg_hwnd == target_hwnd:
             print(f"  [{window_name}] Successfully switched to window")
@@ -763,12 +783,53 @@ def check_play_pause_state(window_name, coords):
             return 'running'
 
 def click_play_pause_raw(window_name):
-    """Press the play/pause keyboard shortcut without state checking."""
+    """Press the play/pause keyboard shortcut without state checking.
+
+    Robustness: attempt to set the target window to foreground up to
+    MAX_FOCUS_ATTEMPTS times and verify the foreground window before
+    sending the hotkey. If focus cannot be acquired, abort the hotkey
+    to avoid affecting the wrong window.
+    """
     check_failsafe()
-    bring_window_to_focus(window_name)
+
+    # Attempt to focus target window with retries
+    focused = False
+    for attempt in range(1, MAX_FOCUS_ATTEMPTS + 1):
+        if DIAGNOSTIC_FOCUS_LOGS:
+            print(f"  [{window_name}] Focus attempt {attempt}/{MAX_FOCUS_ATTEMPTS}...")
+        bring_window_to_focus(window_name)
+        cur_hwnd, cur_title = get_current_foreground_window()
+        if cur_title and window_name.lower() in cur_title.lower():
+            focused = True
+            if DIAGNOSTIC_FOCUS_LOGS:
+                print(f"  [{window_name}] Focus confirmed on attempt {attempt}: hwnd={cur_hwnd}, title='{cur_title}'")
+            # Allow a small settle delay before sending keystroke
+            if FOCUS_SETTLE_DELAY > 0:
+                time.sleep(FOCUS_SETTLE_DELAY)
+            break
+        else:
+            if DIAGNOSTIC_FOCUS_LOGS:
+                print(f"  [{window_name}] Focus not yet acquired (foreground: '{cur_title}'), sleeping {FOCUS_RETRY_DELAY}s before retrying")
+            time.sleep(FOCUS_RETRY_DELAY)
+
+    if not focused:
+        print(f"  [{window_name}] WARNING: Could not focus target window after {MAX_FOCUS_ATTEMPTS} attempts; aborting hotkey to avoid affecting wrong window.")
+        return False
+
+    # Diagnostic: log current foreground before sending hotkey
+    if DIAGNOSTIC_FOCUS_LOGS:
+        cur_hwnd2, cur_title2 = get_current_foreground_window()
+        print(f"  [{window_name}] About to press Ctrl+Shift+U — foreground: hwnd={cur_hwnd2}, title='{cur_title2}'")
+
     print(f"  [{window_name}] Pressing Ctrl+Shift+U for Play/Pause")
     pyautogui.hotkey('ctrl', 'shift', 'u')
     time.sleep(CLICK_DELAY)
+
+    if DIAGNOSTIC_FOCUS_LOGS:
+        cur_hwnd3, cur_title3 = get_current_foreground_window()
+        print(f"  [{window_name}] After hotkey — foreground: hwnd={cur_hwnd3}, title='{cur_title3}'")
+
+    return True
 
 def ensure_game_paused(window_name, coords, max_attempts=3):
     """Ensure the game is paused before proceeding."""
@@ -893,8 +954,11 @@ def get_text_from_region(window_name, region, save_debug_image=True):
                     img = maximus_imgs[i - (6 - len(maximus_imgs))]
                     img_resized = img.resize((max_maximus_w, row_height))
                     combined.paste(img_resized, (max_daddy_w, y))
-            combined.save(debug_path)
-            print(f"[DEBUG] Saved combined new_perk_region screenshot to {debug_path}")
+            if SAVE_DEBUG_IMAGES:
+                combined.save(debug_path)
+                print(f"[DEBUG] Saved combined new_perk_region screenshot to {debug_path}")
+            else:
+                print(f"[DEBUG] Skipped saving combined new_perk_region screenshot (SAVE_DEBUG_IMAGES=False)")
             last_debug_save_time = time.time()
     if screenshot is None:
         print(f"  [{window_name}] Warning: Could not capture region for OCR")
@@ -956,8 +1020,11 @@ def get_text_from_region(window_name, region, save_debug_image=True):
                     img = maximus_imgs[i - (6 - len(maximus_imgs))]
                     img_resized = img.resize((max_maximus_w, row_height))
                     combined.paste(img_resized, (max_daddy_w, y))
-            combined.save(debug_path)
-            print(f"[DEBUG] Saved combined new_perk_region screenshot to {debug_path}")
+            if SAVE_DEBUG_IMAGES:
+                combined.save(debug_path)
+                print(f"[DEBUG] Saved combined new_perk_region screenshot to {debug_path}")
+            else:
+                print(f"[DEBUG] Skipped saving combined new_perk_region screenshot (SAVE_DEBUG_IMAGES=False)")
             last_debug_save_time = time.time()
     if screenshot is None:
         print(f"  [{window_name}] Warning: Could not capture region for OCR")
@@ -992,8 +1059,8 @@ def select_best_perk(window_name, coords):
     perk1_text = get_text_from_region(window_name, coords['perk1_text_region'])
     perk2_text = get_text_from_region(window_name, coords['perk2_text_region'])
 
-    # Optionally read third perk region if present (only for Maximus)
-    has_third = window_name and 'maximus' in window_name.lower() and 'perk3_text_region' in coords and 'perk_option_3' in coords
+    # Optionally read third perk region if present (Maximus and Daddy)
+    has_third = window_name and ('maximus' in window_name.lower() or 'daddy' in window_name.lower()) and 'perk3_text_region' in coords and 'perk_option_3' in coords
     perk3_text = None
     if has_third:
         perk3_text = get_text_from_region(window_name, coords['perk3_text_region'])
@@ -1227,6 +1294,9 @@ def handle_perk_selection(window_name):
         print(f"  [{window_name}] Step 2: Opening perk window...")
         click_at(window_name, coords['new_perk_bar'], "New Perk Bar")
         time.sleep(WINDOW_OPEN_WAIT)
+        # Re-ensure the game is still paused in case someone toggled it while we switched windows
+        print(f"  [{window_name}] Verifying game is paused after opening perk window...")
+        ensure_game_paused(window_name, coords)
         
         print(f"  [{window_name}] Step 3: Selecting best perk...")
         coords = get_coords(window_name)
@@ -1255,8 +1325,11 @@ def handle_perk_selection(window_name):
                             y += im.height
                         stamp = datetime.now().strftime('%Y%m%d_%H%M%S')
                         out_path = SCRIPT_DIR / f"maximus_perks_{stamp}.png"
-                        combined.save(out_path)
-                        print(f"  [{window_name}] Saved Maximus 3-perk snapshot to {out_path}")
+                        if SAVE_DEBUG_IMAGES:
+                            combined.save(out_path)
+                            print(f"  [{window_name}] Saved Maximus 3-perk snapshot to {out_path}")
+                        else:
+                            print(f"  [{window_name}] Skipping saving Maximus 3-perk snapshot (SAVE_DEBUG_IMAGES=False)")
                 except Exception as e:
                     print(f"  [{window_name}] Could not capture/save Maximus perks image: {e}")
         except Exception:
