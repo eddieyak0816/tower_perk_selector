@@ -1,57 +1,31 @@
-[2026-01-16 12:33:29] ======================================================================
-[2026-01-16 12:33:29] PERK AUTOMATOR STARTED
-[2026-01-16 12:33:29] ======================================================================
-[2026-01-16 12:33:29] Window found: Daddy Bluestack at (0, 0)
-[2026-01-16 12:33:29] Window found: Maximus Bluestack at (0, 0)
+[2026-01-16 18:09:02] ======================================================================
+[2026-01-16 18:09:02] PERK AUTOMATOR STARTED
+[2026-01-16 18:09:02] ======================================================================
+[2026-01-16 18:09:02] Window found: Daddy Bluestack at (0, 0)
+[2026-01-16 18:09:02] Window found: Maximus Bluestack at (0, 0)
 
 ======================================================================
-[2026-01-16 12:33:45] PERK SELECTION - Daddy Bluestack
+[2026-01-16 18:09:19] PERK SELECTION - Daddy Bluestack
 ======================================================================
   Perk List Used: PERK_PRIORITY_DADDY
-  Perk 1: Land Mine Damage x3.50
-  Perk 1 Priority: 21
-  Perk 1 Background: RGB(33, 32, 83) | Hex: #212053
-  Perk 1 Is Purple: False
-  Perk 1 Effective Priority: 21
-
-  Perk 2: x1.15 Damage
-  Perk 2 Priority: 22
-  Perk 2 Background: RGB(33, 32, 83) | Hex: #212053
-  Perk 2 Is Purple: False
-  Perk 2 Effective Priority: 22
-
-  Perk 3: x1.15 Defense Absolute
-  Perk 3 Priority: 24
-  Perk 3 Background: RGB(33, 32, 83) | Hex: #212053
-  Perk 3 Is Purple: False
-  Perk 3 Effective Priority: 24
-
-  >>> SELECTED: Perk 1 (Effective Priority 21)
-======================================================================
-
-
-======================================================================
-[2026-01-16 12:34:11] PERK SELECTION - Maximus Bluestack
-======================================================================
-  Perk List Used: PERK_PRIORITY
-  Perk 1: anes eee ae
-  Perk 1 Priority: 9999
-  Perk 1 Background: RGB(30, 3, 83) | Hex: #1E0353
+  Perk 1: Lifesteal peed
+  Perk 1 Priority: 30
+  Perk 1 Background: RGB(31, 3, 82) | Hex: #1F0352
   Perk 1 Is Purple: True
-  Perk 1 Effective Priority: 19999
+  Perk 1 Effective Priority: 30
 
-  Perk 2: Land Mine Damage x3.50
-  Perk 2 Priority: 20
-  Perk 2 Background: RGB(33, 32, 83) | Hex: #212053
-  Perk 2 Is Purple: False
-  Perk 2 Effective Priority: 20
+  Perk 2: ee ils don't givecash
+  Perk 2 Priority: 9999
+  Perk 2 Background: RGB(31, 3, 82) | Hex: #1F0352
+  Perk 2 Is Purple: True
+  Perk 2 Effective Priority: 9999
 
-  Perk 3: x1.15 Defense Absolute
-  Perk 3 Priority: 21
-  Perk 3 Background: RGB(33, 32, 83) | Hex: #212053
-  Perk 3 Is Purple: False
-  Perk 3 Effective Priority: 21
+  Perk 3: x1.80 coins, purower max health
+  Perk 3 Priority: 9999
+  Perk 3 Background: RGB(31, 3, 82) | Hex: #1F0352
+  Perk 3 Is Purple: True
+  Perk 3 Effective Priority: 9999
 
-  >>> SELECTED: Perk 2 (Effective Priority 20)
+  >>> SELECTED: Perk NONE - ALL PURPLE (Effective Priority None)
 ======================================================================
 

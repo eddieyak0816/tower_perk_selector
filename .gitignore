@@ -60,3 +60,9 @@ coverage.xml
 # Local logs
 perk_selection_log.txt
 perks_seen.txt
+
+# Debug / captured images (do not commit)
+debug_newperk_combined.png
+*_perks_*.png
+debug_*.png
+test_*

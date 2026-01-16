@@ -23,6 +23,34 @@ def get_perk_priority(perk_text, window_name=None):
         no_exclude_match = not any(keyword in perk_text_lower for keyword in exclude_keywords)
         if all_include_match and no_exclude_match:
             return priority
+
+    # Special numeric recognition: match "1.8" or "1.80" (optionally prefixed with 'x') for coin-type perks
+    try:
+        import re
+        num_match = re.search(r"\b(?:x)?1\.8(?:0)?\b", perk_text_lower)
+        if num_match:
+            # Prefer the specific coins entry that mentions tower/max health
+            for priority, include_keywords, _ in priority_list:
+                inc = [k.lower() for k in include_keywords]
+                if 'coins' in inc and any('tower' in k for k in inc):
+                    return priority
+            # Fallback: any coin-related entry
+            for priority, include_keywords, _ in priority_list:
+                if any('coin' in k for k in include_keywords):
+                    return priority
+
+        # If no numeric match, support textual match: coin + tower max / max health
+        if 'coin' in perk_text_lower and ('tower max' in perk_text_lower or 'tower max health' in perk_text_lower or 'max health' in perk_text_lower):
+            for priority, include_keywords, _ in priority_list:
+                inc = [k.lower() for k in include_keywords]
+                if 'coins' in inc and any('tower' in k for k in inc):
+                    return priority
+            for priority, include_keywords, _ in priority_list:
+                if any('coin' in k for k in include_keywords):
+                    return priority
+    except Exception:
+        pass
+
     return 9999
 import pyautogui
 import pytesseract
@@ -232,9 +260,9 @@ COORDS_WITH_AD = {
     'new_perk_region': ((1018, 63), (1228, 92)),
     # OLD Perk 1: ((890, 200), (1343, 284))
     # OLD Perk 2: ((888, 305), (1345, 390))
-    'perk1_text_region': ((994, 210), (1311, 288)),
-    'perk2_text_region': ((994, 312), (1311, 391)),
-    'perk3_text_region': ((994, 414), (1311, 493)),
+    'perk1_text_region': ((984, 205), (1341, 293)),
+    'perk2_text_region': ((984, 307), (1341, 396)),
+    'perk3_text_region': ((984, 409), (1341, 498)),
     # 'wave_region': ((1130, 599), (1269, 624)),
 }
 
@@ -253,9 +281,9 @@ COORDS_NO_AD = {
     'new_perk_region': ((832, 62), (1044, 93)),
     # OLD Perk 1: ((703, 199), (1159, 287))
     # OLD Perk 2: ((709, 307), (1160, 391))
-    'perk1_text_region': ((814, 206), (1145, 283)),
-    'perk2_text_region': ((814, 312), (1145, 391)),
-    'perk3_text_region': ((814, 418), (1145, 497)),
+    'perk1_text_region': ((804, 201), (1175, 288)),
+    'perk2_text_region': ((804, 307), (1175, 396)),
+    'perk3_text_region': ((804, 413), (1175, 502)),
     # 'wave_region': ((946, 601), (1080, 628)),
 }
 
@@ -385,8 +413,12 @@ FOCUS_SETTLE_DELAY = 0.15  # seconds to wait after attempting to set foreground 
 MAX_FOCUS_ATTEMPTS = 10
 FOCUS_RETRY_DELAY = 0.15  # seconds between focus attempts
 
+# New-perk foreground verification: attempts and delay when verifying before opening New Perk window
+NEW_PERK_FOREGROUND_ATTEMPTS = 10
+NEW_PERK_FOREGROUND_RETRY_DELAY = 0.15
+
 # Control saving of debug images to disk (set False to avoid creating files)
-SAVE_DEBUG_IMAGES = False
+SAVE_DEBUG_IMAGES = True
 
 # Global timer for debug image saving (every 30 seconds)
 last_debug_save_time = 0
@@ -1393,13 +1425,26 @@ def handle_perk_selection(window_name):
     # Loop to select all available perks
     while True:
         print(f"  [{window_name}] Step 2: Ensuring window is foreground and opening perk window...")
-        # Ensure the target game window is actually foreground before doing any clicks
-        if not ensure_window_foreground(window_name):
-            print(f"  [{window_name}] Aborting perk selection - target window not foreground. Restoring previous window.")
-            write_to_log(f"Aborted perk selection on {window_name}: could not verify foreground")
+        # Verify and attempt to switch to the game window on each iteration (retry loop)
+        attempt = 0
+        max_attempts = NEW_PERK_FOREGROUND_ATTEMPTS
+        while attempt < max_attempts:
+            attempt += 1
+            if ensure_window_foreground(window_name, max_attempts=1, retry_delay=0.05, verify_ui=True):
+                if DIAGNOSTIC_FOCUS_LOGS:
+                    print(f"  [{window_name}] Foreground verification succeeded on attempt {attempt}/{max_attempts}")
+                break
+            else:
+                print(f"  [{window_name}] Foreground verification attempt {attempt}/{max_attempts} failed; retrying in {NEW_PERK_FOREGROUND_RETRY_DELAY}s...")
+                time.sleep(NEW_PERK_FOREGROUND_RETRY_DELAY)
+        if attempt >= max_attempts:
+            print(f"  [{window_name}] Aborting perk selection - could not focus/verify window after {max_attempts} attempts. Restoring previous window.")
+            write_to_log(f"Aborted perk selection on {window_name}: could not verify foreground after {max_attempts} attempts")
             if saved_hwnd:
                 restore_foreground_window(saved_hwnd, saved_title)
             return
+
+        # At this point the target window is foreground and UI verified
         click_at(window_name, coords['new_perk_bar'], "New Perk Bar")
         time.sleep(WINDOW_OPEN_WAIT)
         # Re-ensure the game is still paused in case someone toggled it while we switched windows
@@ -1410,7 +1455,7 @@ def handle_perk_selection(window_name):
         coords = get_coords(window_name)
         # If this is Maximus and a third perk region exists, capture an image of all 3 perks for verification
         try:
-            if window_name and 'maximus' in window_name.lower() and 'perk1_text_region' in coords and 'perk2_text_region' in coords and 'perk3_text_region' in coords:
+            if window_name and ('maximus' in window_name.lower() or 'daddy' in window_name.lower()) and 'perk1_text_region' in coords and 'perk2_text_region' in coords and 'perk3_text_region' in coords:
                 try:
                     img1 = capture_window_screenshot(window_name, coords['perk1_text_region'])
                     img2 = capture_window_screenshot(window_name, coords['perk2_text_region'])
@@ -1432,14 +1477,15 @@ def handle_perk_selection(window_name):
                             combined.paste(im, (0, y))
                             y += im.height
                         stamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-                        out_path = SCRIPT_DIR / f"maximus_perks_{stamp}.png"
+                        safe_name = window_name.lower().replace(' ', '_')
+                        out_path = SCRIPT_DIR / f"{safe_name}_perks_{stamp}.png"
                         if SAVE_DEBUG_IMAGES:
                             combined.save(out_path)
-                            print(f"  [{window_name}] Saved Maximus 3-perk snapshot to {out_path}")
+                            print(f"  [{window_name}] Saved {window_name} 3-perk snapshot to {out_path}")
                         else:
-                            print(f"  [{window_name}] Skipping saving Maximus 3-perk snapshot (SAVE_DEBUG_IMAGES=False)")
+                            print(f"  [{window_name}] Skipping saving {window_name} 3-perk snapshot (SAVE_DEBUG_IMAGES=False)")
                 except Exception as e:
-                    print(f"  [{window_name}] Could not capture/save Maximus perks image: {e}")
+                    print(f"  [{window_name}] Could not capture/save {window_name} perks image: {e}")
         except Exception:
             pass
 
@@ -1586,6 +1632,11 @@ def main_loop():
                     chk.pack(anchor='w', padx=12)
                     vars[name] = var
 
+                # Option: Save debug images (Maximus/Daddy snapshots and combined image)
+                save_debug_var = tk.BooleanVar(value=SAVE_DEBUG_IMAGES)
+                save_chk = tk.Checkbutton(root, text="Save Debug Images (save perk snapshots)", variable=save_debug_var)
+                save_chk.pack(anchor='w', padx=12, pady=(6, 0))
+
                 def select_all():
                     for v in vars.values():
                         v.set(True)
@@ -1605,8 +1656,11 @@ def main_loop():
                         if not messagebox.askyesno("No Windows Selected", "No windows are selected — continue with none?"):
                             return
                     # Update global WINDOWS list
-                    global WINDOWS
+                    global WINDOWS, SAVE_DEBUG_IMAGES
                     WINDOWS = selected
+                    # Update Save Debug Images setting from GUI
+                    SAVE_DEBUG_IMAGES = bool(save_debug_var.get())
+                    print(f"Save Debug Images set to: {SAVE_DEBUG_IMAGES}")
                     root.destroy()
 
                 tk.Button(root, text="Start", command=on_start).pack(pady=(0, 12))
