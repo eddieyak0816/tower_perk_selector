@@ -1482,6 +1482,21 @@ def handle_perk_selection(window_name):
                         if SAVE_DEBUG_IMAGES:
                             combined.save(out_path)
                             print(f"  [{window_name}] Saved {window_name} 3-perk snapshot to {out_path}")
+                            # Prune older per-window snapshots, keep only the last 6
+                            try:
+                                import glob
+                                pattern = str(SCRIPT_DIR / f"{safe_name}_perks_*.png")
+                                files = sorted(glob.glob(pattern))
+                                if len(files) > 6:
+                                    to_delete = files[0: len(files) - 6]
+                                    for fpath in to_delete:
+                                        try:
+                                            os.remove(fpath)
+                                            print(f"  [{window_name}] Removed old snapshot: {fpath}")
+                                        except Exception as e:
+                                            print(f"  [{window_name}] Could not remove old snapshot {fpath}: {e}")
+                            except Exception as e:
+                                print(f"  [{window_name}] Error pruning snapshots: {e}")
                         else:
                             print(f"  [{window_name}] Skipping saving {window_name} 3-perk snapshot (SAVE_DEBUG_IMAGES=False)")
                 except Exception as e:
