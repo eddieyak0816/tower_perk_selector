@@ -51,6 +51,13 @@ def get_perk_priority(perk_text, window_name=None):
     except Exception:
         pass
 
+    # If no exact match found, try a fuzzy match against known perk phrases
+    try:
+        fuzzy = fuzzy_match_perk(perk_text_lower, window_name)
+        if fuzzy != 9999:
+            return fuzzy
+    except Exception:
+        pass
     return 9999
 import pyautogui
 import pytesseract
@@ -406,6 +413,51 @@ CHECK_INTERVAL = 2
 CLICK_DELAY = 0.5
 WINDOW_OPEN_WAIT = 5.0
 WINDOW_CLOSE_WAIT = 5.0
+
+# ============================================
+# FUZZY MATCHING / OCR HELPERS
+# ============================================
+# Build a canonical map of phrases -> priority for fuzzy matching
+PERK_CANONICAL = {}
+
+def _build_perk_canonical():
+    """Populate PERK_CANONICAL mapping using both PERK_PRIORITY and PERK_PRIORITY_DADDY."""
+    try:
+        lists = [PERK_PRIORITY, PERK_PRIORITY_DADDY]
+        for plist in lists:
+            for priority, include_keywords, _ in plist:
+                # Add full phrase joins and individual include keywords
+                full = ' '.join(include_keywords).lower()
+                PERK_CANONICAL[full] = priority
+                for k in include_keywords:
+                    PERK_CANONICAL[k.lower()] = priority
+                    PERK_CANONICAL[k.lower().replace('  ', ' ')] = priority
+    except Exception:
+        pass
+
+_build_perk_canonical()
+
+import difflib
+
+def fuzzy_match_perk(text, window_name=None, cutoff=0.6):
+    """Fuzzy match the given OCR text to known perk phrases and return a priority or 9999."""
+    if not text:
+        return 9999
+    # Compare against canonical phrases
+    candidates = list(PERK_CANONICAL.keys())
+    # Use get_close_matches on the full text
+    match = difflib.get_close_matches(text, candidates, n=1, cutoff=cutoff)
+    if match:
+        return PERK_CANONICAL[match[0]]
+    # Also try token-wise matching: find any canonical phrase that is close to any substring
+    words = text.split()
+    for n in range(len(words), 0, -1):
+        for i in range(0, len(words)-n+1):
+            sub = ' '.join(words[i:i+n])
+            m = difflib.get_close_matches(sub, candidates, n=1, cutoff=cutoff)
+            if m:
+                return PERK_CANONICAL[m[0]]
+    return 9999
 
 # Diagnostic focus logging / small settle delay to help troubleshoot hotkey focus issues
 DIAGNOSTIC_FOCUS_LOGS = True
@@ -1025,7 +1077,54 @@ def click_at(window_name, coords, description=""):
     pyautogui.click(x, y)
     time.sleep(CLICK_DELAY)
 
-def get_text_from_region(window_name, region, save_debug_image=True, is_perk=False):
+def correct_perk_text(text, window_name=None, is_purple=False):
+    """Apply simple fuzzy corrections to OCR text using a small dictionary and fuzzy matching.
+
+    - Tokenizes text and attempts to correct each token by matching against a list of known keywords.
+    - Preserves tokens that already match.
+    - Returns corrected text.
+    """
+    try:
+        import difflib
+        text_lower = text.lower()
+        tokens = text_lower.split()
+        # Known words/keywords to prefer
+        keywords = [
+            'free','upgrade','chance','for','all','max','health','enemies','damage','tower','damage',
+            'cash','coins','coin','per','wave','boss','health','game','speed','chrono','field','golden','tower',
+            'death','spotlight','black','hole','poison','swamp','radius','defense','percent','interest','orbs',
+            'bounce','shot','land','mine','chain','lightning','smart','missiles','inner','life','steal','enemies','speed'
+        ]
+        corrected = []
+        for t in tokens:
+            # If it's short (like 'x1.80' or '1.80') keep it
+            if re.match(r"^x?\d+(?:\.\d+)?%?$", t):
+                corrected.append(t)
+                continue
+            # If exact match in keywords, keep
+            if t in keywords:
+                corrected.append(t)
+                continue
+            # Try close matches
+            match = difflib.get_close_matches(t, keywords, n=1, cutoff=0.75)
+            if match:
+                corrected.append(match[0])
+            else:
+                # As a last resort, keep original token
+                corrected.append(t)
+        # Rebuild and do a few phrase corrections
+        result = ' '.join(corrected)
+        # Common phrase corrections
+        result = re.sub(r'free upgrade chance', 'free upgrade chance', result)
+        result = re.sub(r'upgrade chance for all', 'upgrade chance for all', result)
+        result = re.sub(r'enemies damage', 'enemies damage', result)
+        result = re.sub(r'tower damage', 'tower damage', result)
+        return result
+    except Exception:
+        return text
+
+
+def get_text_from_region(window_name, region, save_debug_image=True, is_perk=False, region_label=None):
     """Capture a region and extract text using OCR.
 
     If is_perk=True, apply enhanced preprocessing and multiple OCR variants to improve recognition for perk text.
@@ -1240,18 +1339,61 @@ def get_text_from_region(window_name, region, save_debug_image=True, is_perk=Fal
             if mapped:
                 # choose with lowest priority, tie-breaker highest avg_conf
                 mapped.sort(key=lambda x: (x[3], -x[2] if x[2] != -1 else float('inf')))
-                return mapped[0][1]
-            # Otherwise choose highest average confidence
-            results.sort(key=lambda x: (-x[2], x[0]))
-            return results[0][1]
+                best = mapped[0]
+            else:
+                # Otherwise choose highest average confidence
+                results.sort(key=lambda x: (-x[2], x[0]))
+                best = results[0]
+            # best is tuple: (name, text, avg_conf, pr)
+            # Find the corresponding image for the best name
+            best_name = best[0]
+            best_img = None
+            for name, var in variants:
+                if name == best_name:
+                    best_img = var
+                    break
+            return best[1], best_img, best_name
 
         try:
-            text = _ocr_variants(screenshot)
+            text, chosen_img, chosen_name = _ocr_variants(screenshot)
             # Basic cleanup
             text = re.sub(r"[^\x00-\x7F]+", "", text)
             text = ' '.join(text.split())
-            print(f"  [{window_name}] OCR (variants) read: '{text}'")
-            return text
+            print(f"  [{window_name}] OCR (variants) read: '{text}' (variant: {chosen_name})")
+
+            # Check background color before applying corrections
+            try:
+                is_purple, bg_color = is_purple_background(window_name, region)
+            except Exception:
+                is_purple, bg_color = False, None
+            print(f"  [{window_name}] Perk background purple: {is_purple}, sampled color: {bg_color}")
+
+            # Apply fuzzy corrections using known keywords
+            corrected = correct_perk_text(text, window_name=window_name, is_purple=is_purple)
+            print(f"  [{window_name}] OCR corrected to: '{corrected}'")
+
+            # Save original + processed variant side-by-side for debugging if enabled
+            if SAVE_DEBUG_IMAGES and chosen_img is not None and region_label:
+                try:
+                    from PIL import Image as PILImage
+                    orig = screenshot.convert('RGB')
+                    proc = chosen_img.convert('RGB') if hasattr(chosen_img, 'convert') else chosen_img
+                    # Resize to same height
+                    h = max(orig.height, proc.height)
+                    proc_resized = proc.resize((int(proc.width * (h / proc.height)), h), PILImage.LANCZOS)
+                    orig_resized = orig.resize((int(orig.width * (h / orig.height)), h), PILImage.LANCZOS)
+                    combined = PILImage.new('RGB', (orig_resized.width + proc_resized.width + 10, h), color=(0,0,0))
+                    combined.paste(orig_resized, (0,0))
+                    combined.paste(proc_resized, (orig_resized.width + 10, 0))
+                    stamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+                    safe_window = window_name.lower().replace(' ', '_')
+                    out_path = SCRIPT_DIR / f"debug_{safe_window}_{region_label}_{stamp}.png"
+                    combined.save(out_path)
+                    print(f"  [{window_name}] Saved debug compare image to {out_path}")
+                except Exception as e:
+                    print(f"  [{window_name}] Could not save debug compare image: {e}")
+
+            return corrected
         except Exception as e:
             print(f"  [{window_name}] OCR variants failed: {e}")
             # Fallback to simple OCR if variants fail
