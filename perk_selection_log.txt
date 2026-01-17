@@ -1,31 +1,5 @@
-[2026-01-16 18:09:02] ======================================================================
-[2026-01-16 18:09:02] PERK AUTOMATOR STARTED
-[2026-01-16 18:09:02] ======================================================================
-[2026-01-16 18:09:02] Window found: Daddy Bluestack at (0, 0)
-[2026-01-16 18:09:02] Window found: Maximus Bluestack at (0, 0)
-
-======================================================================
-[2026-01-16 18:09:19] PERK SELECTION - Daddy Bluestack
-======================================================================
-  Perk List Used: PERK_PRIORITY_DADDY
-  Perk 1: Lifesteal peed
-  Perk 1 Priority: 30
-  Perk 1 Background: RGB(31, 3, 82) | Hex: #1F0352
-  Perk 1 Is Purple: True
-  Perk 1 Effective Priority: 30
-
-  Perk 2: ee ils don't givecash
-  Perk 2 Priority: 9999
-  Perk 2 Background: RGB(31, 3, 82) | Hex: #1F0352
-  Perk 2 Is Purple: True
-  Perk 2 Effective Priority: 9999
-
-  Perk 3: x1.80 coins, purower max health
-  Perk 3 Priority: 9999
-  Perk 3 Background: RGB(31, 3, 82) | Hex: #1F0352
-  Perk 3 Is Purple: True
-  Perk 3 Effective Priority: 9999
-
-  >>> SELECTED: Perk NONE - ALL PURPLE (Effective Priority None)
-======================================================================
-
+[2026-01-17 01:07:15] ======================================================================
+[2026-01-17 01:07:15] PERK AUTOMATOR STARTED
+[2026-01-17 01:07:15] ======================================================================
+[2026-01-17 01:07:15] Window found: Daddy Bluestack at (0, 0)
+[2026-01-17 01:07:15] Window found: Maximus Bluestack at (0, 0)

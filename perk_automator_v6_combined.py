@@ -54,10 +54,11 @@ def get_perk_priority(perk_text, window_name=None):
     return 9999
 import pyautogui
 import pytesseract
-from PIL import Image
+from PIL import Image, ImageFilter, ImageOps, ImageEnhance
 import time
 import threading
 import os
+import re
 from datetime import datetime
 from pathlib import Path
 try:
@@ -1024,8 +1025,11 @@ def click_at(window_name, coords, description=""):
     pyautogui.click(x, y)
     time.sleep(CLICK_DELAY)
 
-def get_text_from_region(window_name, region, save_debug_image=True):
-    """Capture a region and extract text using OCR."""
+def get_text_from_region(window_name, region, save_debug_image=True, is_perk=False):
+    """Capture a region and extract text using OCR.
+
+    If is_perk=True, apply enhanced preprocessing and multiple OCR variants to improve recognition for perk text.
+    """
     global last_debug_save_time
     check_failsafe()
     screenshot = capture_window_screenshot(window_name, region)
@@ -1164,6 +1168,94 @@ def get_text_from_region(window_name, region, save_debug_image=True):
         return ""
     # Preprocess: grayscale, threshold, sharpen (same as New Perk bar)
     # For Daddy and Maximus, use grayscale only, no thresholding
+    # If this is a perk text region, use enhanced preprocessing and multiple OCR variants
+    if is_perk and screenshot is not None:
+        def _ocr_variants(img):
+            """Run OCR on multiple preprocessed variants and choose the best result.
+
+            Strategy:
+            - Generate resized, contrast-enhanced, sharpened, inverted, and thresholded variants
+            - Run pytesseract on each variant with a reasonable psm/oem
+            - For each variant compute average confidence and check if it maps to a known perk (using get_perk_priority)
+            - Prefer variants that map to a known perk (priority != 9999), choosing the lowest priority (best perk). Otherwise pick the highest average confidence.
+            """
+            variants = []
+            try:
+                w, h = img.size
+                # Resize for better OCR
+                resized = img.resize((max(1, w*2), max(1, h*2)), Image.LANCZOS)
+                gray = resized.convert('L')
+                # Basic enhancement
+                enh = ImageEnhance.Contrast(gray).enhance(1.6)
+                sharp = enh.filter(ImageFilter.UnsharpMask(radius=1, percent=150, threshold=2))
+                ac = ImageOps.autocontrast(sharp)
+                inv = ImageOps.invert(ac)
+
+                variants.append(('orig', img))
+                variants.append(('gray', gray))
+                variants.append(('enh', enh))
+                variants.append(('sharp', sharp))
+                variants.append(('autocontrast', ac))
+                variants.append(('invert', inv))
+
+                # Add thresholded variants
+                for t in (120, 140, 160):
+                    thr = ac.point(lambda p, th=t: 255 if p > th else 0)
+                    variants.append((f'th_{t}', thr))
+
+                # Add color-channel variants from the resized image
+                try:
+                    r,g,b = resized.split()
+                    variants.append(('r', r))
+                    variants.append(('g', g))
+                    variants.append(('b', b))
+                except Exception:
+                    pass
+            except Exception:
+                variants = [('orig', img)]
+
+            results = []
+            cfg = "--psm 6 --oem 3"
+            for name, var in variants:
+                try:
+                    data = pytesseract.image_to_data(var, output_type=pytesseract.Output.DICT, config=cfg)
+                    words = [w for w in data.get('text', []) if w and w.strip()]
+                    confs = [int(c) for c in data.get('conf', []) if c.strip() and c != '-1']
+                    avg_conf = sum(confs)/len(confs) if confs else -1
+                    text = ' '.join(words).strip()
+                except Exception:
+                    try:
+                        text = pytesseract.image_to_string(var, config=cfg)
+                        # No confidences available
+                        avg_conf = -1
+                    except Exception:
+                        text = ''
+                        avg_conf = -1
+                # Evaluate mapping to known perk priority
+                pr = get_perk_priority(text, window_name)
+                results.append((name, text, avg_conf, pr))
+
+            # Prefer a variant that maps to a known perk (lower priority number is better)
+            mapped = [r for r in results if r[3] != 9999]
+            if mapped:
+                # choose with lowest priority, tie-breaker highest avg_conf
+                mapped.sort(key=lambda x: (x[3], -x[2] if x[2] != -1 else float('inf')))
+                return mapped[0][1]
+            # Otherwise choose highest average confidence
+            results.sort(key=lambda x: (-x[2], x[0]))
+            return results[0][1]
+
+        try:
+            text = _ocr_variants(screenshot)
+            # Basic cleanup
+            text = re.sub(r"[^\x00-\x7F]+", "", text)
+            text = ' '.join(text.split())
+            print(f"  [{window_name}] OCR (variants) read: '{text}'")
+            return text
+        except Exception as e:
+            print(f"  [{window_name}] OCR variants failed: {e}")
+            # Fallback to simple OCR if variants fail
+            img = screenshot.convert('L')
     if window_name and ('maximus' in window_name.lower() or 'daddy' in window_name.lower()):
         img = screenshot.convert('L')
         text = pytesseract.image_to_string(img, config='--psm 7')
@@ -1188,15 +1280,15 @@ def select_best_perk(window_name, coords):
     - Both perks have purple backgrounds (no choice)
     """
     global SKIP_NEW_PERK_BAR_UNTIL_NUMBERS
-    # Read top two options always
-    perk1_text = get_text_from_region(window_name, coords['perk1_text_region'])
-    perk2_text = get_text_from_region(window_name, coords['perk2_text_region'])
+    # Read top two options always (use enhanced OCR for perk text)
+    perk1_text = get_text_from_region(window_name, coords['perk1_text_region'], is_perk=True)
+    perk2_text = get_text_from_region(window_name, coords['perk2_text_region'], is_perk=True)
 
     # Optionally read third perk region if present (Maximus and Daddy)
     has_third = window_name and ('maximus' in window_name.lower() or 'daddy' in window_name.lower()) and 'perk3_text_region' in coords and 'perk_option_3' in coords
     perk3_text = None
     if has_third:
-        perk3_text = get_text_from_region(window_name, coords['perk3_text_region'])
+        perk3_text = get_text_from_region(window_name, coords['perk3_text_region'], is_perk=True)
 
     print(f"  [{window_name}] Perk 1: {perk1_text[:50]}..." if len(perk1_text) > 50 else f"  [{window_name}] Perk 1: {perk1_text}")
     print(f"  [{window_name}] Perk 2: {perk2_text[:50]}..." if len(perk2_text) > 50 else f"  [{window_name}] Perk 2: {perk2_text}")
